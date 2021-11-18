@@ -26,9 +26,6 @@ const HotelSigninContainer = () => {
     e.preventDefault();
     dispatch(hotelSignin(form));
   };
-  const onLogout = (e) => {
-    // logout
-  };
   useEffect(() => {
     if (hotelSigninSuccess) {
       console.log('success login');

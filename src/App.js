@@ -10,30 +10,51 @@ import { useDispatch, useSelector } from 'react-redux';
 import { checkLoggedIn } from './modules/auth';
 import ArtistSignupPage from './pages/artist/ArtistSignupPage';
 import PhoneCertificationPage from './pages/artist/PhoneCertificationPage';
+import ArtistProfilePage from './pages/artist/ArtistProfilePage';
+import { checkArtistProfile } from './modules/profile';
+import EntryPage from './pages/common/EntryPage';
 
+const checkLogged = { isArtist: true };
 const App = () => {
-  const { check } = useSelector(({ auth }) => ({ check: auth.check }));
+  const { check, checkArtistProfileSuccess } = useSelector(
+    ({ auth, profile }) => ({
+      check: auth.check,
+      checkArtistProfileSuccess: profile.checkArtistProfileSuccess,
+    })
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(checkLoggedIn());
   }, [dispatch]);
-  console.log(check);
+  useEffect(() => {
+    dispatch(checkArtistProfile());
+  }, [dispatch]);
   return (
     <Routes>
-      <Route
+      <Route path='/' element={<EntryPage />}>
+        <Route path='/' element={<ArtistSigninPage />} />
+        <Route path='/hotelSignin' element={<HotelSigninPage />} />
+      </Route>
+      <Route path='/signup/*' element={<MainPage />} />
+      <Route path='checkArtistPhone' element={<PhoneCertificationPage />} />
+      <Route path='checkBusiness' element={<BusinessCertificationPage />} />
+      <Route path='/createArtist' element={<ArtistSignupPage />} />
+      <Route path='/createHotel' element={<HotelSignupPage />} />
+      {/* <Route
         path='/'
         element={check ? <div>로그인 후 페이지</div> : <MainPage />}
-      />
-      <Route path='signin' element={<SigninPage />}>
+      /> */}
+      {/* <Route path='signin' element={<SigninPage />}>
         <Route path='artist' element={<ArtistSigninPage />} />
         <Route path='hotel' element={<HotelSigninPage />} />
       </Route>
-      {/* Artist */}
+
       <Route path='checkArtistPhone' element={<PhoneCertificationPage />} />
       <Route path='artistSignup' element={<ArtistSignupPage />} />
-      {/* Hotel */}
+      <Route path='createArtistProfile' element={<ArtistProfilePage />} />
+
       <Route path='checkBusiness' element={<BusinessCertificationPage />} />
-      <Route path='hotelSignup' element={<HotelSignupPage />} />
+      <Route path='hotelSignup' element={<HotelSignupPage />} /> */}
     </Routes>
   );
 };

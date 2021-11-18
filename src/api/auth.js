@@ -43,5 +43,4 @@ export const hotelSignin = async ({ account, password }) =>
 export const hotelLogout = async () => await axios.post('/auth/hotelLogout');
 
 // 로그인 상태인지 확인
-export const checkLoggedIn = async () =>
-  await axios.post('/auth/checkLoggedIn');
+export const checkLoggedIn = async () => await axios.get('/auth/checkLoggedIn');

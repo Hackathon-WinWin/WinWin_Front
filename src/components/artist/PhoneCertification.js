@@ -5,7 +5,7 @@ const PhoneCertification = () => {
   return (
     <div>
       <input placeholder='test' />
-      <Link to='/artistSignup'>다음</Link>
+      <Link to='./writeInfo'>다음</Link>
     </div>
   );
 };

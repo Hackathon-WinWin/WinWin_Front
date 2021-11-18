@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const ArtistSignin = ({ form, onChange, onSubmit }) => {
+const Entry = ({ form, onChange, onSubmit }) => {
   return (
     <div>
-      <h1>아티스트 로그인</h1>
+      <h1>WinWin</h1>
       <form onSubmit={onSubmit}>
         <input
           name='account'
@@ -20,8 +21,9 @@ const ArtistSignin = ({ form, onChange, onSubmit }) => {
         />
         <button>로그인</button>
       </form>
+      <Link to='/signup'>회원가입</Link>
     </div>
   );
 };
 
-export default ArtistSignin;
+export default Entry;

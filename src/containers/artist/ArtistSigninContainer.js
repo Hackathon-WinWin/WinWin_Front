@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ArtistSignin from '../../components/artist/ArtistSignin';
-import { artistLogout, artistSignin, checkLoggedIn } from '../../modules/auth';
+import { artistSignin, checkLoggedIn } from '../../modules/auth';
 
 const ArtistSigninContainer = () => {
   const { artistSigninSuccess, artistSigninError } = useSelector(
@@ -28,9 +28,6 @@ const ArtistSigninContainer = () => {
     e.preventDefault();
     dispatch(artistSignin(form));
   };
-  const onLogout = (e) => {
-    dispatch(artistLogout());
-  };
   useEffect(() => {
     if (artistSigninSuccess) {
       console.log('success login');
@@ -45,14 +42,7 @@ const ArtistSigninContainer = () => {
     }
   }, [artistSigninSuccess, artistSigninError, navigate, dispatch]);
 
-  return (
-    <ArtistSignin
-      form={form}
-      onChange={onChange}
-      onSubmit={onSubmit}
-      onLogout={onLogout}
-    />
-  );
+  return <ArtistSignin form={form} onChange={onChange} onSubmit={onSubmit} />;
 };
 
 export default ArtistSigninContainer;
