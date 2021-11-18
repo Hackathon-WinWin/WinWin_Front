@@ -1,9 +1,9 @@
 import React from 'react';
-
+import styled from 'styled-components';
 const HotelSignup = ({ form, onChange, onSubmit }) => {
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit}>
         <input
           name='account'
           value={form.account}
@@ -24,22 +24,16 @@ const HotelSignup = ({ form, onChange, onSubmit }) => {
           placeholder='비밀번호 확인'
           type='password'
         />
-        <input
-          name='hostName'
-          value={form.hostName}
-          onChange={onChange}
-          placeholder='이름'
-        />
-        <input
-          name='openDate'
-          value={form.openDate}
-          onChange={onChange}
-          placeholder='오픈 날짜'
-        />
         <button>회원가입</button>
-      </form>
+      </Form>
     </div>
   );
 };
 
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  box-sizing: border-box;
+`;
 export default HotelSignup;

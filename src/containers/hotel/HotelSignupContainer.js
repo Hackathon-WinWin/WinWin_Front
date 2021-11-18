@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import HotelSignup from '../../components/hotel/HotelSignup';
 import { hotelSignup } from '../../modules/auth';
 
@@ -11,12 +11,13 @@ const HotelSignupContainer = () => {
   }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {
+    state: { businessNumber, hostName, openDate },
+  } = useLocation();
   const initialState = {
     account: '',
     password: '',
     passwordConfirm: '',
-    hostName: '',
-    openDate: new Date(),
   };
   const [form, setForm] = useState(initialState);
   const onChange = (e) => {
@@ -27,11 +28,10 @@ const HotelSignupContainer = () => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    const businessNumber = '123123123'; // 임시
-    const { account, password, passwordConfirm, hostName, openDate } = form;
+    const { account, password, passwordConfirm } = form;
     if (password !== passwordConfirm) alert('비밀번호 불일치');
     dispatch(
-      hotelSignup({ account, password, hostName, openDate, businessNumber })
+      hotelSignup({ account, password, businessNumber, hostName, openDate })
     );
   };
   useEffect(() => {
@@ -41,7 +41,8 @@ const HotelSignupContainer = () => {
       return;
     }
     if (hotelSignupError) {
-      alert('회원가입실패');
+      alert('회원가입에 실패하였습니다. 다시 시도해주세요.');
+      navigate('/signup');
       return;
     }
   }, [hotelSignupSuccess, hotelSignupError, navigate]);
