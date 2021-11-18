@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { checkLoggedIn } from '../../api/auth';
 import Entry from '../../components/common/Entry';
+import { checkLoggedIn, initAuth, signin } from '../../modules/auth';
 
 const EntryContainer = () => {
   const { signinSuccess, signinError } = useSelector(({ auth }) => ({
@@ -27,7 +27,7 @@ const EntryContainer = () => {
     if (form.account === '' || form.password === '') {
       alert('양식을 입력해주세요');
     }
-    console.log(form);
+    dispatch(signin(form));
   };
   useEffect(() => {
     if (signinSuccess) {
@@ -39,6 +39,7 @@ const EntryContainer = () => {
     if (signinError) {
       alert('다시 시도해주세요.');
       setForm({ account: '', password: '' });
+      dispatch(initAuth());
       return;
     }
   }, [signinSuccess, signinError, navigate, dispatch]);

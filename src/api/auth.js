@@ -3,7 +3,7 @@ import axios from 'axios';
 // ARTIST
 // 회원가입
 export const artistSignup = async ({ account, password, phoneNumber }) =>
-  await axios.post('3.12.248.32:8000/auth/createArtist', {
+  await axios.post('/auth/createArtist', {
     account,
     password,
     phoneNumber,

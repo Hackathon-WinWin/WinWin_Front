@@ -7,7 +7,6 @@ import { takeLatest } from 'redux-saga/effects';
 const ARTIST_SIGNUP = 'auth/ARTIST_SIGNUP';
 const ARTIST_SIGNUP_SUCCESS = 'auth/ARTIST_SIGNUP_SUCCESS';
 const ARTIST_SIGNUP_FAILURE = 'auth/ARTIST_SIGNUP_FAILURE';
-const ARTIST_SIGNIN = 'auth/ARTIST_SIGNIN';
 
 // HOTEL action
 const HOTEL_SIGNUP = 'auth/HOTEL_SIGNUP';
@@ -56,7 +55,7 @@ export const initAuth = createAction(INIT_AUTH);
 
 const artistSignupSaga = createRequestSaga(ARTIST_SIGNUP, authAPI.artistSignup);
 const hotelSignupSaga = createRequestSaga(HOTEL_SIGNUP, authAPI.hotelSignup);
-const signinSaga = createRequestSaga(ARTIST_SIGNIN, authAPI.signin);
+const signinSaga = createRequestSaga(SIGNIN, authAPI.signin);
 const logoutSaga = createRequestSaga(LOGOUT, authAPI.Logout);
 const checkLoggedInSaga = createRequestSaga(
   CHECK_LOGGEDIN,
@@ -78,9 +77,9 @@ const initialState = {
   artistSignupError: null,
   hotelSignupSuccess: null,
   hotelSignupError: null,
-  user: null,
+  signinSuccess: null,
   signinError: null,
-  LogoutSuccess: null,
+  logoutSuccess: null,
   check: null,
   checkAccountSuccess: null,
 };
@@ -103,9 +102,9 @@ export default handleActions(
       ...state,
       hotelSignupError: error,
     }),
-    [SIGNIN_SUCCESS]: (state, { payload: user }) => ({
+    [SIGNIN_SUCCESS]: (state, { payload: success }) => ({
       ...state,
-      user,
+      signinSuccess: success,
     }),
     [SIGNIN_FAILURE]: (state, { payload: error }) => ({
       ...state,

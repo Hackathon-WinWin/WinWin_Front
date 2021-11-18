@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import HotelSignup from '../../components/hotel/HotelSignup';
-import { hotelSignup } from '../../modules/auth';
+import { hotelSignup, initAuth } from '../../modules/auth';
 
 const HotelSignupContainer = () => {
   const { hotelSignupSuccess, hotelSignupError } = useSelector(({ auth }) => ({
@@ -29,7 +29,10 @@ const HotelSignupContainer = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { account, password, passwordConfirm } = form;
-    if (password !== passwordConfirm) alert('비밀번호 불일치');
+    if (password !== passwordConfirm) {
+      alert('비밀번호 불일치');
+      return;
+    }
     dispatch(
       hotelSignup({ account, password, businessNumber, hostName, openDate })
     );
@@ -42,10 +45,11 @@ const HotelSignupContainer = () => {
     }
     if (hotelSignupError) {
       alert('회원가입에 실패하였습니다. 다시 시도해주세요.');
+      dispatch(initAuth());
       navigate('/signup');
       return;
     }
-  }, [hotelSignupSuccess, hotelSignupError, navigate]);
+  }, [hotelSignupSuccess, hotelSignupError, navigate, dispatch]);
 
   return <HotelSignup form={form} onChange={onChange} onSubmit={onSubmit} />;
 };

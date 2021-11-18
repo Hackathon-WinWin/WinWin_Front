@@ -22,11 +22,11 @@ const INIT_BUSINESS_CERTIFY = 'auth/INIT_BUSINESS_CERTIFY';
 
 export const requireNumber = createAction(
   REQUIRE_NUMBER,
-  (phonenumber) => phonenumber
+  (phoneNumber) => phoneNumber
 );
 export const checkNumber = createAction(
   CHECK_NUMBER,
-  ({ phonenumber, certification }) => ({ phonenumber, certification })
+  ({ phoneNumber, certification }) => ({ phoneNumber, certification })
 );
 export const checkBusiness = createAction(
   CHECK_BUSINESS,

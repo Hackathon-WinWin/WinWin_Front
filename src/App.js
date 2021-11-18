@@ -10,6 +10,7 @@ import PhoneCertificationPage from './pages/artist/PhoneCertificationPage';
 import ArtistProfilePage from './pages/artist/ArtistProfilePage';
 import EntryPage from './pages/common/EntryPage';
 import Signup from './components/common/Signup';
+import { checkArtistProfile } from './modules/profile';
 
 const checkLogged = { isArtist: true };
 const App = () => {
@@ -20,6 +21,15 @@ const App = () => {
   useEffect(() => {
     dispatch(checkLoggedIn());
   }, [dispatch]);
+  useEffect(() => {
+    if (checkLogged) {
+      if (checkLogged.isArtist) {
+        dispatch(checkArtistProfile());
+      } else {
+        // dispatch(checkHotelProfile)
+      }
+    }
+  });
   return (
     <Routes>
       <Route path='/' element={<EntryPage />} />

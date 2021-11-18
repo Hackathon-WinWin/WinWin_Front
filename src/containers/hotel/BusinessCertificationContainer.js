@@ -15,8 +15,8 @@ const BusinessCertificationContainer = () => {
   const navigate = useNavigate();
   const initialState = {
     businessNumber: '',
-    hostName: '',
     openDate: '',
+    hostName: '',
   };
   const [form, setForm] = useState(initialState);
   const onChange = (e) => {
@@ -38,6 +38,12 @@ const BusinessCertificationContainer = () => {
     if (checkBusinessError) {
       alert('Error: certificate');
       dispatch(initBusinessCertify());
+      setForm((state) => ({
+        ...state,
+        businessNumber: '',
+        openDate: '',
+        hostName: '',
+      }));
       return;
     }
   }, [checkBusinessSuccess, checkBusinessError, navigate, dispatch, form]);

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ArtistSignup from '../../components/artist/ArtistSignup';
-import { artistSignup } from '../../modules/auth';
+import { artistSignup, initAuth } from '../../modules/auth';
 
 const ArtistSignupContainer = () => {
   const { artistSignupSuccess, artistSignupError } = useSelector(
@@ -14,7 +14,7 @@ const ArtistSignupContainer = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
-    stata: { phoneNumber },
+    state: { phoneNumber },
   } = useLocation();
   const initialState = {
     account: '',
@@ -45,10 +45,11 @@ const ArtistSignupContainer = () => {
     }
     if (artistSignupError) {
       alert('회원가입에 실패하였습니다. 다시 시도해주세요.');
+      dispatch(initAuth());
       navigate('/signup');
       return;
     }
-  }, [artistSignupSuccess, artistSignupError, navigate]);
+  }, [artistSignupSuccess, artistSignupError, navigate, dispatch]);
   // useEffect(() => {
   //   // 아이디 양식 확인 로직
   // }, [form.account]);
