@@ -6,21 +6,27 @@ import { takeLatest } from 'redux-saga/effects';
 // ARTIST action
 const REQUIRE_NUMBER = 'auth/REQUIRE_NUMBER';
 const REQUIRE_NUMBER_SUCCESS = 'auth/REQUIRE_NUMBER_SUCCESS';
+const REQUIRE_NUMBER_FAILURE = 'auth/REQUIRE_NUMBER_FAILURE';
 const CHECK_NUMBER = 'auth/CHECK_NUMBER';
-const CHECK_NUMBER_SUCCESS = 'auth/CHECK_NUMBER';
+const CHECK_NUMBER_SUCCESS = 'auth/CHECK_NUMBER_SUCCESS';
+const CHECK_NUMBER_FAILURE = 'auth/CHECK_NUMBER_FAILURE';
 
 // HOTEL action
 const CHECK_BUSINESS = 'auth/CHECK_BUSINESS';
 const CHECK_BUSINESS_SUCCESS = 'auth/CHECK_BUSINESS_SUCCESS';
 const CHECK_BUSINESS_FAILURE = 'auth/CHECK_BUSINESS_FAILURE';
 
+// INIT action
+const INIT_PHONE_CERTIFY = 'auth/INIT_PHONE_CERTIFY';
+const INIT_BUSINESS_CERTIFY = 'auth/INIT_BUSINESS_CERTIFY';
+
 export const requireNumber = createAction(
   REQUIRE_NUMBER,
-  (phonenumber) => phonenumber
+  (phoneNumber) => phoneNumber
 );
 export const checkNumber = createAction(
   CHECK_NUMBER,
-  ({ phonenumber, certification }) => ({ phonenumber, certification })
+  ({ phoneNumber, certification }) => ({ phoneNumber, certification })
 );
 export const checkBusiness = createAction(
   CHECK_BUSINESS,
@@ -30,6 +36,8 @@ export const checkBusiness = createAction(
     hostName,
   })
 );
+export const initPhoneCertify = createAction(INIT_PHONE_CERTIFY);
+export const initBusinessCertify = createAction(INIT_BUSINESS_CERTIFY);
 
 const requireNumberSaga = createRequestSaga(
   REQUIRE_NUMBER,
@@ -51,7 +59,9 @@ export function* certificateSaga() {
 
 const initialState = {
   requirePhoneSuccess: null,
-  certificationSuccess: null,
+  requirePhoneError: null,
+  checkPhoneSuccess: null,
+  checkPhoneError: null,
   checkBusinessSuccess: null,
   checkBusinessError: null,
 };
@@ -62,9 +72,17 @@ export default handleActions(
       ...state,
       requirePhoneSuccess: success,
     }),
+    [REQUIRE_NUMBER_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      requirePhoneError: error,
+    }),
     [CHECK_NUMBER_SUCCESS]: (state, { payload: success }) => ({
       ...state,
-      certificationSuccess: success,
+      checkPhoneSuccess: success,
+    }),
+    [CHECK_NUMBER_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      checkPhoneError: error,
     }),
     [CHECK_BUSINESS_SUCCESS]: (state, { payload: success }) => ({
       ...state,
@@ -73,6 +91,18 @@ export default handleActions(
     [CHECK_BUSINESS_FAILURE]: (state, { payload: error }) => ({
       ...state,
       checkBusinessError: error,
+    }),
+    [INIT_PHONE_CERTIFY]: (state) => ({
+      ...state,
+      requirePhoneSuccess: null,
+      requirePhoneError: null,
+      checkPhoneSuccess: null,
+      checkPhoneError: null,
+    }),
+    [INIT_BUSINESS_CERTIFY]: (state) => ({
+      ...state,
+      checkBusinessSuccess: null,
+      checkBusinessError: null,
     }),
   },
   initialState

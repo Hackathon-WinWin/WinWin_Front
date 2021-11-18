@@ -1,11 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const PhoneCertification = () => {
+const PhoneCertification = ({
+  form,
+  onChange,
+  onSubmitPhoneNumber,
+  onCertify,
+  requirePhoneSuccess,
+}) => {
   return (
     <div>
-      <input placeholder='test' />
-      <Link to='/artistSignup'>다음</Link>
+      <h1>전화번호 인증</h1>
+      <form onSubmit={onSubmitPhoneNumber}>
+        <input
+          name='phoneNumber'
+          value={form.phoneNumber}
+          onChange={onChange}
+        />
+        <button>인증번호 요청</button>
+      </form>
+      <form onSubmit={onCertify}>
+        <input
+          name='certification'
+          value={form.certification}
+          onChange={onChange}
+        />
+        <button disabled={requirePhoneSuccess === null}>다음</button>
+      </form>
     </div>
   );
 };

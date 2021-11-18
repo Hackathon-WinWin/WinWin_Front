@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ArtistSignup from '../../components/artist/ArtistSignup';
-import { artistSignup } from '../../modules/auth';
+import { artistSignup, initAuth } from '../../modules/auth';
 
 const ArtistSignupContainer = () => {
-  const { signupSuccess, signupError } = useSelector(({ auth }) => ({
-    signupSuccess: auth.signupSuccess,
-    signupError: auth.signupError,
-  }));
+  const { artistSignupSuccess, artistSignupError } = useSelector(
+    ({ auth }) => ({
+      artistSignupSuccess: auth.artistSignupSuccess,
+      artistSignupError: auth.artistSignupError,
+    })
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const phoneNumber = '01011112222'; // 이미 있음
+  const {
+    state: { phoneNumber },
+  } = useLocation();
   const initialState = {
     account: '',
     password: '',
@@ -34,18 +38,20 @@ const ArtistSignupContainer = () => {
     dispatch(artistSignup({ account, password, phoneNumber }));
   };
   useEffect(() => {
-    if (signupSuccess) {
+    if (artistSignupSuccess) {
       console.log('Success signup');
       navigate('/');
       return;
     }
-    if (signupError) {
-      console.log('Error: signup');
+    if (artistSignupError) {
+      alert('회원가입에 실패하였습니다. 다시 시도해주세요.');
+      dispatch(initAuth());
+      navigate('/signup');
       return;
     }
-  }, [signupSuccess, signupError, navigate]);
+  }, [artistSignupSuccess, artistSignupError, navigate, dispatch]);
   // useEffect(() => {
-  //   // 아이디 양식 확인
+  //   // 아이디 양식 확인 로직
   // }, [form.account]);
   return <ArtistSignup form={form} onChange={onChange} onSubmit={onSubmit} />;
 };

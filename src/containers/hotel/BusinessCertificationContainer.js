@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import BusinessCertification from '../../components/hotel/BusinessCertification';
-import { checkBusiness } from '../../modules/certificate';
+import { checkBusiness, initBusinessCertify } from '../../modules/certificate';
 
 const BusinessCertificationContainer = () => {
   const { checkBusinessSuccess, checkBusinessError } = useSelector(
@@ -15,8 +15,8 @@ const BusinessCertificationContainer = () => {
   const navigate = useNavigate();
   const initialState = {
     businessNumber: '',
-    hostName: '',
     openDate: '',
+    hostName: '',
   };
   const [form, setForm] = useState(initialState);
   const onChange = (e) => {
@@ -32,15 +32,21 @@ const BusinessCertificationContainer = () => {
   useEffect(() => {
     if (checkBusinessSuccess) {
       console.log('Success certificate');
-      navigate('/hotelSignup');
+      navigate('/signupHotel', { state: form });
       return;
     }
     if (checkBusinessError) {
       alert('Error: certificate');
-      // console.log('Error: certificate');
+      dispatch(initBusinessCertify());
+      setForm((state) => ({
+        ...state,
+        businessNumber: '',
+        openDate: '',
+        hostName: '',
+      }));
       return;
     }
-  }, [checkBusinessSuccess, checkBusinessError, navigate]);
+  }, [checkBusinessSuccess, checkBusinessError, navigate, dispatch, form]);
 
   return (
     <BusinessCertification
