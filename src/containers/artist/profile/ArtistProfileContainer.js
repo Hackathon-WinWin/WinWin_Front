@@ -29,18 +29,22 @@ const ArtistProfileContainer = () => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
-    console.log(typeof form.birthday);
     dispatch(createArtistProfile(form));
   };
   useEffect(() => {
     if (artistprofileSuccess) {
-      console.log('Success artistprofile');
-      navigate('/');
+      navigate('/main');
       return;
     }
     if (artistprofileError) {
-      console.log('Error: artistprofile');
+      alert('다시 기입해주세요.');
+      setForm((state) => ({
+        ...state,
+        nickname: '',
+        name: '',
+        birthday: new Date().toString(),
+        email: '',
+      }));
       return;
     }
   }, [artistprofileSuccess, artistprofileError, navigate]);

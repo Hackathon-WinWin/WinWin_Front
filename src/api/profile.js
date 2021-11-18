@@ -60,14 +60,14 @@ export const checkHotelProfile = async () =>
 // 500: 에러 내용
 export const createHotelProfile = async ({
   hotelName,
-  coords,
+  address,
   phoneNumber,
   email,
   introduceText,
 }) =>
   await axios.post('/profile/createHotelProfile', {
     hotelName,
-    coords,
+    address,
     phoneNumber,
     email,
     introduceText,
