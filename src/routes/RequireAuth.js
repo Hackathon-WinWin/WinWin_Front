@@ -3,16 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 import { checkLoggedIn } from '../modules/auth';
 
+const check = { isArtist: false }; // 임시
+
 const RequireAuth = ({ children }) => {
-  const { check } = useSelector(({ auth }) => ({ check: auth.check }));
+  // const { check } = useSelector(({ auth }) => ({ check: auth.check }));
   const dispatch = useDispatch();
   const location = useLocation();
-  useEffect(() => {
-    dispatch(checkLoggedIn());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(checkLoggedIn());
+  // }, [dispatch]);
   if (!check) {
     alert('로그인을 하세요.');
-    return <Navigate to='/signin' state={{ from: location }} />;
+    return <Navigate to='/' state={{ from: location }} />;
   }
   return children;
 };

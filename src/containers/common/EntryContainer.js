@@ -26,6 +26,7 @@ const EntryContainer = () => {
     e.preventDefault();
     if (form.account === '' || form.password === '') {
       alert('양식을 입력해주세요');
+      return;
     }
     dispatch(signin(form));
   };

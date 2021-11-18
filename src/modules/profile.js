@@ -20,7 +20,14 @@ const CREATE_ARTIST_PROFILEIMG_FAILURE =
   'auth/CREATE_ARTIST_PROFILEIMG_FAILURE';
 
 // HOTEL action
+const CHECK_HOTEL_PROFILE = 'auth/CHECK_HOTEL_PROFILE';
+const CHECK_HOTEL_PROFILE_SUCCESS = 'auth/CHECK_HOTEL_PROFILE_SUCCESS';
+const CHECK_HOTEL_PROFILE_FAILURE = 'auth/CHECK_HOTEL_PROFILE_FAILURE';
+const CREATE_HOTEL_PROFILE = 'auth/CREATE_HOTEL_PROFILE';
+const CREATE_HOTEL_PROFILE_SUCCESS = 'auth/CREATE_HOTEL_PROFILE_SUCCESS';
+const CREATE_HOTEL_PROFILE_FAILURE = 'auth/CREATE_HOTEL_PROFILE_FAILURE';
 
+// ARTIST action creator
 export const checkArtistProfile = createAction(CHECK_ARTIST_PROFILE);
 export const createArtistProfile = createAction(
   CREATE_ARTIST_PROFILE,
@@ -38,6 +45,19 @@ export const createArtistProfileImage = createAction(
 export const createArtistBackgroundImage = createAction(
   CREATE_ARTIST_BACKIMG,
   (formData) => formData
+);
+
+// HOTEL action creator
+export const checkHotelProfile = createAction(CHECK_HOTEL_PROFILE);
+export const createHotelProfile = createAction(
+  CREATE_HOTEL_PROFILE,
+  ({ hotelName, address, phoneNumber, email, introduceText }) => ({
+    hotelName,
+    address,
+    phoneNumber,
+    email,
+    introduceText,
+  })
 );
 
 const checkArtistProfileSaga = createRequestSaga(
@@ -74,12 +94,14 @@ const initialState = {
   artistProfileImgSuccess: null,
   artistProfileImgError: null,
 
-  //   hotelSignupSuccess: null,
-  //   hotelSignupError: null,
-  //   hotelSigninSuccess: null,
-  //   hotelSigninError: null,
-  //   hotelLogoutSuccess: null,
-  check: null,
+  checkHotelProfileSuccess: null,
+  checkHotelProfileError: null,
+  hotelprofileSuccess: null,
+  hotelprofileError: null,
+  hotelBackImgSuccess: null,
+  hotelBackImgError: null,
+  hotelProfileImgSuccess: null,
+  hotelProfileImgError: null,
 };
 
 export default handleActions(
