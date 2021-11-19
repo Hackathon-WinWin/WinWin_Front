@@ -34,7 +34,6 @@ const EntryContainer = () => {
     if (signinSuccess) {
       console.log('success login');
       navigate('/main');
-      dispatch(checkLoggedIn());
       return;
     }
     if (signinError) {
