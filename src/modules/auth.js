@@ -80,7 +80,7 @@ const initialState = {
   signinSuccess: null,
   signinError: null,
   logoutSuccess: null,
-  check: null,
+  check: true,
   checkAccountSuccess: null,
 };
 

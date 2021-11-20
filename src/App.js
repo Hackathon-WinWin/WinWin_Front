@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import HotelSignupPage from './pages/hotel/HotelSignupPage';
@@ -12,8 +12,20 @@ import EntryPage from './pages/common/EntryPage';
 import Signup from './components/common/Signup';
 import RequireAuth from './routes/RequireAuth';
 import RequireProfile from './routes/RequireProfile';
+import ArtistMyPage from './pages/artist/mypage/ArtistMyPage';
+import { createGlobalStyle } from 'styled-components';
+import EditArtistProfilePage from './pages/artist/mypage/EditArtistProfilePage';
 
-const check = { isArtist: false };
+const GlobalStyle = createGlobalStyle`
+  * {
+    padding: 0;
+    margin: 0;
+  }
+  body {
+    word-break : keep-all
+  }
+`;
+const check = { isArtist: true };
 const App = () => {
   // const { check } = useSelector(({ auth, profile }) => ({
   //   check: auth.check,
@@ -21,27 +33,40 @@ const App = () => {
   // const dispatch = useDispatch();
 
   return (
-    <Routes>
-      <Route path='/' element={<EntryPage />} />
-      <Route path='/signup' element={<Signup />} />
-      <Route path='/checkArtistPhone' element={<PhoneCertificationPage />} />
-      <Route path='/checkBusiness' element={<BusinessCertificationPage />} />
-      <Route path='/singupArtist' element={<ArtistSignupPage />} />
-      <Route path='/signupHotel' element={<HotelSignupPage />} />
-      <Route path='/createArtistProfile' element={<ArtistProfilePage />} />
-      <Route path='/createHotelProfile' element={<HotelProfilePage />} />
-      <Route
-        path='/main'
-        element={
-          <RequireAuth>
-            <RequireProfile isArtist={check.isArtist}>
-              <MainPage />
-            </RequireProfile>
-          </RequireAuth>
-        }
-      />
-      <Route path='*' element={<div>Not Found.</div>} />
-    </Routes>
+    <>
+      <GlobalStyle />
+      <Routes>
+        <Route path='/' element={<EntryPage />} />
+        <Route path='/signup' element={<Signup />} />
+        <Route path='/checkArtistPhone' element={<PhoneCertificationPage />} />
+        <Route path='/checkBusiness' element={<BusinessCertificationPage />} />
+        <Route path='/singupArtist' element={<ArtistSignupPage />} />
+        <Route path='/signupHotel' element={<HotelSignupPage />} />
+        <Route path='/createArtistProfile' element={<ArtistProfilePage />} />
+        <Route path='/createHotelProfile' element={<HotelProfilePage />} />
+        <Route
+          path='/myPage'
+          element={
+            check.isArtist ? <ArtistMyPage /> : <div>호텔 마이페이지</div>
+          }
+        />
+        <Route
+          path='editProfile'
+          element={check.isArtist ? <EditArtistProfilePage /> : <>호텔 수정</>}
+        />
+        <Route
+          path='/main'
+          element={
+            <RequireAuth>
+              <RequireProfile isArtist={check.isArtist}>
+                <MainPage />
+              </RequireProfile>
+            </RequireAuth>
+          }
+        />
+        <Route path='*' element={<div>Not Found.</div>} />
+      </Routes>
+    </>
   );
 };
 
