@@ -19,31 +19,40 @@ export const createArtistProfile = async ({
   nickname,
   name,
   birthday,
+  address,
   email,
+  introduceText,
 }) =>
   await axios.post('/profile/createArtistProfile', {
     nickname,
     name,
     birthday,
+    address,
     email,
+    introduceText,
   });
-// 프로필 이미지 설정
-// 200: 아티스트 프로필 이미지 저장 성공
+// 아티스트 프로필 수정
+// 200: 프로필 수정 성공
+// 400: 이미 사용중인 닉네임
+// 401: 이미 사용중인 이메일
+// 402: 소개글 최대 길이 - 40
 // 500: 에러 내용
-export const createArtistProfileImage = async (formData) =>
-  await axios.post('/profile/createArtistProfileImage', {
-    headers: { 'content-type': 'multipart/form-data' },
-    data: formData,
+export const updateArtistProfile = async ({
+  nickname,
+  name,
+  birthday,
+  address,
+  email,
+  introduceText,
+}) =>
+  await axios.post('/profile/updateArtistProfile', {
+    nickname,
+    name,
+    birthday,
+    address,
+    email,
+    introduceText,
   });
-// 배경이미지 설정
-// 200: 아티스트 배경 이미지 저장 성공
-// 500: 에러 내용
-export const createArtistBackgroundImage = async (formData) =>
-  await axios.post('/profile/createArtistBackgroundImage', {
-    headers: { 'content-type': 'multipart/form-data' },
-    data: formData,
-  });
-
 // ## HOTEL ##
 
 // 호텔 프로필 생성 유무 확인
