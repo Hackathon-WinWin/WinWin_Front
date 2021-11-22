@@ -6,6 +6,7 @@ const BottomTabContainer = () => {
   const { check } = useSelector(({ auth }) => ({
     check: auth.check,
   }));
+  if (!check) return null;
   return <BottomTab isArtist={check.isArtist} />;
 };
 

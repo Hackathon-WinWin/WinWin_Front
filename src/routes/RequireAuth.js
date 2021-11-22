@@ -1,22 +1,26 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { checkLoggedIn } from '../modules/auth';
 
-const RequireAuth = ({ children }) => {
-  const check = { isArtist: false }; // 임시
-  // const { check } = useSelector(({ auth }) => ({ check: auth.check }));
+const RequireAuth = ({ Component, match }) => {
+  const { check, checkError } = useSelector(({ auth }) => ({
+    check: auth.check,
+    checkError: auth.checkError,
+  }));
   const dispatch = useDispatch();
-  const location = useLocation();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(checkLoggedIn());
   }, [dispatch]);
-  if (!check) {
-    // alert('로그인을 하세요.')
-    console.log('먼저 로그인을 해주세요.');
-    return <Navigate to='/' state={{ from: location }} />;
-  }
-  return children;
+  useEffect(() => {
+    if (checkError) {
+      alert('로그인을 해주세요.');
+      navigate('/');
+    }
+  }, [checkError, navigate]);
+  if (!check) return null;
+  return <Component match={match} />;
 };
 
 export default RequireAuth;
