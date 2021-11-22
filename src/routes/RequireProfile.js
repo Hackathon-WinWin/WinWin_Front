@@ -1,36 +1,36 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { checkLoggedIn } from '../modules/auth';
 import { checkArtistProfile, checkHotelProfile } from '../modules/profile';
 
-const RequireProfile = ({ children, isArtist }) => {
-  const { checkArtistProfileSuccess, checkHotelProfileSuccess } = useSelector(
-    ({ profile }) => ({
-      checkArtistProfileSuccess: profile.checkArtistProfileSuccess, // 아티스트 프로필 존재
-      checkHotelProfileSuccess: profile.checkHotelProfileSuccess,
-    })
-  );
+const RequireProfile = ({ Component, match }) => {
+  const {
+    check,
+    checkError,
+    checkArtistProfileSuccess,
+    checkArtistProfileError,
+    checkHotelProfileSuccess,
+    checkHotelProfileError,
+  } = useSelector(({ auth, profile }) => ({
+    check: auth.check,
+    checkError: auth.checkError,
+  }));
   const dispatch = useDispatch();
-  const location = useLocation();
+  const navigate = useNavigate();
   useEffect(() => {
-    if (isArtist) {
-      dispatch(checkArtistProfile());
-      return;
+    dispatch(checkLoggedIn());
+  }, [dispatch]);
+  useEffect(() => {
+    if (checkError) {
+      alert('로그인을 해주세요.');
+      navigate('/');
     }
-    if (isArtist === false) {
-      dispatch(checkHotelProfile());
-    }
-  }, [dispatch, isArtist]);
+  }, [checkError, navigate]);
 
-  if (!checkArtistProfileSuccess && isArtist === true) {
-    console.log('아티스트 프로필 설정하기.');
-    return <Navigate to='/createArtistProfile' state={{ from: location }} />;
-  }
-  if (!checkHotelProfileSuccess && isArtist === false) {
-    console.log('호텔 프로필 설정하기');
-    return <Navigate to='/createHotelProfile' state={{ from: location }} />;
-  }
-  return children;
+  if (!check) return null;
+
+  return <Component match={match} />;
 };
 
 export default RequireProfile;

@@ -21,6 +21,7 @@ const LOGOUT = 'auth/LOGOUT';
 const LOGOUT_SUCCESS = 'auth/LOGOUT_SUCCESS';
 const CHECK_LOGGEDIN = 'auth/CHECK_LOGGEDIN';
 const CHECK_LOGGEDIN_SUCCESS = 'auth/CHECK_LOGGEDIN_SUCCESS';
+const CHECK_LOGGEDIN_FAILURE = 'auth/CHECK_LOGGEDIN_FAILURE';
 const CHECK_ACCOUNT = 'auth/CHECK_ACCOUNT';
 const CHECK_ACCOUNT_SUCCESS = 'auth/CHECK_ACCOUNT_SUCCESS';
 const CHECK_ACCOUNT_FAILURE = 'auth/CHECK_ACCOUNT_FAILURE';
@@ -80,7 +81,11 @@ const initialState = {
   signinSuccess: null,
   signinError: null,
   logoutSuccess: null,
-  check: true,
+  check: {
+    isArtist: false,
+    hasProfile: true,
+  },
+  checkError: null,
   checkAccountSuccess: null,
 };
 
@@ -117,6 +122,12 @@ export default handleActions(
     [CHECK_LOGGEDIN_SUCCESS]: (state, { payload: check }) => ({
       ...state,
       check,
+      checkError: null,
+    }),
+    [CHECK_LOGGEDIN_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      check: null,
+      checkError: error,
     }),
     [CHECK_ACCOUNT_SUCCESS]: (state, { payload: success }) => ({
       ...state,

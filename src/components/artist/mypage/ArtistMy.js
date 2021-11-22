@@ -10,39 +10,37 @@ const ArtistMy = ({ myArtist, artistProfileImg, artistBackImg }) => {
   };
 
   return (
-    <>
-      <ArtistMyWrapper>
-        <ArtistBgImg backgroundImage={artistBackImg.backgroundImage}>
-          <div>
+    <ArtistMyWrapper>
+      <ArtistBgImg backgroundImage={artistBackImg.backgroundImage}>
+        <div>
+          <MenuBtn onClick={onOpenMenu}>
+            <AiOutlineMenu size='22'></AiOutlineMenu>
+          </MenuBtn>
+        </div>
+      </ArtistBgImg>
+      <ArtistInfo>
+        <ArtistProfileImg
+          profileImage={artistProfileImg.profileImage}
+        ></ArtistProfileImg>
+        <h3>{myArtist.name}</h3>
+        <div>{myArtist.phoneNumber}</div>
+        <div>{myArtist.email}</div>
+      </ArtistInfo>
+      <PortfolioList>1</PortfolioList>
+      <MenuTab isOpen={isOpen}>
+        <ul>
+          <li>
             <MenuBtn onClick={onOpenMenu}>
               <AiOutlineMenu size='22'></AiOutlineMenu>
             </MenuBtn>
-          </div>
-        </ArtistBgImg>
-        <ArtistInfo>
-          <ArtistProfileImg
-            profileImage={artistProfileImg.profileImage}
-          ></ArtistProfileImg>
-          <h3>{myArtist.name}</h3>
-          <div>{myArtist.phoneNumber}</div>
-          <div>{myArtist.email}</div>
-        </ArtistInfo>
-        <PortfolioList>1</PortfolioList>
-        <MenuTab isOpen={isOpen}>
-          <ul>
-            <li>
-              <MenuBtn onClick={onOpenMenu}>
-                <AiOutlineMenu size='22'></AiOutlineMenu>
-              </MenuBtn>
-            </li>
-            <li>
-              <Link to='/editProfile'>프로필 편집</Link>
-            </li>
-          </ul>
-          <BlackEmpty onClick={onOpenMenu} />
-        </MenuTab>
-      </ArtistMyWrapper>
-    </>
+          </li>
+          <li>
+            <Link to='/editProfile'>프로필 편집</Link>
+          </li>
+        </ul>
+        <BlackEmpty onClick={onOpenMenu} />
+      </MenuTab>
+    </ArtistMyWrapper>
   );
 };
 
@@ -94,13 +92,13 @@ const MenuTab = styled.div`
     background-color: white;
     display: flex;
     flex-direction: column;
-    width: 310px;
+    width: 70%;
     height: 100vh;
   }
 `;
 const BlackEmpty = styled.div`
   background-color: rgba(24, 24, 24, 0.8);
-  width: 81px;
+  width: 30%;
   height: 100vh;
 `;
 export default ArtistMy;
