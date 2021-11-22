@@ -15,6 +15,9 @@ import RequireProfile from './routes/RequireProfile';
 import ArtistMyPage from './pages/artist/mypage/ArtistMyPage';
 import { createGlobalStyle } from 'styled-components';
 import EditArtistProfilePage from './pages/artist/mypage/EditArtistProfilePage';
+import { useEffect } from 'react';
+import { checkLoggedIn } from './modules/auth';
+import HotelMyPage from './pages/hotel/mypage/HotelMyPage';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -25,12 +28,14 @@ const GlobalStyle = createGlobalStyle`
     word-break : keep-all
   }
 `;
-const check = { isArtist: true };
 const App = () => {
-  // const { check } = useSelector(({ auth, profile }) => ({
-  //   check: auth.check,
-  // }));
-  // const dispatch = useDispatch();
+  const { check } = useSelector(({ auth }) => ({
+    check: auth.check,
+  }));
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(checkLoggedIn());
+  // }, [dispatch]);
 
   return (
     <>
@@ -46,24 +51,10 @@ const App = () => {
         <Route path='/createHotelProfile' element={<HotelProfilePage />} />
         <Route
           path='/myPage'
-          element={
-            check.isArtist ? <ArtistMyPage /> : <div>호텔 마이페이지</div>
-          }
+          element={check && check.isArtist ? <ArtistMyPage /> : <HotelMyPage />}
         />
-        <Route
-          path='editProfile'
-          element={check.isArtist ? <EditArtistProfilePage /> : <>호텔 수정</>}
-        />
-        <Route
-          path='/main'
-          element={
-            <RequireAuth>
-              <RequireProfile isArtist={check.isArtist}>
-                <MainPage />
-              </RequireProfile>
-            </RequireAuth>
-          }
-        />
+        <Route path='/editProfile' element={<EditArtistProfilePage />} />
+        <Route path='/main' element={<RequireProfile Component={MainPage} />} />
         <Route path='*' element={<div>Not Found.</div>} />
       </Routes>
     </>

@@ -22,7 +22,7 @@ const BottomTab = ({ isArtist }) => {
         </NavLink>
       </Tab>
       <Tab>
-        <NavLink to='/mypage' style={onActive}>
+        <NavLink to='/myPage' style={onActive}>
           마이페이지
         </NavLink>
       </Tab>
@@ -33,17 +33,14 @@ const BottomTabWrapper = styled.ul`
   position: fixed;
   bottom: 0;
   display: flex;
-  margin: 0;
-  padding: 0;
   width: 100vw;
   height: 60px;
   border-top: 1px solid lightgray;
+  background-color: white;
 `;
 const Tab = styled.li`
   list-style: none;
   width: 100%;
-  padding: 0;
-  margin: 0;
   & + & {
     border-left: 1px solid lightgray;
   }

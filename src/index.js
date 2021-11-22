@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
@@ -13,7 +12,9 @@ import logger from 'redux-logger';
 import createSagaMiddleware from '@redux-saga/core';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://3.12.248.32:8000';
+// axios.defaults.baseURL = `http://3.12.248.32:8000`;
+// axios.defaults.withCredentials = true;
+
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   rootReducer,
