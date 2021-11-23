@@ -1,22 +1,49 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import portfolio from '../../../modules/portfolio';
+import { HiPlus } from 'react-icons/hi';
+import DetailPortfolio from './DetailPortfolio';
 
-const ArtistMy = ({ myArtist, artistProfileImg, artistBackImg }) => {
+const ArtistMy = ({
+  form,
+  setForm,
+  myArtist,
+  artistProfileImg,
+  artistBackImg,
+  myPortfolio,
+  onChange,
+  onAddPortfolio,
+}) => {
+  const imgRef = useRef();
+  const previewRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
+  const [openDetail, setOpenDetail] = useState(false);
   const onOpenMenu = (e) => {
     setIsOpen((prev) => !prev);
   };
-
+  const handleOnChangeFiles = (e) => {
+    onChange(e);
+    const {
+      target: { files },
+    } = e;
+    if ([...files].length > 0) {
+      setOpenDetail(true);
+      const reader = new FileReader();
+      const previewImg = files[0];
+      reader.readAsDataURL(previewImg);
+      reader.onloadend = () => {
+        previewRef.current.style.backgroundImage = `url(${reader.result})`;
+      };
+    }
+  };
   return (
     <ArtistMyWrapper>
       <ArtistBgImg backgroundImage={artistBackImg.backgroundImage}>
-        <div>
-          <MenuBtn onClick={onOpenMenu}>
-            <AiOutlineMenu size='22'></AiOutlineMenu>
-          </MenuBtn>
-        </div>
+        <MenuBtn onClick={onOpenMenu}>
+          <AiOutlineMenu size='22'></AiOutlineMenu>
+        </MenuBtn>
       </ArtistBgImg>
       <ArtistInfo>
         <ArtistProfileImg
@@ -26,7 +53,17 @@ const ArtistMy = ({ myArtist, artistProfileImg, artistBackImg }) => {
         <div>{myArtist.phoneNumber}</div>
         <div>{myArtist.email}</div>
       </ArtistInfo>
-      <PortfolioList>1</PortfolioList>
+      <PortfolioList>
+        {!myPortfolio && <p>개인 포트폴리오를 추가해보세요!</p>}
+        {myPortfolio &&
+          (myPortfolio.portfolios === [] ? (
+            <p>개인 포트폴리오를 추가해보세요!</p>
+          ) : (
+            myPortfolio.portfolios.map((portfolio) => (
+              <li key={portfolio._id} image={portfolio.images[0].image}></li>
+            ))
+          ))}
+      </PortfolioList>
       <MenuTab isOpen={isOpen}>
         <ul>
           <li>
@@ -40,11 +77,36 @@ const ArtistMy = ({ myArtist, artistProfileImg, artistBackImg }) => {
         </ul>
         <BlackEmpty onClick={onOpenMenu} />
       </MenuTab>
+      <form onSubmit={onAddPortfolio}>
+        <AddPortfolioLabel>
+          <ImageInput
+            ref={imgRef}
+            name='images'
+            type='file'
+            accept='image/*'
+            onChange={handleOnChangeFiles}
+            required
+            multiple
+          />
+          <HiPlus color='white' size='25' />
+        </AddPortfolioLabel>
+        {openDetail && (
+          <DetailPortfolio
+            setOpenDetail={setOpenDetail}
+            setForm={setForm}
+            onChange={onChange}
+            form={form}
+            previewRef={previewRef}
+          />
+        )}
+      </form>
     </ArtistMyWrapper>
   );
 };
 
 const ArtistMyWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   width: 100vw;
 `;
@@ -72,12 +134,47 @@ const ArtistInfo = styled.div`
   flex-direction: column;
   justify-content: flex-end;
 `;
-const PortfolioList = styled.div`
+const PortfolioList = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 167px);
+  grid-template-rows: repeat(auto-fit, 167px);
+  grid-gap: 18px;
   background-color: #f9f9f9;
   width: 100vw;
-  min-height: 50vh;
+  flex: auto;
+  padding: 16px;
+  box-sizing: border-box;
+  & > p {
+    margin: 30px auto 0;
+  }
+  & > li {
+    list-style: none;
+    width: 167px;
+    height: 167px;
+    /* background-image: url(${({ image }) => image}); */
+    background-color: lightgreen;
+    border-radius: 15px;
+  }
+`;
+const AddPortfolioLabel = styled.label`
+  cursor: pointer;
+  background: #181818;
+  border: none;
+  border-radius: 50%;
+  width: 68px;
+  height: 68px;
+  position: absolute;
+  bottom: 12vh;
+  left: calc(50vw - 34px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const ImageInput = styled.input`
+  display: none;
 `;
 const MenuBtn = styled.button`
+  margin: 16px;
   cursor: pointer;
   background: none;
   border: none;
