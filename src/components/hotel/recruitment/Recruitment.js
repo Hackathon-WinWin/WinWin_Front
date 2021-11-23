@@ -9,18 +9,22 @@ const Recruitment = ({ myRecuitementList }) => {
       <Header>
         <h3>공고 관리</h3>
       </Header>
-      <ul>
+      <RecruitList>
         {myRecuitementList.recruitments.length !== 0 &&
-          myRecuitementList.recruitments.map((recruit) => <li></li>)}
-        <li></li>
-      </ul>
-      <AddRecruit to='/createRecuit'>test</AddRecruit>
+          myRecuitementList.recruitments.map((recruit, index) => (
+            <li key={index}>
+              <h4>{recruit.title}</h4>
+              <p>{recruit.introduceText}</p>
+            </li>
+          ))}
+      </RecruitList>
+      <AddRecruit to='/createRecruit'>test</AddRecruit>
     </RecruitmentWrapper>
   );
 };
 const RecruitmentWrapper = styled.div`
   width: 100vw;
-  min-height: 10vh;
+  min-height: 100vh;
 `;
 const Header = styled.header`
   display: flex;
@@ -33,6 +37,20 @@ const Header = styled.header`
     color: white;
     width: fit-content;
     height: fit-content;
+  }
+`;
+const RecruitList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  min-height: 100vh;
+  & > li {
+    padding: 16px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-top: 1px solid lightgray;
   }
 `;
 const AddRecruit = styled(Link)`

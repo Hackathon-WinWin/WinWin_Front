@@ -11,6 +11,8 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 import createSagaMiddleware from '@redux-saga/core';
 import axios from 'axios';
+import { LocalizationProvider } from '@mui/lab';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
 // axios.defaults.baseURL = `http://3.12.248.32:8000`;
 // axios.defaults.withCredentials = true;
@@ -24,11 +26,13 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </LocalizationProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

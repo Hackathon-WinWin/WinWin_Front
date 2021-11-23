@@ -21,6 +21,7 @@ import axios from 'axios';
 import ArtistMainPage from './pages/artist/ArtistMainPage';
 import HotelMainPage from './pages/hotel/HotelMainPage';
 import RecruitmentPage from './pages/hotel/RecruitmentPage';
+import AddRecruitContainer from './containers/hotel/recruitment/AddRecruitContainer';
 
 // axios.defaults.baseURL = 'http://3.12.248.32:8000';
 axios.defaults.withCredentials = true;
@@ -67,7 +68,7 @@ const App = () => {
           }
         />
         <Route path='/recruit' element={<RecruitmentPage />} />
-        <Route path='/createRecruit' element={<RecruitmentPage />} />
+        <Route path='/createRecruit' element={<AddRecruitContainer />} />
         <Route path='*' element={<div>Not Found.</div>} />
       </Routes>
     </>

@@ -2,8 +2,8 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import Recruitment from '../../components/hotel/Recruitment';
-import { readMyRecruitment } from '../../modules/recruitment';
+import Recruitment from '../../../components/hotel/recruitment/Recruitment';
+import { readMyRecruitment } from '../../../modules/recruitment';
 
 const RecruitmentContainer = () => {
   const { myRecuitementList } = useSelector(({ recruitment }) => ({
@@ -11,9 +11,9 @@ const RecruitmentContainer = () => {
   }));
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(readMyRecruitment());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(readMyRecruitment());
+  // }, [dispatch]);
   return <Recruitment myRecuitementList={myRecuitementList} />;
 };
 
