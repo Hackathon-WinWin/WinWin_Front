@@ -20,8 +20,11 @@ import HotelMyPage from './pages/hotel/mypage/HotelMyPage';
 import axios from 'axios';
 import ArtistMainPage from './pages/artist/ArtistMainPage';
 import HotelMainPage from './pages/hotel/HotelMainPage';
+import RecruitmentPage from './pages/hotel/RecruitmentPage';
+import AddRecruitContainer from './containers/hotel/recruitment/AddRecruitContainer';
 import firebase from 'firebase';
 import { useState } from 'react';
+
 // axios.defaults.baseURL = 'http://3.12.248.32:8000';
 axios.defaults.withCredentials = true;
 
@@ -117,6 +120,8 @@ const App = () => {
             check && check.isArtist ? <ArtistMainPage /> : <HotelMainPage />
           }
         />
+        <Route path='/recruit' element={<RecruitmentPage />} />
+        <Route path='/createRecruit' element={<AddRecruitContainer />} />
         <Route path='*' element={<div>Not Found.</div>} />
       </Routes>
     </>

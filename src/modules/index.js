@@ -5,6 +5,7 @@ import certificate, { certificateSaga } from './certificate';
 import profile, { profileSaga } from './profile';
 import myPage, { myPageSaga } from './myPage';
 import portfolio, { portfolioSaga } from './portfolio';
+import recruitment, { recruitmentSaga } from './recruitment';
 
 const rootReducer = combineReducers({
   auth,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   profile,
   myPage,
   portfolio,
+  recruitment,
 });
 export function* rootSaga() {
   yield all([
@@ -20,6 +22,7 @@ export function* rootSaga() {
     profileSaga(),
     myPageSaga(),
     portfolioSaga(),
+    recruitmentSaga(),
   ]);
 }
 
