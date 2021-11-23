@@ -12,9 +12,15 @@ const BottomTab = ({ isArtist }) => {
         </NavLink>
       </Tab>
       <Tab>
-        <NavLink to='/community' style={onActive}>
-          커뮤니티
-        </NavLink>
+        {isArtist ? (
+          <NavLink to='/community' style={onActive}>
+            커뮤니티
+          </NavLink>
+        ) : (
+          <NavLink to='/recruit' style={onActive}>
+            모집공고
+          </NavLink>
+        )}
       </Tab>
       <Tab>
         <NavLink to='/applystatus' style={onActive}>
