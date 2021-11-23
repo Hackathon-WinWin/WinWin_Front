@@ -50,7 +50,10 @@ export const signin = createAction(SIGNIN, ({ account, password }) => ({
   password,
 }));
 export const logout = createAction(LOGOUT);
-export const checkLoggedIn = createAction(CHECK_LOGGEDIN);
+export const checkLoggedIn = createAction(
+  CHECK_LOGGEDIN,
+  (firebaseToken) => firebaseToken
+);
 export const checkAccount = createAction(CHECK_ACCOUNT, (account) => account);
 export const initAuth = createAction(INIT_AUTH);
 
