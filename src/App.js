@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import MainPage from './pages/MainPage';
 import HotelSignupPage from './pages/hotel/HotelSignupPage';
 import BusinessCertificationPage from './pages/hotel/BusinessCertificationPage';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,6 +18,8 @@ import { useEffect } from 'react';
 import { checkLoggedIn } from './modules/auth';
 import HotelMyPage from './pages/hotel/mypage/HotelMyPage';
 import axios from 'axios';
+import ArtistMainPage from './pages/artist/ArtistMainPage';
+import HotelMainPage from './pages/hotel/HotelMainPage';
 
 axios.defaults.baseURL = 'http://3.12.248.32:8000';
 
@@ -57,8 +58,12 @@ const App = () => {
           element={check && check.isArtist ? <ArtistMyPage /> : <HotelMyPage />}
         />
         <Route path='/editProfile' element={<EditArtistProfilePage />} />
-        <Route path='/main' element={<RequireProfile Component={MainPage} />} />
-        {/* <Route path='/addPortfolio' e */}
+        <Route
+          path='/main'
+          element={
+            check && check.isArtist ? <ArtistMainPage /> : <HotelMainPage />
+          }
+        />
         <Route path='*' element={<div>Not Found.</div>} />
       </Routes>
     </>

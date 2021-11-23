@@ -5,14 +5,7 @@ import { checkLoggedIn } from '../modules/auth';
 import { checkArtistProfile, checkHotelProfile } from '../modules/profile';
 
 const RequireProfile = ({ Component, match }) => {
-  const {
-    check,
-    checkError,
-    checkArtistProfileSuccess,
-    checkArtistProfileError,
-    checkHotelProfileSuccess,
-    checkHotelProfileError,
-  } = useSelector(({ auth, profile }) => ({
+  const { check, checkError } = useSelector(({ auth, profile }) => ({
     check: auth.check,
     checkError: auth.checkError,
   }));
