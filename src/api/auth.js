@@ -43,7 +43,9 @@ export const Logout = async () => await axios.post('/auth/logout');
 // 501: 이외의 모든 에러(토큰 없는 경우 포함)
 // 200 이외에는 전부 로그인 X
 // 200: 호텔이면 false, 아티스트면 true
-export const checkLoggedIn = async () => await axios.get('/auth/checkLoggedIn');
+// firebaseToken : FCM을 위한 사용자 토큰 전달
+export const checkLoggedIn = async (firebaseToken) =>
+  await axios.post('/auth/checkLoggedIn', { firebaseToken });
 
 // 아이디 양식 확인
 // 영어 대문자, 소문자, 숫자로만 가능
