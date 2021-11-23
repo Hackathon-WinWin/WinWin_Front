@@ -23,7 +23,7 @@ export const readMyPortfolio = async () =>
 // 400: 포트폴리오 찾을 수 없음
 // 500: 에러 내용
 export const readOtherPortfolio = async (artistAuth_id) =>
-  await axios.get(`/portfolio/readOtherPortfolio/:${artistAuth_id}`);
+  await axios.get(`/portfolio/readOtherPortfolio/${artistAuth_id}`);
 
 // 특정 포트폴리오를 읽을 때 사용
 // 파라미터로 /:artistAuth_id /:portfolio_id 주기
@@ -32,5 +32,5 @@ export const readOtherPortfolio = async (artistAuth_id) =>
 // 500: 에러 내용
 export const readSpecificPortfolio = async ({ artistAuth_id, portfolio_id }) =>
   await axios.get(
-    `/portfolio/readSpecificPortfolio/:${artistAuth_id}/:${portfolio_id}`
+    `/portfolio/readSpecificPortfolio/${artistAuth_id}/${portfolio_id}`
   );
