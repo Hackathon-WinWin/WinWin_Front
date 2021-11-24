@@ -84,7 +84,7 @@ const LoginButton = styled.button`
   margin-top: 14px;
   border: none;
   border-radius: 4px;
-  font-weight: 400;
+  font-weight: 700;
 `;
 
 const FindAuth = styled(Link)`
@@ -99,7 +99,7 @@ const FindAuth = styled(Link)`
   font-size: 10px;
   color: #ffffff;
   text-decoration: none;
-  font-weight: 400;
+  font-weight: 500;
 `;
 
 const CreateAuth = styled(Link)`
@@ -116,7 +116,7 @@ const CreateAuth = styled(Link)`
   text-decoration: none;
   margin-top: auto;
   margin-bottom: auto;
-  font-weight: 400;
+  font-weight: 500;
 `;
 
 const Bar = styled.p`
