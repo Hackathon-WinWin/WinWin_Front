@@ -1,8 +1,9 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import React from 'react';
 import styled from 'styled-components';
 import MobileDatePicker from '@mui/lab/MobileDatePicker';
 import TextField from '@mui/material/TextField';
-import { css } from '@emotion/react';
 import { Box } from '@material-ui/core';
 import { Input, InputAdornment } from '@mui/material';
 import { useRef } from 'react';
@@ -32,14 +33,6 @@ const AddRecruit = ({
       };
     }
   };
-  const BoxSx = {
-    display: 'flex',
-    alignItems: 'center',
-    '& .MuiOutlinedInput-root': {
-      height: '30px',
-      width: 'fit-content',
-    },
-  };
   return (
     <AddRecruitWrapper onSubmit={onAddRecruit}>
       <Header>
@@ -53,7 +46,7 @@ const AddRecruit = ({
         <FormBox>
           <FormTitle>전시 정보 입력</FormTitle>
           <InputBox>
-            <Box sx={BoxSx}>
+            <Box css={BoxStyle}>
               <h4>신청기간</h4>
               <MobileDatePicker
                 label='시작날짜'
@@ -71,7 +64,7 @@ const AddRecruit = ({
                 renderInput={(params) => <TextField {...params} />}
               />
             </Box>
-            <Box sx={BoxSx}>
+            <Box css={BoxStyle}>
               <h4>전시기간</h4>
               <MobileDatePicker
                 label='시작날짜'
@@ -249,4 +242,12 @@ const ImgLabel = styled.label`
   background-size: cover;
 `;
 const InputBox = styled.div``;
+const BoxStyle = css`
+  display: flex;
+  align-items: center;
+  & .muioutlinedinput-root {
+    height: 30px;
+    width: fit-content;
+  }
+`;
 export default AddRecruit;

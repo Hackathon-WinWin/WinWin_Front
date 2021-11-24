@@ -1,4 +1,7 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const HotelMain = ({ artistProfiles }) => {
@@ -16,8 +19,8 @@ const HotelMain = ({ artistProfiles }) => {
       <MainPortfoilo>
         <ul>
           {!artistProfiles && <p>loading...</p>}
-          {artistProfiles === [] ? (
-            <p>loading...</p>
+          {artistProfiles.length === 0 ? (
+            <p>아티스트의 프로필이 없습니다!</p>
           ) : (
             artistProfiles.map((portfolio, index) => (
               <li
@@ -28,16 +31,21 @@ const HotelMain = ({ artistProfiles }) => {
                     : portfolio.portfolio.images[0].image
                 }
               >
-                <div>
-                  <h3>{portfolio.portfolio.title}</h3>
-                  <ul>
-                    {portfolio.hashTag &&
-                      portfolio.hashTag.length !== 0 &&
-                      portfolio.hashTag.map((tag, index) => (
-                        <li key={index}>{`# ${tag.tagName}`}</li>
-                      ))}
-                  </ul>
-                </div>
+                <Link
+                  css={LinkCss}
+                  to={`../otherProfile/${portfolio.artistAuth_id}`}
+                >
+                  <div>
+                    <h3>{portfolio.portfolio.title}</h3>
+                    <ul>
+                      {portfolio.hashTag &&
+                        portfolio.hashTag.length !== 0 &&
+                        portfolio.hashTag.map((tag, index) => (
+                          <li key={index}>{`# ${tag.tagName}`}</li>
+                        ))}
+                    </ul>
+                  </div>
+                </Link>
               </li>
             ))
           )}
@@ -88,9 +96,6 @@ const MainPortfoilo = styled.div`
       display: none;
     }
     & > li {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
       flex-shrink: 0;
       scroll-snap-align: start; /* latest (Chrome 69+) */
       scroll-snap-coordinate: 0% 0%; /* older (Firefox/IE) */
@@ -111,6 +116,22 @@ const MainPortfoilo = styled.div`
       margin-left: 16px;
       border-radius: 10px;
     }
+  }
+`;
+const LinkCss = css`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: white;
+  text-decoration: none;
+  & ul {
+    display: flex;
+  }
+  & li {
+    list-style: none;
+    margin-right: 7px;
   }
 `;
 

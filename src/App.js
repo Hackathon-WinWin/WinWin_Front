@@ -9,8 +9,6 @@ import ArtistProfilePage from './pages/artist/ArtistProfilePage';
 import HotelProfilePage from './pages/hotel/HotelProfilePage';
 import EntryPage from './pages/common/EntryPage';
 import Signup from './components/common/Signup';
-import RequireAuth from './routes/RequireAuth';
-import RequireProfile from './routes/RequireProfile';
 import ArtistMyPage from './pages/artist/mypage/ArtistMyPage';
 import { createGlobalStyle } from 'styled-components';
 import EditArtistProfilePage from './pages/artist/mypage/EditArtistProfilePage';
@@ -21,7 +19,10 @@ import axios from 'axios';
 import ArtistMainPage from './pages/artist/ArtistMainPage';
 import HotelMainPage from './pages/hotel/HotelMainPage';
 import RecruitmentPage from './pages/hotel/RecruitmentPage';
-import AddRecruitContainer from './containers/hotel/recruitment/AddRecruitContainer';
+import AddRecruitPage from './pages/hotel/AddRecruitPage';
+import SpecificPortfolioPage from './pages/hotel/SpecificPortfolioPage';
+import OtherProfilePage from './pages/hotel/OtherProfilePage';
+import ProposeFormPage from './pages/hotel/ProposeFormPage';
 import firebase from 'firebase';
 import { useState } from 'react';
 
@@ -85,7 +86,7 @@ const App = () => {
   useEffect(() => {
     if (firebaseToken) {
       console.log(firebaseToken);
-      dispatch(checkLoggedIn(firebaseToken));
+      // dispatch(checkLoggedIn(firebaseToken));
     }
   }, [dispatch, firebaseToken]);
 
@@ -113,7 +114,16 @@ const App = () => {
           }
         />
         <Route path='/recruit' element={<RecruitmentPage />} />
-        <Route path='/createRecruit' element={<AddRecruitContainer />} />
+        <Route path='/createRecruit' element={<AddRecruitPage />} />
+        <Route
+          path='/otherProfile/:artistAuth_id'
+          element={<OtherProfilePage />}
+        />
+        <Route
+          path='/specificPortfolio/:artistAuth_id/:portfolio_id'
+          element={<SpecificPortfolioPage />}
+        />
+        <Route path='/propose/:artistAuth_id' element={<ProposeFormPage />} />
         <Route path='*' element={<div>Not Found.</div>} />
       </Routes>
     </>
