@@ -53,6 +53,15 @@ export const updateArtistProfile = async ({
     email,
     introduceText,
   });
+
+// 특정 아티스트의 프로필
+// 파라미터에 artistAuth_id 값 전달
+// 해당 artist의 프로필 반환
+// 200: 특정 아티스트의 프로필 정보
+// 500: 에러 내용
+export const specificArtistProfile = async (artistAuth_id) =>
+  await axios.get(`/profile/artistProfile/${artistAuth_id}`);
+
 // ## HOTEL ##
 
 // 호텔 프로필 생성 유무 확인
