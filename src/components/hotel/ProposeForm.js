@@ -74,15 +74,10 @@ const ProposeForm = ({
           >
             X
           </Link>
-          <h3>모집공고 관리</h3>
+          <h3>제안서 작성</h3>
           <button>완료</button>
         </Header>
-        <div
-          css={css`
-            display: flex;
-            flex-direction: column;
-          `}
-        >
+        <div css={FlexColumn}>
           <div css={FlexColumn}>
             <FormTitle>담당자 정보</FormTitle>
             <WhiteBox>

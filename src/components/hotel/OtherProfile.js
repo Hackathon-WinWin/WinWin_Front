@@ -131,7 +131,7 @@ const ProposeFormLink = css`
   background-color: #181818;
   height: 75px;
   width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 0;
 `;
 export default OtherProfile;
