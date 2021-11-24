@@ -51,7 +51,7 @@ initialState.myRecuitementList = {
       area: 500,
       concept: '자연',
       images: [],
-      title: '서울호텔 자연컨셉 작품 모집',
+      title: '신라호텔 로비 꾸미기',
       introduceText: '안녕하세요 서울호텔입니다.',
       _id: '619d23826f2db9b7980d27ae',
     },

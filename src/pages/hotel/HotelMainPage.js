@@ -1,5 +1,5 @@
 import React from 'react';
-import HotelMainContainer from '../../containers/artist/HotelMainContainer';
+import HotelMainContainer from '../../containers/hotel/HotelMainContainer';
 import BottomTabContainer from '../../containers/common/BottomTabContainer';
 
 const HotelMainPage = () => {
