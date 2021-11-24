@@ -36,3 +36,39 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 100;
+  src: url(../public/fonts/NotoSansKR-Light.otf);
+}
+
+@font-face {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 200;
+  src: url(../public/fonts/NotoSansKR-Regular.otf);
+}
+
+@font-face {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  src: url(../public/fonts/NotoSansKR-Medium.otf);
+}
+
+@font-face {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  src: url(../public/fonts/NotoSansKR-Bold.otf);
+}
+
+@font-face {
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 200;
+  src: url(../public/fonts/NotoSans-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 400;
+  src: url(../public/fonts/NotoSans-Bold.ttf);
+}
