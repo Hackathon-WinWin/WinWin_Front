@@ -16,25 +16,38 @@ const ApplyFormContainer = () => {
   const { recruitment_id } = useParams();
   const [artistInfo, setArtistInfo] = useState();
   const navigate = useNavigate();
-  const initForm = {};
+
+  const initForm = {
+    title: '',
+    message: '',
+  };
+  const [form, setForm] = useState(initForm);
+
+  const onChange = (e) => {
+    const {
+      target: { name, value },
+    } = e;
+    setForm((state) => ({ ...state, [name]: value }));
+  };
+
   const onApply = async (e) => {
     e.preventDefault();
     try {
       const response = await artistSendApplication({
         ...artistInfo,
+        ...form,
       });
       if (response.status === 200) {
         navigate(-1);
-        // setForm((state) => ({
-        //   ...state,
-        //   title: '',
-        //   message: '',
-        //   artistAuth_id,
-        //   recruitment_id: null,
-        // }));
+        setForm((state) => ({
+          ...state,
+          title: '',
+          message: '',
+        }));
       }
     } catch (e) {}
   };
+
   useEffect(() => {
     // const fetchArtistInfo = async () => {
     //   try {
@@ -43,11 +56,17 @@ const ApplyFormContainer = () => {
     //   } catch (e) {}
     // };
     // if (recruitment_id) fetchArtistInfo();
-    // if (recruitment_id) setArtistInfo(dummy);
-    setArtistInfo(dummy);
+    if (recruitment_id) setArtistInfo(dummy);
   }, [recruitment_id]);
-  console.log(artistInfo);
-  return <ApplyForm artistInfo={artistInfo} onApply={onApply} />;
+
+  return (
+    <ApplyForm
+      form={form}
+      artistInfo={artistInfo}
+      onApply={onApply}
+      onChange={onChange}
+    />
+  );
 };
 
 export default ApplyFormContainer;

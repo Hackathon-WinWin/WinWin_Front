@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const ApplyForm = ({ artistInfo, onApply }) => {
+const ApplyForm = ({ form, artistInfo, onApply, onChange }) => {
   if (!artistInfo) return null;
   const {
     name,
@@ -28,12 +28,21 @@ const ApplyForm = ({ artistInfo, onApply }) => {
           css={css`
             color: white;
             text-decoration: none;
+            position: absolute;
+            left: 16px;
           `}
         >
           X
         </Link>
         <h3>지원서 작성</h3>
-        <button>완료</button>
+        <button
+          css={css`
+            position: absolute;
+            right: 16px;
+          `}
+        >
+          완료
+        </button>
       </Header>
       <div css={FlexColumn}>
         <div css={FlexColumn}>
@@ -72,37 +81,31 @@ const ApplyForm = ({ artistInfo, onApply }) => {
           <FormTitle>전시공고 확인</FormTitle>
           <WhiteBox>
             <div css={InfoItem}>
-              <Icon
-                src={process.env.PUBLIC_URL + '/icons/person.png'}
-                alt='icon'
-              />
-              <p>
-                <span>{name}</span>
-                <span>
-                  {calcAge()}세/
-                  {address}
-                </span>
-              </p>
+              <span>호텔 정보</span>
+              <p>{hotelName}</p>
             </div>
             <div css={InfoItem}>
-              <Icon
-                src={process.env.PUBLIC_URL + '/icons/phone.png'}
-                alt='icon'
-              />
-              <p>{phoneNumber}</p>
-            </div>
-            <div css={InfoItem}>
-              <Icon
-                src={process.env.PUBLIC_URL + '/icons/phone.png'}
-                alt='icon'
-              />
-              <p>{email}</p>
+              <span>전시 제목</span>
+              <p>{recruitmentTitle}</p>
             </div>
           </WhiteBox>
         </div>
         <div css={FlexColumn}>
-          <FormTitle>전시공고 확인</FormTitle>
-          <WhiteBox></WhiteBox>
+          <FormTitle>지원서 작성</FormTitle>
+          <WhiteBox>
+            <input
+              name='title'
+              value={form.title}
+              onChange={onChange}
+              placeholder='제목을 입력하세요.'
+            />
+            <input
+              name='message'
+              value={form.message}
+              onChange={onChange}
+              placeholder='아티스트에게 전하고 싶은 메시지를 적어주세요. '
+            />
+          </WhiteBox>
         </div>
       </div>
     </form>
@@ -120,8 +123,8 @@ const Header = styled.header`
   left: 0;
   padding: 16px;
   box-sizing: border-box;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  justify-content: center;
   align-items: center;
   height: 60px;
   width: 100vw;

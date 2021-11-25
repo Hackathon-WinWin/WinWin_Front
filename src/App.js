@@ -21,10 +21,11 @@ import HotelMainPage from './pages/hotel/HotelMainPage';
 import RecruitmentPage from './pages/hotel/RecruitmentPage';
 import AddRecruitPage from './pages/hotel/AddRecruitPage';
 import SpecificPortfolioPage from './pages/hotel/SpecificPortfolioPage';
-import OtherProfilePage from './pages/hotel/OtherProfilePage';
 import ProposeFormPage from './pages/hotel/ProposeFormPage';
 import SpecificRecruitmentPage from './pages/artist/SpecificRecruitmentPage';
 import ApplyFormPage from './pages/artist/ApplyFormPage';
+import OtherArtistProfilePage from './pages/hotel/OtherArtistProfilePage';
+import OtherHotelProfilePage from './pages/artist/OtherHotelProfilePage';
 
 // axios.defaults.baseURL = 'http://3.12.248.32:8000';
 axios.defaults.withCredentials = true;
@@ -116,8 +117,8 @@ const App = () => {
         <Route path='/recruit' element={<RecruitmentPage />} />
         <Route path='/createRecruit' element={<AddRecruitPage />} />
         <Route
-          path='/otherProfile/:artistAuth_id'
-          element={<OtherProfilePage />}
+          path='/otherArtistProfile/:artistAuth_id'
+          element={<OtherArtistProfilePage />}
         />
         <Route
           path='/specificPortfolio/:artistAuth_id/:portfolio_id'
@@ -125,11 +126,14 @@ const App = () => {
         />
         <Route path='/propose/:artistAuth_id' element={<ProposeFormPage />} />
         <Route
+          path='/otherHotelProfile/:hotelAuth_id'
+          element={<OtherHotelProfilePage />}
+        />
+        <Route
           path='/specificRecruit/:hotelAuth_id/:recruitment_id'
           element={<SpecificRecruitmentPage />}
         />
-        {/* <Route path='/apply/:recruitment_id' element={<ApplyFormPage />} /> */}
-        <Route path='/apply' element={<ApplyFormPage />} />
+        <Route path='/apply/:recruitment_id' element={<ApplyFormPage />} />
         <Route path='*' element={<div>Not Found.</div>} />
       </Routes>
     </>

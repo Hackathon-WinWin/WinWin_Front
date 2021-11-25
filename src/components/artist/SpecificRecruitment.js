@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { flexbox } from '@mui/system';
+import dayjs from 'dayjs';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -8,6 +9,25 @@ import Recruitment from '../hotel/recruitment/Recruitment';
 
 const SpecificRecruitment = ({ specificRecruit }) => {
   if (!specificRecruit) return null;
+  const {
+    hotelAuth_id,
+    hotelName,
+    address,
+    bookMark,
+    recruitment: {
+      _id: recruitment_id,
+      exhibitionStartDate,
+      exhibitionEndDate,
+      applicationStartDate,
+      applicationEndDate,
+      area,
+      recruitNumber,
+      concept,
+      images,
+      title,
+      introduceText,
+    },
+  } = specificRecruit;
   return (
     <Wrapper>
       <Header>
@@ -21,16 +41,16 @@ const SpecificRecruitment = ({ specificRecruit }) => {
         <div></div>
       </Header>
       <HotelExhibitImg>
-        <li></li>
-        <li></li>
-        <li></li>
+        {images.map((image) => (
+          <li image={image.image}></li>
+        ))}
       </HotelExhibitImg>
       <div css={BottomBox}>
         <RecruitmentInfoCard>
           <div css={Top}>
-            <h2>명동 메트로 호텔</h2>
+            <h2>{hotelName}</h2>
             <Link
-              to='/main'
+              to={`/otherHotelProfile/${hotelAuth_id}`}
               css={css`
                 color: black;
                 text-decoration: none;
@@ -42,38 +62,46 @@ const SpecificRecruitment = ({ specificRecruit }) => {
           <ul css={RecruitInfoList}>
             <li>
               <h4>위치</h4>
-              <p>서울 중구 명동9가길 14</p>
+              <p>{address}</p>
+            </li>
+            <li>
+              <h4>신청기간</h4>
+              <p>
+                {dayjs(applicationStartDate).format('YY.MM.DD')} -{' '}
+                {dayjs(applicationEndDate).format('YY.MM.DD')}
+              </p>
             </li>
             <li>
               <h4>전시기간</h4>
-              <p>서울 중구 명동9가길 14</p>
+              <p>
+                {dayjs(exhibitionStartDate).format('YY.MM.DD')} -{' '}
+                {dayjs(exhibitionEndDate).format('YY.MM.DD')}
+              </p>
             </li>
             <li>
-              <h4>전시기간</h4>
-              <p>서울 중구 명동9가길 14</p>
-            </li>
-            <li>
-              <h4>전시기간</h4>
-              <p>서울 중구 명동9가길 14</p>
+              <h4>전시공간</h4>
+              <p>
+                {area} m<sup>2</sup>
+              </p>
             </li>
             <li className='line'></li>
             <li>
-              <h4>전시기간</h4>
-              <p>서울 중구 명동9가길 14</p>
+              <h4>전시컨셉</h4>
+              <p>{concept}</p>
             </li>
             <li>
-              <h4>전시기간</h4>
-              <p>서울 중구 명동9가길 14</p>
+              <h4>모집인원</h4>
+              <p>{recruitNumber} 명</p>
             </li>
           </ul>
           <div css={Bottom}>
-            <h3>호텔 창립 60주년 기념 전시</h3>
-            <p>introintrointro</p>
+            <h3>{title}</h3>
+            <p>{introduceText}</p>
           </div>
         </RecruitmentInfoCard>
       </div>
       {/* param : 공고 id */}
-      <Link css={ApplyFormLink} to={`/apply`}>
+      <Link css={ApplyFormLink} to={`/apply/${recruitment_id}`}>
         지원하기
       </Link>
     </Wrapper>
@@ -149,7 +177,7 @@ const HotelExhibitImg = styled.ul`
     overflow: hidden;
     list-style: none;
     background-color: green;
-    /* background-image: url(${({ image }) => image}); */
+    background-image: url(${({ image }) => image});
     background-repeat: no-repeat;
     background-size: cover;
     scroll-snap-align: start;
