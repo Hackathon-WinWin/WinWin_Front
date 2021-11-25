@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import portfolio from '../../../modules/portfolio';
 import { HiPlus } from 'react-icons/hi';
 import DetailPortfolio from './DetailPortfolio';
 
@@ -151,7 +150,7 @@ const PortfolioList = styled.ul`
     list-style: none;
     width: 167px;
     height: 167px;
-    /* background-image: url(${({ image }) => image}); */
+    background-image: url(${({ image }) => image});
     background-color: lightgreen;
     border-radius: 15px;
   }

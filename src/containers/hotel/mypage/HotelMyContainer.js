@@ -45,10 +45,10 @@ const HotelMyContainer = () => {
     } catch (e) {}
   };
   // 서버와 연동시 주석 해제
-  // useEffect(() => {
-  //   dispatch(getMyHotelProfile());
-  //   dispatch(getMyHotelProfileImg());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getMyHotelProfile());
+    dispatch(getMyHotelProfileImg());
+  }, [dispatch]);
   return (
     <HotelMy
       myHotel={myHotel}

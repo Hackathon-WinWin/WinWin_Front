@@ -111,51 +111,51 @@ const initialState = {
   hotelProfileImgError: null,
 };
 // DUMMY DATA
-initialState.myArtist = {
-  _id: '619796295b2b45723b57ab85',
-  artistAuth_id: '619661cfaf39e6cec711d492',
-  nickname: 'jayjay',
-  name: '오정진',
-  birthday: '1999-11-23T00:00:00.000Z',
-  address: '서울시 노원구 공릉동',
-  phoneNumber: '01012341234',
-  email: 'ojj1123@gmail.com',
-  introduceText: '안녕하세요.',
-  hashTag: [],
-  __v: 0,
-};
-initialState.artistProfileImg = {
-  _id: '6197962a5b2b45723b57ab87',
-  artistAuth_id: '619661cfaf39e6cec711d492',
-  profileImage:
-    'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5.png',
-  __v: 0,
-};
-initialState.artistBackImg = {
-  _id: '6197962a5b2b45723b57ab89',
-  artistAuth_id: '619661cfaf39e6cec711d492',
-  backgroundImage:
-    'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5.png',
-  __v: 0,
-};
-initialState.myHotel = {
-  _id: '619a85a8e022247def87c54b',
-  hotelAuth_id: '619a8567e022247def87c540',
-  hotelName: '서울 호텔',
-  address: '서울시 강남구 대치동',
-  phoneNumber: '02-1234-56781',
-  email: 'ojj991123@seoulhotel.com',
-  introduceText: '안녕하세요 서울 호텔입니다.',
-  images: [], // 이미지가 비어있다면 무조건 빈 배열?
-  __v: 0,
-};
-initialState.hotelProfileImg = {
-  _id: '619a85a8e022247def87c54d',
-  hotelAuth_id: '619a8567e022247def87c540',
-  profileImage:
-    'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5.png',
-  __v: 0,
-};
+// initialState.myArtist = {
+//   _id: '619796295b2b45723b57ab85',
+//   artistAuth_id: '619661cfaf39e6cec711d492',
+//   nickname: 'jayjay',
+//   name: '오정진',
+//   birthday: '1999-11-23T00:00:00.000Z',
+//   address: '서울시 노원구 공릉동',
+//   phoneNumber: '01012341234',
+//   email: 'ojj1123@gmail.com',
+//   introduceText: '안녕하세요.',
+//   hashTag: [],
+//   __v: 0,
+// };
+// initialState.artistProfileImg = {
+//   _id: '6197962a5b2b45723b57ab87',
+//   artistAuth_id: '619661cfaf39e6cec711d492',
+//   profileImage:
+//     'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5.png',
+//   __v: 0,
+// };
+// initialState.artistBackImg = {
+//   _id: '6197962a5b2b45723b57ab89',
+//   artistAuth_id: '619661cfaf39e6cec711d492',
+//   backgroundImage:
+//     'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5.png',
+//   __v: 0,
+// };
+// initialState.myHotel = {
+//   _id: '619a85a8e022247def87c54b',
+//   hotelAuth_id: '619a8567e022247def87c540',
+//   hotelName: '서울 호텔',
+//   address: '서울시 강남구 대치동',
+//   phoneNumber: '02-1234-56781',
+//   email: 'ojj991123@seoulhotel.com',
+//   introduceText: '안녕하세요 서울 호텔입니다.',
+//   images: [],
+//   __v: 0,
+// };
+// initialState.hotelProfileImg = {
+//   _id: '619a85a8e022247def87c54d',
+//   hotelAuth_id: '619a8567e022247def87c540',
+//   profileImage:
+//     'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5.png',
+//   __v: 0,
+// };
 export default handleActions(
   {
     [UPDATE_ARTIST_PROFILEIMG_SUCCESS]: (state, { payload: profileImg }) => ({

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { createHotelProfile } from '../../../api/profile';
 import HotelProfile from '../../../components/hotel/profile/HotelProfile';
-// import { createHotelProfile } from '../../../modules/profile';
+import { createHotelProfile } from '../../../modules/profile';
 
 const HotelProfileContainer = () => {
   const { hotelprofileSuccess, hotelprofileError } = useSelector(

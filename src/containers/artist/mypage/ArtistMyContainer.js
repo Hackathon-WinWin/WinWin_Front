@@ -57,12 +57,12 @@ const ArtistMyContainer = () => {
     dispatch(addPortfolio(formData));
   };
   // jwt 발급 오류로 안됨
-  // useEffect(() => {
-  //   dispatch(getMyAritistProfile());
-  //   dispatch(getMyArtistProfileImg());
-  //   dispatch(getMyArtistBgImg());
-  //   dispatch(readMyPortfolio());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getMyAritistProfile());
+    dispatch(getMyArtistProfileImg());
+    dispatch(getMyArtistBgImg());
+    dispatch(readMyPortfolio());
+  }, [dispatch]);
   useEffect(() => {
     if (myPortfolioError) {
       console.log('myPortfolioError');

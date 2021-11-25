@@ -33,51 +33,51 @@ const initialState = {
   myPortfolio: null,
   myPortfolioError: null,
 };
-initialState.myPortfolio = {
-  _id: '619b9803d2959b99228bf3f5',
-  artistAuth_id: '619b97fcd2959b99228bf3e9',
-  portfolios: [
-    {
-      artistAuth_id: '619b97fcd2959b99228bf3e9',
-      title: '포트폴리오 제목',
-      introduceText: '소개글',
-      link: '링크',
-      images: [
-        {
-          image:
-            'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/4291637586955897.png',
-          _id: '619b980cd2959b99228bf3fb',
-        },
-        {
-          image:
-            'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/8301637586955898.png',
-          _id: '619b980cd2959b99228bf3fc',
-        },
-      ],
-      _id: '619b980cd2959b99228bf3fa',
-    },
-    {
-      artistAuth_id: '619b97fcd2959b99228bf3e9',
-      title: '포트폴리오 제목',
-      introduceText: '소개글',
-      link: '링크',
-      images: [
-        {
-          image:
-            'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/4291637586955897.png',
-          _id: '619b980cd2959b99228bf3',
-        },
-        {
-          image:
-            'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/8301637586955898.png',
-          _id: '619b980cd2959b992f3fc',
-        },
-      ],
-      _id: '619b980cd2959b99228bf3',
-    },
-  ],
-  __v: 0,
-};
+// initialState.myPortfolio = {
+//   _id: '619b9803d2959b99228bf3f5',
+//   artistAuth_id: '619b97fcd2959b99228bf3e9',
+//   portfolios: [
+//     {
+//       artistAuth_id: '619b97fcd2959b99228bf3e9',
+//       title: '포트폴리오 제목',
+//       introduceText: '소개글',
+//       link: '링크',
+//       images: [
+//         {
+//           image:
+//             'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/4291637586955897.png',
+//           _id: '619b980cd2959b99228bf3fb',
+//         },
+//         {
+//           image:
+//             'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/8301637586955898.png',
+//           _id: '619b980cd2959b99228bf3fc',
+//         },
+//       ],
+//       _id: '619b980cd2959b99228bf3fa',
+//     },
+//     {
+//       artistAuth_id: '619b97fcd2959b99228bf3e9',
+//       title: '포트폴리오 제목',
+//       introduceText: '소개글',
+//       link: '링크',
+//       images: [
+//         {
+//           image:
+//             'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/4291637586955897.png',
+//           _id: '619b980cd2959b99228bf3',
+//         },
+//         {
+//           image:
+//             'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/8301637586955898.png',
+//           _id: '619b980cd2959b992f3fc',
+//         },
+//       ],
+//       _id: '619b980cd2959b99228bf3',
+//     },
+//   ],
+//   __v: 0,
+// };
 export default handleActions(
   {
     [ADD_PORTFOLIO_SUCCESS]: (state, { payload: success }) => ({

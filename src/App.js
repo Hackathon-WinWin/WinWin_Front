@@ -25,8 +25,8 @@ import OtherProfilePage from './pages/hotel/OtherProfilePage';
 import ProposeFormPage from './pages/hotel/ProposeFormPage';
 import firebase from 'firebase';
 import { useState } from 'react';
+import RequireAuth from './routes/RequireAuth';
 
-// axios.defaults.baseURL = 'http://3.12.248.32:8000';
 axios.defaults.withCredentials = true;
 
 const GlobalStyle = createGlobalStyle`
@@ -86,7 +86,7 @@ const App = () => {
   useEffect(() => {
     if (firebaseToken) {
       console.log(firebaseToken);
-      // dispatch(checkLoggedIn(firebaseToken));
+      dispatch(checkLoggedIn(firebaseToken));
     }
   }, [dispatch, firebaseToken]);
 
@@ -104,26 +104,70 @@ const App = () => {
         <Route path='/createHotelProfile' element={<HotelProfilePage />} />
         <Route
           path='/myPage'
-          element={check && check.isArtist ? <ArtistMyPage /> : <HotelMyPage />}
+          element={
+            <RequireAuth
+              firebaseToken={firebaseToken}
+              ArtistComponent={ArtistMyPage}
+              HotelComponent={HotelMyPage}
+            />
+          }
         />
         <Route path='/editProfile' element={<EditArtistProfilePage />} />
         <Route
           path='/main'
           element={
-            check && check.isArtist ? <ArtistMainPage /> : <HotelMainPage />
+            <RequireAuth
+              firebaseToken={firebaseToken}
+              ArtistComponent={ArtistMainPage}
+              HotelComponent={HotelMainPage}
+            />
           }
         />
-        <Route path='/recruit' element={<RecruitmentPage />} />
-        <Route path='/createRecruit' element={<AddRecruitPage />} />
+        <Route
+          path='/recruit'
+          element={
+            <RequireAuth
+              firebaseToken={firebaseToken}
+              HotelComponent={RecruitmentPage}
+            />
+          }
+        />
+        <Route
+          path='/createRecruit'
+          element={
+            <RequireAuth
+              firebaseToken={firebaseToken}
+              HotelComponent={AddRecruitPage}
+            />
+          }
+        />
         <Route
           path='/otherProfile/:artistAuth_id'
-          element={<OtherProfilePage />}
+          element={
+            <RequireAuth
+              firebaseToken={firebaseToken}
+              ArtistComponent={OtherProfilePage}
+            />
+          }
         />
         <Route
           path='/specificPortfolio/:artistAuth_id/:portfolio_id'
-          element={<SpecificPortfolioPage />}
+          element={
+            <RequireAuth
+              firebaseToken={firebaseToken}
+              HotelComponent={SpecificPortfolioPage}
+            />
+          }
         />
-        <Route path='/propose/:artistAuth_id' element={<ProposeFormPage />} />
+        <Route
+          path='/propose/:artistAuth_id'
+          element={
+            <RequireAuth
+              firebaseToken={firebaseToken}
+              HotelComponent={ProposeFormPage}
+            />
+          }
+        />
         <Route path='*' element={<div>Not Found.</div>} />
       </Routes>
     </>
