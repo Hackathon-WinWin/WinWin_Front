@@ -127,6 +127,9 @@ const HotelImageList = styled.ul`
   flex: auto;
   & > li {
     list-style: none;
+    background-image: url(${({ image }) => image});
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 `;
 const MenuTab = styled.div`
