@@ -33,7 +33,7 @@ const HotelMain = ({ artistProfiles }) => {
               >
                 <Link
                   css={LinkCss}
-                  to={`../otherProfile/${portfolio.artistAuth_id}`}
+                  to={`../otherArtistProfile/${portfolio.artistAuth_id}`}
                 >
                   <div>
                     <h3>{portfolio.portfolio.title}</h3>

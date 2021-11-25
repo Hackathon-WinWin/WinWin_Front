@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const OtherProfile = ({ otherProfile, otherPortfolio }) => {
+const OtherArtistProfile = ({ otherProfile, otherPortfolio }) => {
   if (!otherProfile && !otherPortfolio) return null;
   const {
     backgroundImageURL,
@@ -131,7 +131,7 @@ const ProposeFormLink = css`
   background-color: #181818;
   height: 75px;
   width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 0;
 `;
-export default OtherProfile;
+export default OtherArtistProfile;

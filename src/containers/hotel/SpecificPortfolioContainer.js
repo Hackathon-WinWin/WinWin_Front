@@ -44,6 +44,7 @@ const SpecificPortfolioContainer = () => {
     <SpecificPortfolio
       specificPortfolio={specificPortfolio}
       artistInfo={artistInfo}
+      artistAuth_id={artistAuth_id}
     />
   );
 };

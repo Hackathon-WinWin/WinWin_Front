@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { readOtherPortfolio } from '../../api/portfolio';
 import { specificArtistProfile } from '../../api/profile';
-import OtherProfile from '../../components/hotel/OtherProfile';
+import OtherProfile from '../../components/hotel/OtherArtistProfile';
 
 // // GET specificArtistProfile
 // const dummyOtherProfile = {
@@ -53,7 +53,7 @@ import OtherProfile from '../../components/hotel/OtherProfile';
 //   __v: 0,
 // };
 
-const OtherProfileContainer = () => {
+const OtherArtistProfileContainer = () => {
   const { artistAuth_id } = useParams();
   const [otherProfile, setOtherProfile] = useState();
   const [otherPortfolio, setOtherPortfolio] = useState();
@@ -82,4 +82,4 @@ const OtherProfileContainer = () => {
   );
 };
 
-export default OtherProfileContainer;
+export default OtherArtistProfileContainer;

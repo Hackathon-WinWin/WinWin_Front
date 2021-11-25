@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { createGlobalStyle } from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import firebase from 'firebase';
+import { checkLoggedIn } from './modules/auth';
 import HotelSignupPage from './pages/hotel/HotelSignupPage';
 import BusinessCertificationPage from './pages/hotel/BusinessCertificationPage';
-import { useDispatch, useSelector } from 'react-redux';
 import ArtistSignupPage from './pages/artist/ArtistSignupPage';
 import PhoneCertificationPage from './pages/artist/PhoneCertificationPage';
 import ArtistProfilePage from './pages/artist/ArtistProfilePage';
@@ -10,22 +14,19 @@ import HotelProfilePage from './pages/hotel/HotelProfilePage';
 import EntryPage from './pages/common/EntryPage';
 import Signup from './components/common/Signup';
 import ArtistMyPage from './pages/artist/mypage/ArtistMyPage';
-import { createGlobalStyle } from 'styled-components';
 import EditArtistProfilePage from './pages/artist/mypage/EditArtistProfilePage';
-import { useEffect } from 'react';
-import { checkLoggedIn } from './modules/auth';
 import HotelMyPage from './pages/hotel/mypage/HotelMyPage';
-import axios from 'axios';
 import ArtistMainPage from './pages/artist/ArtistMainPage';
 import HotelMainPage from './pages/hotel/HotelMainPage';
 import RecruitmentPage from './pages/hotel/RecruitmentPage';
 import AddRecruitPage from './pages/hotel/AddRecruitPage';
 import SpecificPortfolioPage from './pages/hotel/SpecificPortfolioPage';
-import OtherProfilePage from './pages/hotel/OtherProfilePage';
 import ProposeFormPage from './pages/hotel/ProposeFormPage';
-import firebase from 'firebase';
-import { useState } from 'react';
 import RequireAuth from './routes/RequireAuth';
+import SpecificRecruitmentPage from './pages/artist/SpecificRecruitmentPage';
+import ApplyFormPage from './pages/artist/ApplyFormPage';
+import OtherArtistProfilePage from './pages/hotel/OtherArtistProfilePage';
+import OtherHotelProfilePage from './pages/artist/OtherHotelProfilePage';
 
 axios.defaults.withCredentials = true;
 
@@ -142,13 +143,8 @@ const App = () => {
           }
         />
         <Route
-          path='/otherProfile/:artistAuth_id'
-          element={
-            <RequireAuth
-              firebaseToken={firebaseToken}
-              ArtistComponent={OtherProfilePage}
-            />
-          }
+          path='/otherArtistProfile/:artistAuth_id'
+          element={<OtherArtistProfilePage />}
         />
         <Route
           path='/specificPortfolio/:artistAuth_id/:portfolio_id'
@@ -168,6 +164,16 @@ const App = () => {
             />
           }
         />
+        <Route path='/propose/:artistAuth_id' element={<ProposeFormPage />} />
+        <Route
+          path='/otherHotelProfile/:hotelAuth_id'
+          element={<OtherHotelProfilePage />}
+        />
+        <Route
+          path='/specificRecruit/:hotelAuth_id/:recruitment_id'
+          element={<SpecificRecruitmentPage />}
+        />
+        <Route path='/apply/:recruitment_id' element={<ApplyFormPage />} />
         <Route path='*' element={<div>Not Found.</div>} />
       </Routes>
     </>

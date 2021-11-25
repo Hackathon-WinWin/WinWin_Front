@@ -1,4 +1,7 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const ArtistMain = ({ hotelList }) => {
@@ -27,11 +30,16 @@ const ArtistMain = ({ hotelList }) => {
                     : hotel.recruitment.images[0].image
                 }
               >
-                <h3>{hotel.hotelName}</h3>
-                <div>
-                  <p>{hotel.address}</p>
-                  <p>{hotel.recruitment.title}</p>
-                </div>
+                <Link
+                  to={`/specificRecruit/${hotel.hotelAuth_id}/${hotel.recruitment._id}`}
+                  css={LinkCss}
+                >
+                  <h3>{hotel.hotelName}</h3>
+                  <div>
+                    <p>{hotel.address}</p>
+                    <p>{hotel.recruitment.title}</p>
+                  </div>
+                </Link>
               </li>
             ))
           )}
@@ -107,5 +115,13 @@ const MainPortfoilo = styled.div`
     }
   }
 `;
-
+const LinkCss = css`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  text-decoration: none;
+`;
 export default ArtistMain;

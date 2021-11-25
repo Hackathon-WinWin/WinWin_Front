@@ -14,6 +14,7 @@ const AddRecruitContainer = () => {
     applicationStartDate: new Date(),
     applicationEndDate: new Date(),
     area: '',
+    recruitNumber: '',
     concept: '',
     title: '',
     introduceText: '',
@@ -58,6 +59,7 @@ const AddRecruitContainer = () => {
     formData.append('applicationEndDate', form.applicationEndDate);
     formData.append('area', form.area);
     formData.append('concept', form.concept);
+    formData.append('recruitNumber', form.recruitNumber);
     formData.append('title', form.title);
     formData.append('introduceText', form.introduceText);
     dispatch(addRecruitment(formData));
@@ -72,6 +74,7 @@ const AddRecruitContainer = () => {
         applicationStartDate: new Date(),
         applicationEndDate: new Date(),
         area: '',
+        recruitNumber: '',
         concept: '',
         title: '',
         introduceText: '',
