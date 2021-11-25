@@ -98,7 +98,7 @@ const App = () => {
         <Route path='/signup' element={<Signup />} />
         <Route path='/checkArtistPhone' element={<PhoneCertificationPage />} />
         <Route path='/checkBusiness' element={<BusinessCertificationPage />} />
-        <Route path='/singupArtist' element={<ArtistSignupPage />} />
+        <Route path='/signupArtist' element={<ArtistSignupPage />} />
         <Route path='/signupHotel' element={<HotelSignupPage />} />
         <Route path='/createArtistProfile' element={<ArtistProfilePage />} />
         <Route path='/createHotelProfile' element={<HotelProfilePage />} />
