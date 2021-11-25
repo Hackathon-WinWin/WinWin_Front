@@ -24,7 +24,7 @@ const SpecificPortfolio = ({
       </Header>
       <div>
         <Link
-          to={`/otherProfile/${artistAuth_id}`}
+          to={`/otherArtistProfile/${artistAuth_id}`}
           css={ProfileLink}
           replace={true}
         >

@@ -90,3 +90,6 @@ export const createHotelProfile = async ({
     email,
     introduceText,
   });
+
+export const specificHotelProfile = async (hotelAuth_id) =>
+  await axios.get(`/profile/hotelProfile/${hotelAuth_id}`);
