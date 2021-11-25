@@ -85,7 +85,7 @@ const initialState = {
   signinError: null,
   logoutSuccess: null,
   check: {
-    isArtist: false,
+    isArtist: true,
     hasProfile: true,
   },
   checkError: null,

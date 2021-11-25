@@ -25,6 +25,7 @@ import OtherProfilePage from './pages/hotel/OtherProfilePage';
 import ProposeFormPage from './pages/hotel/ProposeFormPage';
 import firebase from 'firebase';
 import { useState } from 'react';
+import ArtistStatusPage from './pages/artist/ArtistStatusPage';
 
 // axios.defaults.baseURL = 'http://3.12.248.32:8000';
 axios.defaults.withCredentials = true;
@@ -113,6 +114,9 @@ const App = () => {
             check && check.isArtist ? <ArtistMainPage /> : <HotelMainPage />
           }
         />
+        <Route path='/applyStatus/*' element={<ArtistStatusPage />} />
+        {/* <Route path='/recruitStatus/*' element={<ArtistStatusPage />} /> */}
+
         <Route path='/recruit' element={<RecruitmentPage />} />
         <Route path='/createRecruit' element={<AddRecruitPage />} />
         <Route

@@ -23,9 +23,15 @@ const BottomTab = ({ isArtist }) => {
         )}
       </Tab>
       <Tab>
-        <NavLink to='/applystatus' style={onActive}>
-          지원현황
-        </NavLink>
+        {isArtist ? (
+          <NavLink to='/applyStatus' style={onActive}>
+            지원현황
+          </NavLink>
+        ) : (
+          <NavLink to='/recruitStatus' style={onActive}>
+            지원현황
+          </NavLink>
+        )}
       </Tab>
       <Tab>
         <NavLink to='/myPage' style={onActive}>
