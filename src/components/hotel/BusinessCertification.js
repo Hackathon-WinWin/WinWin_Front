@@ -12,22 +12,23 @@ const BusinessCertification = ({ form, onChange, onSubmit }) => {
                     name="businessNumber"
                     value={form.businessNumber}
                     onChange={onChange}
-                    placeholder="사업자번호"
+                    placeholder="0000000000000"
                 />
                 <P2>대표자 성명</P2>
                 <Input2
                     name="hostName"
                     value={form.hostName}
                     onChange={onChange}
-                    placeholder="대표자 성명"
+                    placeholder="외국인 사업자의 경우, 영문명 입력"
                 />
                 <P3>개업일자</P3>
                 <Input3
                     name="openDate"
                     value={form.openDate}
                     onChange={onChange}
-                    placeholder="YYMMDD"
+                    placeholder="YYYYMMDD"
                 />
+                <Button1>인증 요청</Button1>
                 <Button2>다음</Button2>
             </form>
         </Container>
@@ -89,7 +90,7 @@ const P2 = styled.p`
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 364px;
+    top: 358px;
     left: 20px;
     width: 71px;
     height: 16px;
@@ -103,7 +104,7 @@ const P3 = styled.p`
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 490px;
+    top: 479px;
     left: 20px;
     width: 54px;
     height: 16px;
@@ -134,7 +135,7 @@ const Input2 = styled.input`
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 360px;
+    top: 380px;
     left: 20px;
     width: 350px;
     height: 50px;
@@ -151,7 +152,7 @@ const Input3 = styled.input`
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 500px;
+    top: 501px;
     left: 20px;
     width: 350px;
     height: 50px;
@@ -160,6 +161,23 @@ const Input3 = styled.input`
     border: none;
     border-bottom: 1px solid black;
     font-size: 16px;
+    font-weight: 500;
+`;
+
+const Button1 = styled.button`
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 569px;
+    left: 20px;
+    width: 350px;
+    height: 48px;
+    border: none;
+    border-radius: 4px;
+    background-color: #181818;
+    color: #ffffff;
+    font-size: 12px;
     font-weight: 500;
 `;
 
@@ -172,7 +190,7 @@ const Button2 = styled.button`
     width: 390px;
     height: 75px;
     border: none;
-    background-color: #181818;
+    background-color: #c1c1c1;
     color: #ffffff;
     font-size: 18px;
     font-weight: 700;
