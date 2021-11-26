@@ -1,7 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const BusinessCertification = ({ form, onChange, onSubmit }) => {
+const BusinessCertification = ({
+  form,
+  onChange,
+  onSubmit,
+  checkBusinessSuccess,
+  certifyMessage,
+  isClickFirst,
+}) => {
+  const navigate = useNavigate();
+  const onNextStep = (e) => {
+    navigate('/signupHotel', { state: form });
+  };
   return (
     <Container>
       <Title>사업자 인증</Title>
@@ -9,28 +21,31 @@ const BusinessCertification = ({ form, onChange, onSubmit }) => {
       <form onSubmit={onSubmit}>
         <P1>사업자 등록 번호</P1>
         <Input1
-          name="businessNumber"
+          name='businessNumber'
           value={form.businessNumber}
           onChange={onChange}
-          placeholder="0000000000000"
+          placeholder='0000000000000'
         />
         <P2>대표자 성명</P2>
         <Input2
-          name="hostName"
+          name='hostName'
           value={form.hostName}
           onChange={onChange}
-          placeholder="외국인 사업자의 경우, 영문명 입력"
+          placeholder='외국인 사업자의 경우, 영문명 입력'
         />
         <P3>개업일자</P3>
         <Input3
-          name="openDate"
+          name='openDate'
           value={form.openDate}
           onChange={onChange}
-          placeholder="YYYYMMDD"
+          placeholder='YYYYMMDD'
         />
         <Button1>인증 요청</Button1>
-        <Button2>다음</Button2>
+        {!isClickFirst && <Message>{certifyMessage}</Message>}
       </form>
+      <NextBtn onClick={onNextStep} disabled={!checkBusinessSuccess}>
+        다음
+      </NextBtn>
     </Container>
   );
 };
@@ -42,7 +57,11 @@ const Container = styled.div`
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 100;
 `;
-
+const Message = styled.p`
+  position: absolute;
+  top: 629px;
+  left: 20px;
+`;
 const Title = styled.p`
   position: absolute;
   display: flex;
@@ -181,7 +200,7 @@ const Button1 = styled.button`
   font-weight: 500;
 `;
 
-const Button2 = styled.button`
+const NextBtn = styled.button`
   position: absolute;
   display: flex;
   align-items: center;
@@ -190,7 +209,7 @@ const Button2 = styled.button`
   width: 390px;
   height: 75px;
   border: none;
-  background-color: #c1c1c1;
+  background-color: ${({ disabled }) => (disabled ? '#C1C1C1' : '#181818')};
   color: #ffffff;
   font-size: 18px;
   font-weight: 700;

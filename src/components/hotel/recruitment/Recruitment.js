@@ -12,13 +12,18 @@ const Recruitment = ({ myRecuitementList }) => {
       <RecruitList>
         {myRecuitementList.recruitments.length !== 0 &&
           myRecuitementList.recruitments.map((recruit, index) => (
-            <li key={index}>
-              <h4>{recruit.title}</h4>
+            <RecruitItem key={index}>
+              <h3>{recruit.title}</h3>
               <p>{recruit.introduceText}</p>
-            </li>
+            </RecruitItem>
           ))}
       </RecruitList>
-      <AddRecruit to='/createRecruit'>test</AddRecruit>
+      <AddRecruit to='/createRecruit'>
+        <img
+          src={process.env.PUBLIC_URL + '/icons/gonggo_write.svg'}
+          alt='공고'
+        />
+      </AddRecruit>
     </RecruitmentWrapper>
   );
 };
@@ -44,14 +49,15 @@ const RecruitList = styled.ul`
   flex-direction: column;
   width: 100vw;
   min-height: 100vh;
-  & > li {
-    padding: 16px;
-    height: 80px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-top: 1px solid lightgray;
-  }
+`;
+const RecruitItem = styled.li`
+  padding: 30px 16px;
+  height: 110px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgray;
 `;
 const AddRecruit = styled(Link)`
   display: flex;
@@ -59,7 +65,6 @@ const AddRecruit = styled(Link)`
   align-items: center;
   width: 68px;
   height: 68px;
-  background-color: #181818;
   position: absolute;
   right: 10%;
   bottom: 12%;

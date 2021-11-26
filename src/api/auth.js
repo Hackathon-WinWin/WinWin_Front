@@ -3,7 +3,7 @@ import axios from 'axios';
 // ARTIST
 // 회원가입
 export const artistSignup = async ({ account, password, phoneNumber }) =>
-  await axios.post('/auth/createArtist', {
+  await axios.post('/api/auth/createArtist', {
     account,
     password,
     phoneNumber,
@@ -18,7 +18,7 @@ export const hotelSignup = async ({
   openDate,
   businessNumber,
 }) =>
-  await axios.post('/auth/createHotel', {
+  await axios.post('/api/auth/createHotel', {
     account,
     password,
     hostName,
@@ -29,12 +29,12 @@ export const hotelSignup = async ({
 // COMMON
 // 로그인
 export const signin = async ({ account, password }) =>
-  await axios.post('/auth/login', {
+  await axios.post('/api/auth/login', {
     account,
     password,
   });
 // 로그아웃
-export const Logout = async () => await axios.post('/auth/logout');
+export const Logout = async () => await axios.post('/api/auth/logout');
 
 // 로그인 상태인지 확인
 // 200: 로그인 상태임, 로그인된 유저 아이디 전달
@@ -45,7 +45,7 @@ export const Logout = async () => await axios.post('/auth/logout');
 // 200: 호텔이면 false, 아티스트면 true
 // firebaseToken : FCM을 위한 사용자 토큰 전달
 export const checkLoggedIn = async (firebaseToken) =>
-  await axios.post('/auth/checkLoggedIn', { firebaseToken });
+  await axios.post('/api/auth/checkLoggedIn', { firebaseToken });
 
 // 아이디 양식 확인
 // 영어 대문자, 소문자, 숫자로만 가능
@@ -55,4 +55,4 @@ export const checkLoggedIn = async (firebaseToken) =>
 // 401: 아이디 중복
 // 500: 에러 내용
 export const checkAccount = async (account) =>
-  await axios.post('/auth/checkAccount', { account });
+  await axios.post('/api/auth/checkAccount', { account });

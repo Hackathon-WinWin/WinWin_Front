@@ -8,27 +8,27 @@ const Entry = ({ form, onChange, onSubmit }) => {
       <LogoText>WinWin</LogoText>
       <form onSubmit={onSubmit}>
         <InputId
-          name="account"
+          name='account'
           value={form.account}
-          placeholder="  아이디"
+          placeholder='    ID'
           onChange={onChange}
         />
         <InputPassword
-          name="password"
+          name='password'
           value={form.password}
-          placeholder="  비밀번호"
+          placeholder='    Password'
           onChange={onChange}
-          type="password"
+          type='password'
         />
         <LoginButton>로그인</LoginButton>
       </form>
-      <FindAuth to="/signup">아이디 비밀번호 찾기</FindAuth>
+      <FindAuth to='/signup'>아이디 비밀번호 찾기</FindAuth>
       <Bar></Bar>
-      <CreateAuth to="/signup">회원가입</CreateAuth>
+      <CreateAuth to='/signup'>회원가입</CreateAuth>
     </Container>
   );
 };
-const Container = styled.form`
+const Container = styled.div`
   height: 844px;
   width: 390px;
   background-color: #181818;

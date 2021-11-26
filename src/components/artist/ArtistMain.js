@@ -18,9 +18,8 @@ const ArtistMain = ({ hotelList }) => {
       </div>
       <MainPortfoilo>
         <ul>
-          {!hotelList && <p>loading...</p>}
-          {hotelList === [] ? (
-            <p>loading...</p>
+          {hotelList.length === 0 ? (
+            <p>등록된 호텔이 없습니다.</p>
           ) : (
             hotelList.map((hotel, index) => (
               <li
@@ -107,7 +106,7 @@ const MainPortfoilo = styled.div`
       padding: 16px;
       list-style: none;
       background-color: red;
-      /* background-image: url(${({ image }) => image}); */
+      background-image: url(${({ image }) => image});
       background-repeat: no-repeat;
       background-size: cover;
       scroll-snap-align: start;

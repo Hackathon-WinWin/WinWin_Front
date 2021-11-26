@@ -34,7 +34,10 @@ const SpecificPortfolio = ({
       </div>
       <PortfolioImgList>
         {images.map((image) => (
-          <li key={image._id} image={image.image}></li>
+          <PortfolioImgItem
+            key={image._id}
+            image={image.image}
+          ></PortfolioImgItem>
         ))}
       </PortfolioImgList>
       <LinkBox>
@@ -103,23 +106,22 @@ const PortfolioImgList = styled.ul`
   &::-webkit-scrollbar {
     display: none;
   }
-  & > li {
-    box-sizing: border-box;
-    width: 100%;
-    height: 361px;
-    border-left: 1px solid black;
-    flex-shrink: 0;
-    scroll-snap-align: start; /* latest (Chrome 69+) */
-    scroll-snap-coordinate: 0% 0%; /* older (Firefox/IE) */
-    -webkit-scroll-snap-coordinate: 0% 0%; /* older (Safari) */
-    overflow: hidden;
-    list-style: none;
-    background-color: green;
-    /* background-image: url(${({ image }) => image}); */
-    background-repeat: no-repeat;
-    background-size: cover;
-    scroll-snap-align: start;
-  }
+`;
+const PortfolioImgItem = styled.li`
+  box-sizing: border-box;
+  width: 100%;
+  height: 361px;
+  border-left: 1px solid black;
+  flex-shrink: 0;
+  scroll-snap-align: start; /* latest (Chrome 69+) */
+  scroll-snap-coordinate: 0% 0%; /* older (Firefox/IE) */
+  -webkit-scroll-snap-coordinate: 0% 0%; /* older (Safari) */
+  overflow: hidden;
+  list-style: none;
+  background-image: url(${({ image }) => image});
+  background-repeat: no-repeat;
+  background-size: cover;
+  scroll-snap-align: start;
 `;
 const LinkBox = styled.div`
   display: flex;

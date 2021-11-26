@@ -60,16 +60,16 @@ const initialState = {
 
 export default handleActions(
   {
-    [CREATE_ARTIST_PROFILE_SUCCESS]: (state, { payload: success }) => ({
-      ...state,
-      artistprofileSuccess: success,
-      artistprofileError: null,
-    }),
-    [CREATE_ARTIST_PROFILE_FAILURE]: (state, { payload: error }) => ({
-      ...state,
-      artistprofileSuccess: null,
-      artistprofileError: error,
-    }),
+    // [CREATE_ARTIST_PROFILE_SUCCESS]: (state, { payload: success }) => ({
+    //   ...state,
+    //   artistprofileSuccess: success,
+    //   artistprofileError: null,
+    // }),
+    // [CREATE_ARTIST_PROFILE_FAILURE]: (state, { payload: error }) => ({
+    //   ...state,
+    //   artistprofileSuccess: null,
+    //   artistprofileError: error,
+    // }),
   },
   initialState
 );
