@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const HotelProfile = ({ form, error, onChange, onSubmit }) => {
+const HotelProfile = ({ form, dupPhone, dupEmail, onChange, onSubmit }) => {
+  const { isDupPhone, phoneMessage } = dupPhone;
+  const { isDupEmail, emailMessage } = dupEmail;
   return (
     <Container>
       <Title>프로필 설정</Title>
@@ -25,22 +27,16 @@ const HotelProfile = ({ form, error, onChange, onSubmit }) => {
           onChange={onChange}
           placeholder='전화'
         />
-        <p>
-          {error.isDupPhone
-            ? '전화번호가 이미 존재합니다.'
-            : '사용 가능합니다.'}
-        </p>
+        <p>{isDupPhone && phoneMessage}</p>
+        <p>{!isDupPhone && phoneMessage}</p>
         <Input4
           name='email'
           value={form.email}
           onChange={onChange}
-          placeholder='메일'
+          placeholder='이메일'
         />
-        <p>
-          {error.isDupEamil
-            ? '해당 이메일이 이미 존재합니다.'
-            : '사용 가능합니다.'}
-        </p>
+        <p>{isDupEmail && emailMessage}</p>
+        <p>{!isDupEmail && emailMessage}</p>
         <Input5
           name='introduceText'
           value={form.introduceText}

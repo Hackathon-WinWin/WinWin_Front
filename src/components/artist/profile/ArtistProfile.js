@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-const ArtistProfile = ({ form, onChange, onSubmit }) => {
+const ArtistProfile = ({ form, dupNickname, dupEmail, onChange, onSubmit }) => {
+  const { isDupNickname, nicknameMessage } = dupNickname;
+  const { isDupEmail, emailMessage } = dupEmail;
   return (
     <div>
       <Form onSubmit={onSubmit}>
@@ -10,11 +12,13 @@ const ArtistProfile = ({ form, onChange, onSubmit }) => {
           onChange={onChange}
           placeholder='닉네임'
         />
+        <p>{isDupNickname && nicknameMessage}</p>
+        <p>{!isDupNickname && nicknameMessage}</p>
         <input
           name='name'
           value={form.name}
           onChange={onChange}
-          placeholder='name'
+          placeholder='이름'
         />
         <input
           name='birthday'
@@ -35,6 +39,8 @@ const ArtistProfile = ({ form, onChange, onSubmit }) => {
           type='email'
           placeholder='email'
         />
+        <p>{isDupEmail && emailMessage}</p>
+        <p>{!isDupEmail && emailMessage}</p>
         <input
           name='introduceText'
           value={form.introduceText}

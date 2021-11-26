@@ -15,12 +15,15 @@ const HotelProfileContainer = () => {
     email: '',
     introduceText: '',
   };
-  const initError = {
-    isDupPhone: false,
-    isDupEmail: false,
-  };
   const [form, setForm] = useState(initialState);
-  const [error, setError] = useState(initError);
+  const [dupPhone, setDupPhone] = useState({
+    isDupPhone: true,
+    phoneMessage: '',
+  });
+  const [dupEmail, setDupEmail] = useState({
+    isDupEmail: true,
+    emailMessage: '',
+  });
   const onChange = (e) => {
     const {
       target: { name, value },
@@ -36,17 +39,22 @@ const HotelProfileContainer = () => {
       phoneNumber === '' ||
       email === ''
     ) {
-      alert('소개란을 제외한 양식을 체워주세요.');
+      alert('소개란을 제외한 양식을 채워주세요.');
       return;
     }
     try {
       const response = await createHotelProfile(form);
       if (response.status === 200) {
         const firebaseToken = localStorage.getItem('firebase_token');
-        setError((state) => ({
+        setDupPhone((state) => ({
+          ...state,
+          isDupPhone: false,
+          phoneMessage: '사용가능합니다.',
+        }));
+        setDupEmail((state) => ({
           ...state,
           isDupEmail: false,
-          isDupPhone: false,
+          emailMessage: '사용가능합니다.',
         }));
         dispatch(checkLoggedIn(firebaseToken));
         navigate('/main');
@@ -55,26 +63,38 @@ const HotelProfileContainer = () => {
       const { status } = e.response;
       switch (status) {
         case 400:
-          setError((state) => ({ ...state, isDupPhone: true }));
-          // alert('이미 사용중인 전화번호');
+          setDupPhone((state) => ({
+            ...state,
+            isDupPhone: true,
+            phoneMessage: '이미 존재하는 휴대폰 번호입니다!',
+          }));
           break;
         case 401:
-          setError((state) => ({ ...state, isDupEmail: true }));
-          // alert('이미 사용중인 이메일');
+          setDupEmail((state) => ({
+            ...state,
+            isDupEmail: true,
+            emailMessage: '이미 존재하는 이메일 입니다!',
+          }));
           break;
         default:
-          setError((state) => ({
+          alert('다시 시도해주세요.');
+          setDupPhone((state) => ({
             ...state,
-            isDupEmail: false,
-            isDupPhone: false,
+            isDupPhone: true,
+            phoneMessage: '',
           }));
-          alert('다시 시도');
+          setDupEmail((state) => ({
+            ...state,
+            isDupEmail: true,
+            emailMessage: '',
+          }));
           setForm((state) => ({
             ...state,
-            nickname: '',
-            name: '',
-            birthday: new Date().toString(),
+            hotelName: '',
+            address: '서울시 노원구 공릉동 41마길 7',
+            phoneNumber: '',
             email: '',
+            introduceText: '',
           }));
       }
     }
@@ -82,7 +102,8 @@ const HotelProfileContainer = () => {
   return (
     <HotelProfile
       form={form}
-      error={error}
+      dupPhone={dupPhone}
+      dupEmail={dupEmail}
       onChange={onChange}
       onSubmit={onSubmit}
     />
