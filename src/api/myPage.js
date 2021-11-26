@@ -3,7 +3,7 @@ import axios from 'axios';
 // ## ARTIST ##
 
 // 프로필 이미지 설정
-// 200: 아티스트 프로필 이미지 저장 성공
+// 200: 아티스트 프로필 이미지 저장 이미지
 // 500: 에러 내용
 export const updateArtistProfileImage = async (formData) =>
   await axios({
@@ -13,7 +13,7 @@ export const updateArtistProfileImage = async (formData) =>
     data: formData,
   });
 // 배경이미지 설정
-// 200: 아티스트 배경 이미지 저장 성공
+// 200: 아티스트 배경 이미지 저장 이미지
 // 500: 에러 내용
 export const updateArtistBackgroundImage = async (formData) =>
   await axios({

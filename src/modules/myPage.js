@@ -130,8 +130,6 @@ const initialState = {
   myHotelError: null,
   hotelProfileImg: null,
   hotelProfileImgError: null,
-  updateHotelProfileImg: null,
-  updateHotelProfileImgError: null,
   addHotelImg: null,
   addHotelImgError: null,
 };
@@ -183,9 +181,12 @@ const initialState = {
 // };
 export default handleActions(
   {
-    [UPDATE_ARTIST_PROFILEIMG_SUCCESS]: (state, { payload: profileImg }) => ({
+    [UPDATE_ARTIST_PROFILEIMG_SUCCESS]: (
+      state,
+      { payload: artistProfileImg }
+    ) => ({
       ...state,
-      artistProfileImg: profileImg,
+      artistProfileImg,
       artistProfileImgError: null,
     }),
     [UPDATE_ARTIST_PROFILEIMG_FAILURE]: (state, { payload: error }) => ({
@@ -193,9 +194,9 @@ export default handleActions(
       artistProfileImg: null,
       artistProfileImgError: error,
     }),
-    [UPDATE_ARTIST_BACKIMG_SUCCESS]: (state, { payload: bgImg }) => ({
+    [UPDATE_ARTIST_BACKIMG_SUCCESS]: (state, { payload: artistBackImg }) => ({
       ...state,
-      artistBackImg: bgImg,
+      artistBackImg,
       artistBackImgError: null,
     }),
     [UPDATE_ARTIST_BACKIMG_FAILURE]: (state, { payload: error }) => ({
@@ -213,7 +214,34 @@ export default handleActions(
       myArtist: null,
       myArtistError: error,
     }),
+    [GET_MY_ARTIST_PROFILEIMG_SUCCESS]: (
+      state,
+      { payload: artistProfileImg }
+    ) => ({
+      ...state,
+      artistProfileImg,
+      artistProfileImgError: null,
+    }),
+    [GET_MY_ARTIST_PROFILEIMG_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      artistProfileImg: null,
+      artistProfileImgError: error,
+    }),
+    [GET_MY_ARTIST_PROFILE_BACKIMG_SUCCESS]: (
+      state,
+      { payload: artistBackImg }
+    ) => ({
+      ...state,
+      artistBackImg,
+      artistBackImgError: null,
+    }),
+    [GET_MY_ARTIST_PROFILE_BACKIMG_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      artistBackImg: null,
+      artistBackImgError: error,
+    }),
 
+    // HOTEL
     [GET_MY_HOTEL_PROFILE_SUCCESS]: (state, { payload: myHotel }) => ({
       ...state,
       myHotel,
@@ -239,16 +267,16 @@ export default handleActions(
     }),
     [UPDATE_HOTEL_PROFILEIMG_SUCCESS]: (
       state,
-      { payload: updateHotelProfileImg }
+      { payload: hotelProfileImg }
     ) => ({
       ...state,
-      updateHotelProfileImg,
-      updateHotelProfileImgError: null,
+      hotelProfileImg,
+      hotelProfileImgError: null,
     }),
     [UPDATE_HOTEL_PROFILEIMG_FAILURE]: (state, { payload: error }) => ({
       ...state,
-      updateHotelProfileImg: null,
-      updateHotelProfileImgError: error,
+      hotelProfileImg: null,
+      hotelProfileImgError: error,
     }),
     [ADD_HOTEL_IMAGE_SUCCESS]: (state, { payload: addHotelImg }) => ({
       ...state,

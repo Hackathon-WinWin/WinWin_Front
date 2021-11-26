@@ -26,7 +26,6 @@ import SpecificRecruitmentPage from './pages/artist/SpecificRecruitmentPage';
 import ApplyFormPage from './pages/artist/ApplyFormPage';
 import OtherArtistProfilePage from './pages/hotel/OtherArtistProfilePage';
 import OtherHotelProfilePage from './pages/artist/OtherHotelProfilePage';
-import PrivateRoute from './routes/PrivateRoute';
 import MySpecificPortfolioPage from './pages/artist/mypage/MySpecificPortfolioPage';
 
 axios.defaults.withCredentials = true;

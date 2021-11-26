@@ -9,21 +9,13 @@ import {
 } from '../../../modules/myPage';
 
 const HotelMyContainer = () => {
-  const {
-    myHotel,
-    hotelProfileImg,
-    updateHotelProfileImg,
-    updateHotelProfileImgError,
-    addHotelImg,
-    addHotelImgError,
-  } = useSelector(({ myPage }) => ({
-    myHotel: myPage.myHotel,
-    hotelProfileImg: myPage.hotelProfileImg,
-    updateHotelProfileImg: myPage.updateHotelProfileImg,
-    updateHotelProfileImgError: myPage.updateHotelProfileImgError,
-    addHotelImg: myPage.addHotelImg,
-    addHotelImgError: myPage.addHotelImgError,
-  }));
+  const { myHotel, hotelProfileImg, addHotelImg, addHotelImgError } =
+    useSelector(({ myPage }) => ({
+      myHotel: myPage.myHotel,
+      hotelProfileImg: myPage.hotelProfileImg,
+      addHotelImg: myPage.addHotelImg,
+      addHotelImgError: myPage.addHotelImgError,
+    }));
   const dispatch = useDispatch();
 
   const onChange = (e) => {
@@ -50,11 +42,7 @@ const HotelMyContainer = () => {
       dispatch(getMyHotelProfile());
     }
   }, [dispatch, addHotelImg]);
-  useEffect(() => {
-    if (updateHotelProfileImg) {
-      dispatch(getMyHotelProfileImg());
-    }
-  }, [dispatch, updateHotelProfileImg]);
+
   return (
     <HotelMy
       myHotel={myHotel}
