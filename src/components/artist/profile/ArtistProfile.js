@@ -23,11 +23,23 @@ const ArtistProfile = ({ form, onChange, onSubmit }) => {
           placeholder='생일'
         />
         <input
+          name='address'
+          value={form.address}
+          onChange={onChange}
+          placeholder='주소'
+        />
+        <input
           name='email'
           value={form.email}
           onChange={onChange}
           type='email'
           placeholder='email'
+        />
+        <input
+          name='introduceText'
+          value={form.introduceText}
+          onChange={onChange}
+          placeholder='introduceText'
         />
         <button>다음</button>
       </Form>

@@ -16,7 +16,7 @@ const PhoneCertification = ({
       <form onSubmit={onSubmitPhoneNumber}>
         <P1>휴대전화 번호</P1>
         <Input1
-          name="phoneNumber"
+          name='phoneNumber'
           value={form.phoneNumber}
           onChange={onChange}
         />
@@ -25,7 +25,7 @@ const PhoneCertification = ({
       <form onSubmit={onCertify}>
         <P2>인증번호 입력</P2>
         <Input2
-          name="certification"
+          name='certification'
           value={form.certification}
           onChange={onChange}
         />

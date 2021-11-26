@@ -7,6 +7,15 @@ const BottomTab = ({ isArtist }) => {
   return (
     <BottomTabWrapper>
       <Tab>
+        {/* {isArtist ? (
+          <NavLink to='/artistmain' style={onActive}>
+            메인
+          </NavLink>
+        ) : (
+          <NavLink to='/hotelmain' style={onActive}>
+            메인
+          </NavLink>
+        )} */}
         <NavLink to='/main' style={onActive}>
           메인
         </NavLink>
@@ -23,14 +32,26 @@ const BottomTab = ({ isArtist }) => {
         )}
       </Tab>
       <Tab>
-        <NavLink to='/applystatus' style={onActive}>
-          지원현황
-        </NavLink>
+        {isArtist ? (
+          <NavLink to='/applyStatus' style={onActive}>
+            지원현황
+          </NavLink>
+        ) : (
+          <NavLink to='/recruitStatus' style={onActive}>
+            제안현황
+          </NavLink>
+        )}
       </Tab>
       <Tab>
-        <NavLink to='/myPage' style={onActive}>
-          마이페이지
-        </NavLink>
+        {isArtist ? (
+          <NavLink to='/artistMyPage' style={onActive}>
+            마이페이지
+          </NavLink>
+        ) : (
+          <NavLink to='/hotelMyPage' style={onActive}>
+            마이페이지
+          </NavLink>
+        )}
       </Tab>
     </BottomTabWrapper>
   );

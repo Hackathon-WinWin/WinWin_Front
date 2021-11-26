@@ -8,34 +8,34 @@ const HotelProfile = ({ form, onChange, onSubmit }) => {
       <Subtitle>아티스트들에게 보여질 프로필을 만드세요.</Subtitle>
       <form onSubmit={onSubmit}>
         <Input1
-          name="hotelName"
+          name='hotelName'
           value={form.hotelName}
           onChange={onChange}
-          placeholder="호텔명"
+          placeholder='호텔명'
         />
         <Input2
-          name="address"
+          name='address'
           value={form.address}
           onChange={onChange}
-          placeholder="주소"
+          placeholder='주소'
         />
         <Input3
-          name="phoneNumber"
+          name='phoneNumber'
           value={form.phoneNumber}
           onChange={onChange}
-          placeholder="전화"
+          placeholder='전화'
         />
         <Input4
-          name="email"
+          name='email'
           value={form.email}
           onChange={onChange}
-          placeholder="메일"
+          placeholder='메일'
         />
         <Input5
-          name="introduceText"
+          name='introduceText'
           value={form.introduceText}
           onChange={onChange}
-          placeholder="소개"
+          placeholder='소개'
         />
         <Button1>완료</Button1>
       </form>
@@ -88,7 +88,7 @@ const Button1 = styled.button`
   width: 390px;
   height: 75px;
   border: none;
-  background-color: #c1c1c1;
+  background-color: #181818;
   color: #ffffff;
   font-size: 18px;
   font-weight: 700;

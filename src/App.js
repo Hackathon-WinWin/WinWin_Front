@@ -26,8 +26,9 @@ import SpecificRecruitmentPage from './pages/artist/SpecificRecruitmentPage';
 import ApplyFormPage from './pages/artist/ApplyFormPage';
 import OtherArtistProfilePage from './pages/hotel/OtherArtistProfilePage';
 import OtherHotelProfilePage from './pages/artist/OtherHotelProfilePage';
+import PrivateRoute from './routes/PrivateRoute';
+import MySpecificPortfolioPage from './pages/artist/mypage/MySpecificPortfolioPage';
 
-// axios.defaults.baseURL = 'http://3.12.248.32:8000';
 axios.defaults.withCredentials = true;
 
 const GlobalStyle = createGlobalStyle`
@@ -82,38 +83,37 @@ const App = () => {
       } catch (e) {}
     };
     getFirebaseToken();
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (firebaseToken) {
-      console.log(firebaseToken);
-      // dispatch(checkLoggedIn(firebaseToken));
+      dispatch(checkLoggedIn(firebaseToken));
     }
   }, [dispatch, firebaseToken]);
-
   return (
     <>
       <GlobalStyle />
       <Routes>
-        <Route path='/' element={<EntryPage />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/' element={<EntryPage />} />
         <Route path='/checkArtistPhone' element={<PhoneCertificationPage />} />
         <Route path='/checkBusiness' element={<BusinessCertificationPage />} />
-        <Route path='/singupArtist' element={<ArtistSignupPage />} />
+        <Route path='/signupArtist' element={<ArtistSignupPage />} />
         <Route path='/signupHotel' element={<HotelSignupPage />} />
         <Route path='/createArtistProfile' element={<ArtistProfilePage />} />
         <Route path='/createHotelProfile' element={<HotelProfilePage />} />
-        <Route
-          path='/myPage'
-          element={check && check.isArtist ? <ArtistMyPage /> : <HotelMyPage />}
-        />
-        <Route path='/editProfile' element={<EditArtistProfilePage />} />
         <Route
           path='/main'
           element={
             check && check.isArtist ? <ArtistMainPage /> : <HotelMainPage />
           }
         />
+        {/* <Route path='/hotelmain' element={<HotelMainPage />} /> */}
+
+        <Route path='/artistMyPage' element={<ArtistMyPage />} />
+        <Route path='/hotelMyPage' element={<HotelMyPage />} />
+
+        <Route path='/editProfile' element={<EditArtistProfilePage />} />
         <Route path='/recruit' element={<RecruitmentPage />} />
         <Route path='/createRecruit' element={<AddRecruitPage />} />
         <Route
@@ -123,6 +123,10 @@ const App = () => {
         <Route
           path='/specificPortfolio/:artistAuth_id/:portfolio_id'
           element={<SpecificPortfolioPage />}
+        />
+        <Route
+          path='/mySpecificPortfolio/:artistAuth_id/:portfolio_id'
+          element={<MySpecificPortfolioPage />}
         />
         <Route path='/propose/:artistAuth_id' element={<ProposeFormPage />} />
         <Route
