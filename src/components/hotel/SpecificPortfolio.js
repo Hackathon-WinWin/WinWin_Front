@@ -28,7 +28,7 @@ const SpecificPortfolio = ({
           css={ProfileLink}
           replace={true}
         >
-          <div image={profileImageURL}></div>
+          <ProfileImgBox image={profileImageURL}></ProfileImgBox>
           <span>{artistName}</span>
         </Link>
       </div>
@@ -75,19 +75,21 @@ const ProfileLink = css`
   padding: 16px;
   text-decoration: none;
   color: black;
-  & > div {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background-color: lightgray;
-    margin-right: 12px;
-    background-image: url(${({ image }) => image});
-  }
   & > span {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+`;
+const ProfileImgBox = styled.div`
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: lightgray;
+  margin-right: 12px;
+  background-image: url(${({ image }) => image});
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 const PortfolioImgList = styled.ul`
   display: flex;

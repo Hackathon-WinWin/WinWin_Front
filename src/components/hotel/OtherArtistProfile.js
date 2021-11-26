@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const OtherArtistProfile = ({ otherProfile, otherPortfolio }) => {
+  console.log(otherProfile, otherPortfolio);
   if (!otherProfile || !otherPortfolio) return null;
   const {
     backgroundImageURL,
@@ -74,6 +75,7 @@ const Header = styled.header`
   top: 0;
   left: 0;
   padding: 16px;
+  background-color: white;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -97,7 +99,7 @@ const ArtistProfileImg = styled.div`
   width: 106px;
   height: 106px;
   border-radius: 50%;
-  background-image: url(${({ backgroundImage }) => backgroundImage});
+  background-image: url(${({ profileImage }) => profileImage});
   background-repeat: no-repeat;
   background-size: cover;
 `;

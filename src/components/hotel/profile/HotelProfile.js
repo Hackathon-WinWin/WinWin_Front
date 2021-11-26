@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const HotelProfile = ({ form, onChange, onSubmit }) => {
+const HotelProfile = ({ form, dupPhone, dupEmail, onChange, onSubmit }) => {
+  const { isDupPhone, phoneMessage } = dupPhone;
+  const { isDupEmail, emailMessage } = dupEmail;
   return (
     <Container>
       <Title>프로필 설정</Title>
@@ -25,12 +27,16 @@ const HotelProfile = ({ form, onChange, onSubmit }) => {
           onChange={onChange}
           placeholder='전화'
         />
+        <p>{isDupPhone && phoneMessage}</p>
+        <p>{!isDupPhone && phoneMessage}</p>
         <Input4
           name='email'
           value={form.email}
           onChange={onChange}
-          placeholder='메일'
+          placeholder='이메일'
         />
+        <p>{isDupEmail && emailMessage}</p>
+        <p>{!isDupEmail && emailMessage}</p>
         <Input5
           name='introduceText'
           value={form.introduceText}

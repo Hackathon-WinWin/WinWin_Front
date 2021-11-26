@@ -9,6 +9,8 @@ import {
   getMyAritistProfile,
   getMyArtistBgImg,
   getMyArtistProfileImg,
+  updateArtistBackgroundImage,
+  updateArtistProfileImage,
 } from '../../../modules/myPage';
 import {
   addPortfolio,
@@ -55,6 +57,18 @@ const ArtistMyContainer = () => {
       ...state,
       [name]: name === 'images' ? [...files] : value,
     }));
+  };
+  const onChangeFile = (e) => {
+    const {
+      target: { name, files },
+    } = e;
+    const formData = new FormData();
+    formData.append(name, files[0]);
+    if (name === 'profileImage') {
+      dispatch(updateArtistProfileImage(formData));
+    } else if (name === 'backgroundImage') {
+      dispatch(updateArtistBackgroundImage(formData));
+    }
   };
   const onAddPortfolio = (e) => {
     e.preventDefault();
@@ -113,6 +127,7 @@ const ArtistMyContainer = () => {
       artistBackImg={artistBackImg}
       myPortfolio={myPortfolio}
       onChange={onChange}
+      onChangeFile={onChangeFile}
       onAddPortfolio={onAddPortfolio}
       onLogout={onLogout}
     />

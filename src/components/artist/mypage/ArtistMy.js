@@ -17,6 +17,7 @@ const ArtistMy = ({
   artistBackImg,
   myPortfolio,
   onChange,
+  onChangeFile,
   onAddPortfolio,
   onLogout,
 }) => {
@@ -52,9 +53,15 @@ const ArtistMy = ({
         </MenuBtn>
       </ArtistBgImg>
       <ArtistInfo>
-        <ArtistProfileImg
-          profileImage={artistProfileImg.profileImage}
-        ></ArtistProfileImg>
+        <ArtistProfileImg profileImage={artistProfileImg.profileImage}>
+          <label>
+            <img
+              src={process.env.PUBLIC_URL + '/icons/my_pen.svg'}
+              alt='수정'
+            />
+            <input type='file' name='profileImage' onChange={onChangeFile} />
+          </label>
+        </ArtistProfileImg>
         <h3>{myArtist.name}</h3>
         <div>{myArtist.phoneNumber}</div>
         <div>{myArtist.email}</div>
@@ -147,6 +154,15 @@ const ArtistProfileImg = styled.div`
   height: 106px;
   border-radius: 50%;
   background-image: url(${({ profileImage }) => profileImage});
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25));
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  & input {
+    display: none;
+  }
 `;
 const ArtistInfo = styled.div`
   position: relative;
