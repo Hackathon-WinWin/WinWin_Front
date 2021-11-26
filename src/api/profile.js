@@ -7,7 +7,7 @@ import axios from 'axios';
 // 400: 프로필 존재하지 않음
 // 500: 에러 내용
 export const checkArtistProfile = async () =>
-  await axios.get('/profile/checkArtistProfile');
+  await axios.get('/api/profile/checkArtistProfile');
 
 // 아티스트 프로필 생성
 // birthday만 Date, 나머지 String
@@ -23,7 +23,7 @@ export const createArtistProfile = async ({
   email,
   introduceText,
 }) =>
-  await axios.post('/profile/createArtistProfile', {
+  await axios.post('/api/profile/createArtistProfile', {
     nickname,
     name,
     birthday,
@@ -45,7 +45,7 @@ export const updateArtistProfile = async ({
   email,
   introduceText,
 }) =>
-  await axios.post('/profile/updateArtistProfile', {
+  await axios.post('/api/profile/updateArtistProfile', {
     nickname,
     name,
     birthday,
@@ -60,7 +60,7 @@ export const updateArtistProfile = async ({
 // 200: 특정 아티스트의 프로필 정보
 // 500: 에러 내용
 export const specificArtistProfile = async (artistAuth_id) =>
-  await axios.get(`/profile/artistProfile/${artistAuth_id}`);
+  await axios.get(`/api/profile/artistProfile/${artistAuth_id}`);
 
 // ## HOTEL ##
 
@@ -69,7 +69,7 @@ export const specificArtistProfile = async (artistAuth_id) =>
 // 400: 프로필 존재하지 않음
 // 500: 에러 내용
 export const checkHotelProfile = async () =>
-  await axios.get('/profile/checkHotelProfile');
+  await axios.get('/api/profile/checkHotelProfile');
 
 // 호텔 프로필 생성
 // 200: 호텔 프로필 생성 성공
@@ -83,10 +83,13 @@ export const createHotelProfile = async ({
   email,
   introduceText,
 }) =>
-  await axios.post('/profile/createHotelProfile', {
+  await axios.post('/api/profile/createHotelProfile', {
     hotelName,
     address,
     phoneNumber,
     email,
     introduceText,
   });
+
+export const specificHotelProfile = async (hotelAuth_id) =>
+  await axios.get(`/api/profile/hotelProfile/${hotelAuth_id}`);

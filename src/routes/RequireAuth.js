@@ -1,26 +1,43 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { checkLoggedIn } from '../modules/auth';
 
-const RequireAuth = ({ Component, match }) => {
-  const { check, checkError } = useSelector(({ auth }) => ({
+const RequireProfile = ({
+  isArtist,
+  hasProfile,
+  ArtistComponent,
+  HotelComponent,
+}) => {
+  if (!hasProfile) {
+    if (isArtist) return <Navigate to='/createArtistProfile' replace />;
+    return <Navigate to='/createHotelProfile' replace />;
+  }
+  return isArtist ? <ArtistComponent /> : <HotelComponent />;
+};
+
+const RequireAuth = ({ firebaseToken, ArtistComponent, HotelComponent }) => {
+  const { check } = useSelector(({ auth }) => ({
     check: auth.check,
-    checkError: auth.checkError,
   }));
+  // check: {isArtist, hasProfile}
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   useEffect(() => {
-    dispatch(checkLoggedIn());
-  }, [dispatch]);
-  useEffect(() => {
-    if (checkError) {
-      alert('로그인을 해주세요.');
-      navigate('/');
-    }
-  }, [checkError, navigate]);
-  if (!check) return null;
-  return <Component match={match} />;
+    // if (firebaseToken) dispatch(checkLoggedIn(firebaseToken));
+  }, [dispatch, firebaseToken]);
+  // 로그인 실패 혹은 안함
+  if (!check) {
+    return <Navigate to='/' replace />;
+  }
+  // 로그인 성공
+  return (
+    <RequireProfile
+      isArtist={check.isArtist}
+      hasProfile={check.hasProfile}
+      ArtistComponent={ArtistComponent}
+      HotelComponent={HotelComponent}
+    />
+  );
 };
 
 export default RequireAuth;

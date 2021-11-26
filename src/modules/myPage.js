@@ -27,11 +27,14 @@ const GET_MY_ARTIST_PROFILE_BACKIMG_FAILURE =
   'myPage/GET_MY_ARTIST_PROFILE_BACKIMG_FAILURE';
 
 // HOTEL action
-const UPDATE_HOTEL_PROFILEIMG = 'myPage/UPDATE_PROFILEIMG';
+const UPDATE_HOTEL_PROFILEIMG = 'myPage/UPDATE_HOTEL_PROFILEIMG';
 const UPDATE_HOTEL_PROFILEIMG_SUCCESS =
   'myPage/UPDATE_HOTEL_PROFILEIMG_SUCCESS';
 const UPDATE_HOTEL_PROFILEIMG_FAILURE =
   'myPage/UPDATE_HOTEL_PROFILEIMG_FAILURE';
+const ADD_HOTEL_IMAGE = 'myPage/ADD_HOTEL_IMAGE';
+const ADD_HOTEL_IMAGE_SUCCESS = 'myPage/ADD_HOTEL_IMAGE_SUCCESS';
+const ADD_HOTEL_IMAGE_FAILURE = 'myPage/ADD_HOTEL_IMAGE_FAILURE';
 const GET_MY_HOTEL_PROFILE = 'myPage/GET_MY_HOTEL_PROFILE';
 const GET_MY_HOTEL_PROFILE_SUCCESS = 'myPage/GET_MY_HOTEL_PROFILE_SUCCESS';
 const GET_MY_HOTEL_PROFILE_FAILURE = 'myPage/GET_MY_HOTEL_PROFILE_FAILURE';
@@ -57,6 +60,14 @@ export const getMyArtistBgImg = createAction(GET_MY_ARTIST_PROFILE_BACKIMG);
 // HOTEL action creator
 export const getMyHotelProfile = createAction(GET_MY_HOTEL_PROFILE);
 export const getMyHotelProfileImg = createAction(GET_MY_HOTEL_PROFILEIMG);
+export const updateHotelProfileImage = createAction(
+  UPDATE_HOTEL_PROFILEIMG,
+  (formData) => formData
+);
+export const addHotelImage = createAction(
+  ADD_HOTEL_IMAGE,
+  (formData) => formData
+);
 
 // ARTIST saga
 const updateArtistProfileImageSaga = createRequestSaga(
@@ -88,6 +99,14 @@ const getMyHotelProfileImgSaga = createRequestSaga(
   GET_MY_HOTEL_PROFILEIMG,
   myPageAPI.getMyHotelProfileImage
 );
+const updateHotelProfileImageSaga = createRequestSaga(
+  UPDATE_HOTEL_PROFILEIMG,
+  myPageAPI.updateHotelProfileImage
+);
+const addHotelImageSaga = createRequestSaga(
+  ADD_HOTEL_IMAGE,
+  myPageAPI.addHotelImage
+);
 export function* myPageSaga() {
   yield takeLatest(GET_MY_ARTIST_PROFILE, getMyAritistProfileSaga);
   yield takeLatest(GET_MY_ARTIST_PROFILEIMG, getMyArtistProfileImgSaga);
@@ -96,6 +115,8 @@ export function* myPageSaga() {
   yield takeLatest(UPDATE_ARTIST_BACKIMG, updateArtistBackgroundImageSaga);
   yield takeLatest(GET_MY_HOTEL_PROFILE, getMyHotelProfileSaga);
   yield takeLatest(GET_MY_HOTEL_PROFILEIMG, getMyHotelProfileImgSaga);
+  yield takeLatest(UPDATE_HOTEL_PROFILEIMG, updateHotelProfileImageSaga);
+  yield takeLatest(ADD_HOTEL_IMAGE, addHotelImageSaga);
 }
 const initialState = {
   myArtist: null,
@@ -109,58 +130,63 @@ const initialState = {
   myHotelError: null,
   hotelProfileImg: null,
   hotelProfileImgError: null,
+  addHotelImg: null,
+  addHotelImgError: null,
 };
 // DUMMY DATA
-initialState.myArtist = {
-  _id: '619796295b2b45723b57ab85',
-  artistAuth_id: '619661cfaf39e6cec711d492',
-  nickname: 'jayjay',
-  name: '오정진',
-  birthday: '1999-11-23T00:00:00.000Z',
-  address: '서울시 노원구 공릉동',
-  phoneNumber: '01012341234',
-  email: 'ojj1123@gmail.com',
-  introduceText: '안녕하세요.',
-  hashTag: [],
-  __v: 0,
-};
-initialState.artistProfileImg = {
-  _id: '6197962a5b2b45723b57ab87',
-  artistAuth_id: '619661cfaf39e6cec711d492',
-  profileImage:
-    'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5.png',
-  __v: 0,
-};
-initialState.artistBackImg = {
-  _id: '6197962a5b2b45723b57ab89',
-  artistAuth_id: '619661cfaf39e6cec711d492',
-  backgroundImage:
-    'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5.png',
-  __v: 0,
-};
-initialState.myHotel = {
-  _id: '619a85a8e022247def87c54b',
-  hotelAuth_id: '619a8567e022247def87c540',
-  hotelName: '서울 호텔',
-  address: '서울시 강남구 대치동',
-  phoneNumber: '02-1234-56781',
-  email: 'ojj991123@seoulhotel.com',
-  introduceText: '안녕하세요 서울 호텔입니다.',
-  images: [], // 이미지가 비어있다면 무조건 빈 배열?
-  __v: 0,
-};
-initialState.hotelProfileImg = {
-  _id: '619a85a8e022247def87c54d',
-  hotelAuth_id: '619a8567e022247def87c540',
-  profileImage:
-    'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5.png',
-  __v: 0,
-};
+// initialState.myArtist = {
+//   _id: '619796295b2b45723b57ab85',
+//   artistAuth_id: '619661cfaf39e6cec711d492',
+//   nickname: 'jayjay',
+//   name: '오정진',
+//   birthday: '1999-11-23T00:00:00.000Z',
+//   address: '서울시 노원구 공릉동',
+//   phoneNumber: '01012341234',
+//   email: 'ojj1123@gmail.com',
+//   introduceText: '안녕하세요.',
+//   hashTag: [],
+//   __v: 0,
+// };
+// initialState.artistProfileImg = {
+//   _id: '6197962a5b2b45723b57ab87',
+//   artistAuth_id: '619661cfaf39e6cec711d492',
+//   profileImage:
+//     'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5.png',
+//   __v: 0,
+// };
+// initialState.artistBackImg = {
+//   _id: '6197962a5b2b45723b57ab89',
+//   artistAuth_id: '619661cfaf39e6cec711d492',
+//   backgroundImage:
+//     'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5.png',
+//   __v: 0,
+// };
+// initialState.myHotel = {
+//   _id: '619a85a8e022247def87c54b',
+//   hotelAuth_id: '619a8567e022247def87c540',
+//   hotelName: '서울 호텔',
+//   address: '서울시 강남구 대치동',
+//   phoneNumber: '02-1234-56781',
+//   email: 'ojj991123@seoulhotel.com',
+//   introduceText: '안녕하세요 서울 호텔입니다.',
+//   images: [], // 이미지가 비어있다면 무조건 빈 배열?
+//   __v: 0,
+// };
+// initialState.hotelProfileImg = {
+//   _id: '619a85a8e022247def87c54d',
+//   hotelAuth_id: '619a8567e022247def87c540',
+//   profileImage:
+//     'https://hackathonwinwin.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5.png',
+//   __v: 0,
+// };
 export default handleActions(
   {
-    [UPDATE_ARTIST_PROFILEIMG_SUCCESS]: (state, { payload: profileImg }) => ({
+    [UPDATE_ARTIST_PROFILEIMG_SUCCESS]: (
+      state,
+      { payload: artistProfileImg }
+    ) => ({
       ...state,
-      artistProfileImg: profileImg,
+      artistProfileImg,
       artistProfileImgError: null,
     }),
     [UPDATE_ARTIST_PROFILEIMG_FAILURE]: (state, { payload: error }) => ({
@@ -168,9 +194,9 @@ export default handleActions(
       artistProfileImg: null,
       artistProfileImgError: error,
     }),
-    [UPDATE_ARTIST_BACKIMG_SUCCESS]: (state, { payload: bgImg }) => ({
+    [UPDATE_ARTIST_BACKIMG_SUCCESS]: (state, { payload: artistBackImg }) => ({
       ...state,
-      artistBackImg: bgImg,
+      artistBackImg,
       artistBackImgError: null,
     }),
     [UPDATE_ARTIST_BACKIMG_FAILURE]: (state, { payload: error }) => ({
@@ -188,7 +214,34 @@ export default handleActions(
       myArtist: null,
       myArtistError: error,
     }),
+    [GET_MY_ARTIST_PROFILEIMG_SUCCESS]: (
+      state,
+      { payload: artistProfileImg }
+    ) => ({
+      ...state,
+      artistProfileImg,
+      artistProfileImgError: null,
+    }),
+    [GET_MY_ARTIST_PROFILEIMG_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      artistProfileImg: null,
+      artistProfileImgError: error,
+    }),
+    [GET_MY_ARTIST_PROFILE_BACKIMG_SUCCESS]: (
+      state,
+      { payload: artistBackImg }
+    ) => ({
+      ...state,
+      artistBackImg,
+      artistBackImgError: null,
+    }),
+    [GET_MY_ARTIST_PROFILE_BACKIMG_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      artistBackImg: null,
+      artistBackImgError: error,
+    }),
 
+    // HOTEL
     [GET_MY_HOTEL_PROFILE_SUCCESS]: (state, { payload: myHotel }) => ({
       ...state,
       myHotel,
@@ -211,6 +264,29 @@ export default handleActions(
       ...state,
       hotelProfileImg: null,
       hotelProfileImgError: error,
+    }),
+    [UPDATE_HOTEL_PROFILEIMG_SUCCESS]: (
+      state,
+      { payload: hotelProfileImg }
+    ) => ({
+      ...state,
+      hotelProfileImg,
+      hotelProfileImgError: null,
+    }),
+    [UPDATE_HOTEL_PROFILEIMG_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      hotelProfileImg: null,
+      hotelProfileImgError: error,
+    }),
+    [ADD_HOTEL_IMAGE_SUCCESS]: (state, { payload: addHotelImg }) => ({
+      ...state,
+      addHotelImg,
+      addHotelImgError: null,
+    }),
+    [ADD_HOTEL_IMAGE_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      addHotelImg: null,
+      addHotelImgError: error,
     }),
   },
   initialState

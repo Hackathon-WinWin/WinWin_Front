@@ -1,61 +1,53 @@
-import React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { addHotelImage, updateHotelProfileImage } from '../../../api/myPage';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import HotelMy from '../../../components/hotel/mypage/HotelMy';
 import {
+  addHotelImage,
   getMyHotelProfile,
   getMyHotelProfileImg,
+  updateHotelProfileImage,
 } from '../../../modules/myPage';
 
 const HotelMyContainer = () => {
-  const { myHotel, hotelProfileImg } = useSelector(({ myPage }) => ({
-    myHotel: myPage.myHotel,
-    hotelProfileImg: myPage.hotelProfileImg,
-  }));
-  const initState = {
-    profileImage: null,
-    image: null,
-  };
-  const [form, setForm] = useState(initState);
+  const { myHotel, hotelProfileImg, addHotelImg, addHotelImgError } =
+    useSelector(({ myPage }) => ({
+      myHotel: myPage.myHotel,
+      hotelProfileImg: myPage.hotelProfileImg,
+      addHotelImg: myPage.addHotelImg,
+      addHotelImgError: myPage.addHotelImgError,
+    }));
   const dispatch = useDispatch();
+
   const onChange = (e) => {
     const {
       target: { name, files },
     } = e;
-    console.log(files);
-    setForm((state) => ({ ...state, [name]: files[0] }));
-  };
-  const onAddHotelImage = async (e) => {
     const formData = new FormData();
-    formData.append('image', form.image);
-    e.preventDafault();
-    try {
-      await addHotelImage(formData);
-    } catch (e) {}
+    formData.append(name, files[0]);
+    if (name === 'image') {
+      dispatch(addHotelImage(formData));
+    } else if (name === 'profileImage') {
+      console.log(formData);
+      dispatch(updateHotelProfileImage(formData));
+    }
   };
-  const onUpdateHotelProfileImg = async (e) => {
-    const formData = new FormData();
-    formData.append('profileImage', form.profileImage);
-    e.preventDafault();
-    try {
-      await updateHotelProfileImage(formData);
-    } catch (e) {}
-  };
-  // 서버와 연동시 주석 해제
-  // useEffect(() => {
-  //   dispatch(getMyHotelProfile());
-  //   dispatch(getMyHotelProfileImg());
-  // }, [dispatch]);
+
+  // ** 프로필 생성 여부가 선행되어야 함 **
+  useEffect(() => {
+    dispatch(getMyHotelProfile());
+    dispatch(getMyHotelProfileImg());
+  }, [dispatch]);
+  useEffect(() => {
+    if (addHotelImg) {
+      dispatch(getMyHotelProfile());
+    }
+  }, [dispatch, addHotelImg]);
+
   return (
     <HotelMy
       myHotel={myHotel}
       hotelProfileImg={hotelProfileImg}
       onChange={onChange}
-      onUpdateHotelProfileImg={onUpdateHotelProfileImg}
-      onAddHotelImage={onAddHotelImage}
     />
   );
 };

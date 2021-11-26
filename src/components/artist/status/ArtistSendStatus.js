@@ -43,9 +43,7 @@ const SentItem = css`
     justify-content: space-between;
     width: 100%;
   }
-  & + & {
-    border-top: 1px solid lightgray;
-  }
+  border-bottom: 1px solid lightgray;
 `;
 const Status = styled.div`
   display: flex;

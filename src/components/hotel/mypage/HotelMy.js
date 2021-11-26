@@ -4,23 +4,24 @@ import { HiPlus } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const HotelMy = ({
-  myHotel,
-  hotelProfileImg,
-  onChange,
-  onAddHotelImage,
-  onUpdateHotelProfileImg,
-}) => {
+const HotelMy = ({ myHotel, hotelProfileImg, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
-  if (!myHotel) return <div>loading...</div>;
-  const { hotelName, address, phoneNumber, email, introduceText, images } =
-    myHotel;
+  if (!myHotel || !hotelProfileImg) return <div>loading...</div>;
+  const {
+    hotelName,
+    address,
+    phoneNumber,
+    email,
+    introduceText,
+    images,
+    bookMark,
+  } = myHotel;
   const onOpenMenu = (e) => {
     setIsOpen((prev) => !prev);
   };
   return (
     <HotelMyWrapper>
-      <HotelProfileImg profileImage={hotelProfileImg.profileImage}>
+      <HotelProfileImg image={hotelProfileImg.profileImage}>
         <MenuBtn onClick={onOpenMenu}>
           <AiOutlineMenu size='22'></AiOutlineMenu>
         </MenuBtn>
@@ -38,7 +39,9 @@ const HotelMy = ({
         {images.length === 0 ? (
           <Message>이미지를 추가해주세요!</Message>
         ) : (
-          images.map((image) => <li>{image}</li>)
+          images.map((image) => (
+            <HotelImageBox key={image._id} image={image.image}></HotelImageBox>
+          ))
         )}
       </HotelImageList>
       <MenuTab isOpen={isOpen}>
@@ -52,7 +55,7 @@ const HotelMy = ({
             <Link to='/editProfile'>프로필 편집</Link>
           </li>
           <li>
-            <form onSubmit={onUpdateHotelProfileImg}>
+            <form>
               <label>
                 <ImageInput
                   name='profileImage'
@@ -60,14 +63,14 @@ const HotelMy = ({
                   accept='image/*'
                   onChange={onChange}
                 />
-                편집
+                대표 이미지 편집
               </label>
             </form>
           </li>
         </ul>
         <BlackEmpty onClick={onOpenMenu} />
       </MenuTab>
-      <form onSubmit={onAddHotelImage}>
+      <form>
         <AddHotelImageLabel>
           <ImageInput
             name='image'
@@ -85,13 +88,13 @@ const HotelMyWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100vw;
-  min-height: 100vh;
+  min-height: 120vh;
+  height: auto;
 `;
 const HotelProfileImg = styled.div`
   width: 100vw;
   height: 321px;
-
-  background-image: url(${({ profileImage }) => profileImage});
+  background-image: url(${({ image }) => image});
 `;
 const HotelInfoBox = styled.div`
   background-color: white;
@@ -122,12 +125,23 @@ const HotelInfo = styled.ul`
 const HotelImageList = styled.ul`
   width: 100%;
   margin-top: 183px;
+  padding: 16px;
+  box-sizing: border-box;
   display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, 167px);
+  grid-template-rows: repeat(auto-fit, 167px);
   background-color: lightgray;
   flex: auto;
-  & > li {
-    list-style: none;
-  }
+`;
+const HotelImageBox = styled.li`
+  list-style: none;
+  width: 167px;
+  height: 167px;
+  border-radius: 15px;
+  background-image: url(${({ image }) => image});
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 const MenuTab = styled.div`
   position: fixed;
@@ -164,7 +178,7 @@ const AddHotelImageLabel = styled.label`
   border-radius: 50%;
   width: 68px;
   height: 68px;
-  position: absolute;
+  position: fixed;
   bottom: 12vh;
   left: calc(50vw - 34px);
   display: flex;

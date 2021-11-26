@@ -8,7 +8,6 @@ import 'dayjs/locale/ko';
 dayjs.locale('ko');
 
 const ArtistReceiveStatus = ({ recieved }) => {
-  console.log(recieved);
   return (
     <Wrapper>
       {recieved.map((item) => (
@@ -17,7 +16,7 @@ const ArtistReceiveStatus = ({ recieved }) => {
             <h3>{item.title}</h3>
             <span>{dayjs(item.writtenTime).format('MM.DD ddd A hh:mm')}</span>
           </div>
-          <p>{item.message}</p>
+          <Message>{item.message}</Message>
         </li>
       ))}
     </Wrapper>
@@ -43,5 +42,10 @@ const RecievedItem = css`
   & + & {
     border-top: 1px solid lightgray;
   }
+`;
+const Message = styled.p`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 export default ArtistReceiveStatus;

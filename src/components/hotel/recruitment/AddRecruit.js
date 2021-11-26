@@ -98,11 +98,11 @@ const AddRecruit = ({
                 }}
               />
             </div>
-            {/* <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
               <h4>모집인원</h4>
               <Input
-                name='concept'
-                value={form.concept}
+                name='recruitNumber'
+                value={form.recruitNumber}
                 onChange={onChange}
                 endAdornment={
                   <InputAdornment position='end'>명</InputAdornment>
@@ -111,7 +111,7 @@ const AddRecruit = ({
                   'aria-label': 'weight',
                 }}
               />
-            </div> */}
+            </div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <h4>전시컨셉</h4>
               <Input

@@ -1,25 +1,32 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import portfolio from '../../../modules/portfolio';
 import { HiPlus } from 'react-icons/hi';
 import DetailPortfolio from './DetailPortfolio';
 
 const ArtistMy = ({
   form,
+  openDetail,
+  setOpenDetail,
   setForm,
   myArtist,
   artistProfileImg,
   artistBackImg,
   myPortfolio,
   onChange,
+  onChangeFile,
   onAddPortfolio,
+  onLogout,
 }) => {
   const imgRef = useRef();
   const previewRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
-  const [openDetail, setOpenDetail] = useState(false);
+  if (!artistProfileImg || !artistBackImg || !myArtist || !myPortfolio)
+    return null;
+  const { artistAuth_id } = myPortfolio;
   const onOpenMenu = (e) => {
     setIsOpen((prev) => !prev);
   };
@@ -46,9 +53,15 @@ const ArtistMy = ({
         </MenuBtn>
       </ArtistBgImg>
       <ArtistInfo>
-        <ArtistProfileImg
-          profileImage={artistProfileImg.profileImage}
-        ></ArtistProfileImg>
+        <ArtistProfileImg profileImage={artistProfileImg.profileImage}>
+          <label>
+            <img
+              src={process.env.PUBLIC_URL + '/icons/my_pen.svg'}
+              alt='수정'
+            />
+            <input type='file' name='profileImage' onChange={onChangeFile} />
+          </label>
+        </ArtistProfileImg>
         <h3>{myArtist.name}</h3>
         <div>{myArtist.phoneNumber}</div>
         <div>{myArtist.email}</div>
@@ -60,10 +73,24 @@ const ArtistMy = ({
             <p>개인 포트폴리오를 추가해보세요!</p>
           ) : (
             myPortfolio.portfolios.map((portfolio) => (
-              <li key={portfolio._id} image={portfolio.images[0].image}></li>
+              <PreviewImg key={portfolio._id} image={portfolio.images[0].image}>
+                <Link
+                  css={css`
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                  `}
+                  to={`/mySpecificPortfolio/${artistAuth_id}/${portfolio._id}`}
+                  state={{
+                    profileImageURL: artistProfileImg,
+                    artistName: myArtist.name,
+                  }}
+                />
+              </PreviewImg>
             ))
           ))}
       </PortfolioList>
+      {/* 메뉴 */}
       <MenuTab isOpen={isOpen}>
         <ul>
           <li>
@@ -73,6 +100,10 @@ const ArtistMy = ({
           </li>
           <li>
             <Link to='/editProfile'>프로필 편집</Link>
+          </li>
+          <li></li>
+          <li>
+            <LogoutBtn onClick={onLogout}>로그아웃</LogoutBtn>
           </li>
         </ul>
         <BlackEmpty onClick={onOpenMenu} />
@@ -113,7 +144,6 @@ const ArtistMyWrapper = styled.div`
 const ArtistBgImg = styled.div`
   width: 100vw;
   height: 220px;
-  background: lightgray;
   background-image: url(${({ backgroundImage }) => backgroundImage});
 `;
 const ArtistProfileImg = styled.div`
@@ -123,8 +153,16 @@ const ArtistProfileImg = styled.div`
   width: 106px;
   height: 106px;
   border-radius: 50%;
-  background: lightgreen;
-  background-image: url(${({ backgroundImage }) => backgroundImage});
+  background-image: url(${({ profileImage }) => profileImage});
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25));
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  & input {
+    display: none;
+  }
 `;
 const ArtistInfo = styled.div`
   position: relative;
@@ -147,14 +185,13 @@ const PortfolioList = styled.ul`
   & > p {
     margin: 30px auto 0;
   }
-  & > li {
-    list-style: none;
-    width: 167px;
-    height: 167px;
-    /* background-image: url(${({ image }) => image}); */
-    background-color: lightgreen;
-    border-radius: 15px;
-  }
+`;
+const PreviewImg = styled.li`
+  list-style: none;
+  width: 167px;
+  height: 167px;
+  background-image: url(${({ image }) => image});
+  border-radius: 15px;
 `;
 const AddPortfolioLabel = styled.label`
   cursor: pointer;
@@ -197,5 +234,9 @@ const BlackEmpty = styled.div`
   background-color: rgba(24, 24, 24, 0.8);
   width: 30%;
   height: 100vh;
+`;
+const LogoutBtn = styled.button`
+  border: none;
+  background: none;
 `;
 export default ArtistMy;

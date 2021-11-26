@@ -1,25 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { createArtistProfile } from '../../../api/profile';
 import ArtistProfile from '../../../components/artist/profile/ArtistProfile';
-import { createArtistProfile } from '../../../modules/profile';
+import { checkLoggedIn } from '../../../modules/auth';
 
 const ArtistProfileContainer = () => {
-  const { artistprofileSuccess, artistprofileError } = useSelector(
-    ({ profile }) => ({
-      artistprofileSuccess: profile.artistprofileSuccess,
-      artistprofileError: profile.artistprofileError,
-    })
-  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const initialState = {
     nickname: '',
     name: '',
     birthday: new Date().toString(),
+    address: '',
     email: '',
+    introduceText: '',
   };
   const [form, setForm] = useState(initialState);
+  const [dupNickname, setDupNickname] = useState({
+    isDupNickname: true,
+    nicknameMessage: '',
+  });
+  const [dupEmail, setDupEmail] = useState({
+    isDupEmail: true,
+    emailMessage: '',
+  });
 
   const onChange = (e) => {
     const {
@@ -27,29 +32,78 @@ const ArtistProfileContainer = () => {
     } = e;
     setForm((state) => ({ ...state, [name]: value }));
   };
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    dispatch(createArtistProfile(form));
+    try {
+      const response = await createArtistProfile(form);
+      if (response.status === 200) {
+        const firebaseToken = localStorage.getItem('firebase_token');
+        setDupNickname((state) => ({
+          ...state,
+          isDupNickname: false,
+          nicknameMessage: '사용가능합니다.',
+        }));
+        setDupEmail((state) => ({
+          ...state,
+          isDupEmail: false,
+          emailMessage: '사용가능합니다.',
+        }));
+        dispatch(checkLoggedIn(firebaseToken));
+        navigate('/main');
+      }
+    } catch (e) {
+      const { status } = e.response;
+      switch (status) {
+        case 400:
+          setDupNickname((state) => ({
+            ...state,
+            isDupNickname: true,
+            nicknameMessage: '다른 닉네임을 사용해 주세요.',
+          }));
+          break;
+        case 401:
+          setDupEmail((state) => ({
+            ...state,
+            isDupEmail: false,
+            emailMessage: '이미 존재하는 이메일입니다.',
+          }));
+          break;
+        case 402:
+          alert('소개글 40자 미만');
+          break;
+        default:
+          alert('다시 시도해주세요.');
+          setForm((state) => ({
+            ...state,
+            nickname: '',
+            name: '',
+            birthday: new Date().toString(),
+            address: '',
+            email: '',
+            introduceText: '',
+          }));
+          setDupNickname((state) => ({
+            ...state,
+            isDupNickname: true,
+            nicknameMessage: '다른 닉네임을 사용해 주세요.',
+          }));
+          setDupEmail((state) => ({
+            ...state,
+            isDupEmail: false,
+            emailMessage: '이미 존재하는 이메일입니다.',
+          }));
+      }
+    }
   };
-  useEffect(() => {
-    if (artistprofileSuccess) {
-      navigate('/main');
-      return;
-    }
-    if (artistprofileError) {
-      alert('다시 기입해주세요.');
-      setForm((state) => ({
-        ...state,
-        nickname: '',
-        name: '',
-        birthday: new Date().toString(),
-        email: '',
-      }));
-      return;
-    }
-  }, [artistprofileSuccess, artistprofileError, navigate]);
-
-  return <ArtistProfile form={form} onChange={onChange} onSubmit={onSubmit} />;
+  return (
+    <ArtistProfile
+      form={form}
+      dupNickname={dupNickname}
+      dupEmail={dupEmail}
+      onChange={onChange}
+      onSubmit={onSubmit}
+    />
+  );
 };
 
 export default ArtistProfileContainer;

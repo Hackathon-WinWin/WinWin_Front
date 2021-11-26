@@ -1,4 +1,7 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const ArtistMain = ({ hotelList }) => {
@@ -15,9 +18,8 @@ const ArtistMain = ({ hotelList }) => {
       </div>
       <MainPortfoilo>
         <ul>
-          {!hotelList && <p>loading...</p>}
-          {hotelList === [] ? (
-            <p>loading...</p>
+          {hotelList.length === 0 ? (
+            <p>등록된 호텔이 없습니다.</p>
           ) : (
             hotelList.map((hotel, index) => (
               <li
@@ -28,11 +30,16 @@ const ArtistMain = ({ hotelList }) => {
                     : hotel.recruitment.images[0].image
                 }
               >
-                <h3>{hotel.hotelName}</h3>
-                <div>
-                  <p>{hotel.address}</p>
-                  <p>{hotel.recruitment.title}</p>
-                </div>
+                <Link
+                  to={`/specificRecruit/${hotel.hotelAuth_id}/${hotel.recruitment._id}`}
+                  css={LinkCss}
+                >
+                  <h3>{hotel.hotelName}</h3>
+                  <div>
+                    <p>{hotel.address}</p>
+                    <p>{hotel.recruitment.title}</p>
+                  </div>
+                </Link>
               </li>
             ))
           )}
@@ -99,7 +106,7 @@ const MainPortfoilo = styled.div`
       padding: 16px;
       list-style: none;
       background-color: red;
-      /* background-image: url(${({ image }) => image}); */
+      background-image: url(${({ image }) => image});
       background-repeat: no-repeat;
       background-size: cover;
       scroll-snap-align: start;
@@ -108,5 +115,13 @@ const MainPortfoilo = styled.div`
     }
   }
 `;
-
+const LinkCss = css`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  text-decoration: none;
+`;
 export default ArtistMain;

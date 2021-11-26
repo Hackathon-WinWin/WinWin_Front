@@ -9,6 +9,7 @@ const EntryContainer = () => {
     signinSuccess: auth.signinSuccess,
     signinError: auth.signinError,
   }));
+  const [firebaseToken, setFirebaseToken] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const initialState = {
@@ -31,18 +32,25 @@ const EntryContainer = () => {
     dispatch(signin(form));
   };
   useEffect(() => {
+    const getFirebaseToken = () => {
+      try {
+        const token = localStorage.getItem('firebase_token');
+        setFirebaseToken(token);
+      } catch (e) {}
+    };
+    getFirebaseToken();
+  }, []);
+  useEffect(() => {
     if (signinSuccess) {
-      console.log('success login');
+      dispatch(checkLoggedIn(firebaseToken));
       navigate('/main');
-      return;
     }
     if (signinError) {
       alert('다시 시도해주세요.');
       setForm({ account: '', password: '' });
       dispatch(initAuth());
-      return;
     }
-  }, [signinSuccess, signinError, navigate, dispatch]);
+  }, [signinSuccess, signinError, navigate, dispatch, firebaseToken]);
   return <Entry form={form} onChange={onChange} onSubmit={onSubmit} />;
 };
 

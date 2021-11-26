@@ -11,9 +11,9 @@ const RecruitmentContainer = () => {
   }));
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(readMyRecruitment());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(readMyRecruitment());
+  }, [dispatch]);
   return <Recruitment myRecuitementList={myRecuitementList} />;
 };
 
