@@ -5,26 +5,29 @@ import styled from 'styled-components';
 const Entry = ({ form, onChange, onSubmit }) => {
   return (
     <Container>
-      <LogoText>WinWin</LogoText>
+      <MainLogo
+        src={process.env.PUBLIC_URL + '/assets/main_logo.png'}
+        alt="WinWin"
+      />
       <form onSubmit={onSubmit}>
         <InputId
-          name='account'
+          name="account"
           value={form.account}
-          placeholder='    ID'
+          placeholder="ID"
           onChange={onChange}
         />
         <InputPassword
-          name='password'
+          name="password"
           value={form.password}
-          placeholder='    Password'
+          placeholder="Password"
           onChange={onChange}
-          type='password'
+          type="password"
         />
         <LoginButton>로그인</LoginButton>
       </form>
-      <FindAuth to='/signup'>아이디 비밀번호 찾기</FindAuth>
+      <FindAuth to="/signup">아이디 비밀번호 찾기</FindAuth>
       <Bar></Bar>
-      <CreateAuth to='/signup'>회원가입</CreateAuth>
+      <CreateAuth to="/signup">회원가입</CreateAuth>
     </Container>
   );
 };
@@ -37,17 +40,15 @@ const Container = styled.div`
   font-weight: 100;
 `;
 
-const LogoText = styled.p`
+const MainLogo = styled.img`
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  top: 283px;
-  left: 116px;
-  width: 160px;
-  height: 80.69px;
-  color: #faff00;
-  font-size: 45.37px;
+  top: 294px;
+  left: 83px;
+  width: 223px;
+  height: 46px;
 `;
 
 const InputId = styled.input`
@@ -60,6 +61,10 @@ const InputId = styled.input`
   border: none;
   border-bottom: 1px solid #181818;
   border-radius: 4px 4px 0 0;
+  padding-left: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  box-sizing: border-box;
 `;
 
 const InputPassword = styled.input`
@@ -72,6 +77,10 @@ const InputPassword = styled.input`
   border: none;
   border-top: 1px solid #181818;
   border-radius: 0 0 4px 4px;
+  padding-left: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  box-sizing: border-box;
 `;
 
 const LoginButton = styled.button`
