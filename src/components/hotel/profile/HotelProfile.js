@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const HotelProfile = ({ form, onChange, onSubmit }) => {
+const HotelProfile = ({ form, error, onChange, onSubmit }) => {
   return (
     <Container>
       <Title>프로필 설정</Title>
@@ -25,12 +25,22 @@ const HotelProfile = ({ form, onChange, onSubmit }) => {
           onChange={onChange}
           placeholder='전화'
         />
+        <p>
+          {error.isDupPhone
+            ? '전화번호가 이미 존재합니다.'
+            : '사용 가능합니다.'}
+        </p>
         <Input4
           name='email'
           value={form.email}
           onChange={onChange}
           placeholder='메일'
         />
+        <p>
+          {error.isDupEamil
+            ? '해당 이메일이 이미 존재합니다.'
+            : '사용 가능합니다.'}
+        </p>
         <Input5
           name='introduceText'
           value={form.introduceText}

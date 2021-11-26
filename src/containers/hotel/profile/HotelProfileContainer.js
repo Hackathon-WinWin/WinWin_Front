@@ -3,15 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { createHotelProfile } from '../../../api/profile';
 import HotelProfile from '../../../components/hotel/profile/HotelProfile';
-// import { createHotelProfile } from '../../../modules/profile';
+import { checkLoggedIn } from '../../../modules/auth';
 
 const HotelProfileContainer = () => {
-  const { hotelprofileSuccess, hotelprofileError } = useSelector(
-    ({ profile }) => ({
-      hotelprofileSuccess: profile.hotelprofileSuccess,
-      hotelprofileError: profile.hotelprofileError,
-    })
-  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const initialState = {
@@ -21,8 +15,12 @@ const HotelProfileContainer = () => {
     email: '',
     introduceText: '',
   };
+  const initError = {
+    isDupPhone: false,
+    isDupEmail: false,
+  };
   const [form, setForm] = useState(initialState);
-
+  const [error, setError] = useState(initError);
   const onChange = (e) => {
     const {
       target: { name, value },
@@ -44,18 +42,32 @@ const HotelProfileContainer = () => {
     try {
       const response = await createHotelProfile(form);
       if (response.status === 200) {
+        const firebaseToken = localStorage.getItem('firebase_token');
+        setError((state) => ({
+          ...state,
+          isDupEmail: false,
+          isDupPhone: false,
+        }));
+        dispatch(checkLoggedIn(firebaseToken));
         navigate('/main');
       }
     } catch (e) {
       const { status } = e.response;
       switch (status) {
         case 400:
-          alert('이미 사용중인 전화번호');
+          setError((state) => ({ ...state, isDupPhone: true }));
+          // alert('이미 사용중인 전화번호');
           break;
         case 401:
-          alert('이미 사용중인 이메일');
+          setError((state) => ({ ...state, isDupEmail: true }));
+          // alert('이미 사용중인 이메일');
           break;
         default:
+          setError((state) => ({
+            ...state,
+            isDupEmail: false,
+            isDupPhone: false,
+          }));
           alert('다시 시도');
           setForm((state) => ({
             ...state,
@@ -67,7 +79,14 @@ const HotelProfileContainer = () => {
       }
     }
   };
-  return <HotelProfile form={form} onChange={onChange} onSubmit={onSubmit} />;
+  return (
+    <HotelProfile
+      form={form}
+      error={error}
+      onChange={onChange}
+      onSubmit={onSubmit}
+    />
+  );
 };
 
 export default HotelProfileContainer;

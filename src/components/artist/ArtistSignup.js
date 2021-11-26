@@ -1,7 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ArtistSignup = ({ form, onChange, onSubmit }) => {
+const ArtistSignup = ({
+  checkPassword,
+  form,
+  onChange,
+  onSubmit,
+  onCheckAccount,
+  error,
+}) => {
+  const { isError, message } = error;
+  const { formError, formMessage } = checkPassword;
   return (
     <Container>
       <Title>회원가입</Title>
@@ -9,11 +18,14 @@ const ArtistSignup = ({ form, onChange, onSubmit }) => {
       <form onSubmit={onSubmit}>
         <P1>ID</P1>
         <Input1
+          onBlur={onCheckAccount}
           name='account'
           value={form.account}
           onChange={onChange}
           placeholder=''
         />
+        <p>{isError && message}</p>
+        <p>{!isError && message}</p>
         <P2>비밀번호</P2>
         <Input2
           name='password'
@@ -30,14 +42,16 @@ const ArtistSignup = ({ form, onChange, onSubmit }) => {
           placeholder=''
           type='password'
         />
-        <Button1>다음</Button1>
+        <p>{formError && formMessage}</p>
+        <p>{!formError && formMessage}</p>
+        <SubmitBtn disabled={isError || !formError}>다음</SubmitBtn>
       </form>
     </Container>
   );
 };
 const Container = styled.div`
-  height: 844px;
-  width: 390px;
+  height: 100vh;
+  width: 100vw;
   background-color: #ffffff;
   text-align: center;
   font-family: 'Noto Sans KR', sans-serif;
@@ -165,7 +179,7 @@ const Input3 = styled.input`
   font-weight: 500;
 `;
 
-const Button1 = styled.button`
+const SubmitBtn = styled.button`
   position: absolute;
   display: flex;
   align-items: center;
@@ -174,12 +188,11 @@ const Button1 = styled.button`
   width: 390px;
   height: 75px;
   border: none;
-  background-color: #c1c1c1;
+  background-color: ${({ disabled }) => (disabled ? '#c1c1c1' : '#181818')};
+  transition: 0.5s;
   color: #ffffff;
   font-size: 18px;
   font-weight: 700;
 `;
-
-//아이디 중복확인하고, 비밀번호 일치확인 되면 다음 색깔 변경
 
 export default ArtistSignup;
