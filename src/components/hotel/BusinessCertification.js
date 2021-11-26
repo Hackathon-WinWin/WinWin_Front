@@ -21,24 +21,24 @@ const BusinessCertification = ({
       <form onSubmit={onSubmit}>
         <P1>사업자 등록 번호</P1>
         <Input1
-          name='businessNumber'
+          name="businessNumber"
           value={form.businessNumber}
           onChange={onChange}
-          placeholder='0000000000000'
+          placeholder="0000000000000"
         />
         <P2>대표자 성명</P2>
         <Input2
-          name='hostName'
+          name="hostName"
           value={form.hostName}
           onChange={onChange}
-          placeholder='외국인 사업자의 경우, 영문명 입력'
+          placeholder="외국인 사업자의 경우, 영문명 입력"
         />
         <P3>개업일자</P3>
         <Input3
-          name='openDate'
+          name="openDate"
           value={form.openDate}
           onChange={onChange}
-          placeholder='YYYYMMDD'
+          placeholder="YYYYMMDD"
         />
         <Button1>인증 요청</Button1>
         {!isClickFirst && <Message>{certifyMessage}</Message>}
@@ -61,6 +61,10 @@ const Message = styled.p`
   position: absolute;
   top: 629px;
   left: 20px;
+  width: 122px;
+  height: 16px;
+  font-size: 12px;
+  font-weight: 400;
 `;
 const Title = styled.p`
   position: absolute;
