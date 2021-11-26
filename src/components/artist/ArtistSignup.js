@@ -206,8 +206,9 @@ const Input2 = styled.input`
   background-color: #ffffff;
   border: none;
   border-bottom: 1px solid black;
+  font-family: 'Noto Sans', sans-serif;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
 `;
 
 const Input3 = styled.input`
@@ -223,8 +224,9 @@ const Input3 = styled.input`
   background-color: #ffffff;
   border: none;
   border-bottom: 1px solid black;
+  font-family: 'Noto Sans', sans-serif;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
 `;
 
 const SubmitBtn = styled.button`
