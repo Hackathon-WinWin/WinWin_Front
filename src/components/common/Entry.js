@@ -28,7 +28,7 @@ const Entry = ({ form, onChange, onSubmit }) => {
     </Container>
   );
 };
-const Container = styled.form`
+const Container = styled.div`
   height: 844px;
   width: 390px;
   background-color: #181818;

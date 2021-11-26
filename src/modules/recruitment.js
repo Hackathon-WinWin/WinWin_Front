@@ -5,8 +5,8 @@ import { takeLatest } from 'redux-saga/effects';
 import { handleActions } from 'redux-actions';
 
 const ADD_RECRUITMENT = 'recruitment/ADD_RECRUITMENT';
-// const ADD_RECRUITMENT_SUCCESS = 'recruitment/ADD_RECRUITMENT_SUCCESS';
-// const ADD_RECRUITMENT_FAILURE = 'recruitment/ADD_RECRUITMENT_FAILURE';
+const ADD_RECRUITMENT_SUCCESS = 'recruitment/ADD_RECRUITMENT_SUCCESS';
+const ADD_RECRUITMENT_FAILURE = 'recruitment/ADD_RECRUITMENT_FAILURE';
 const REAC_MY_RECRUITMENT = 'recruitment/REAC_MY_RECRUITMENT';
 const REAC_MY_RECRUITMENT_SUCCESS = 'recruitment/REAC_MY_RECRUITMENT_SUCCESS';
 const REAC_MY_RECRUITMENT_FAILURE = 'recruitment/REAC_MY_RECRUITMENT_FAILURE';
@@ -89,6 +89,16 @@ const initialState = {
 // };
 export default handleActions(
   {
+    [ADD_RECRUITMENT_SUCCESS]: (state, { payload: addSuccess }) => ({
+      ...state,
+      addSuccess,
+      addError: null,
+    }),
+    [ADD_RECRUITMENT_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      addSuccess: null,
+      addError: error,
+    }),
     [REAC_MY_RECRUITMENT_SUCCESS]: (state, { payload: myRecuitementList }) => ({
       ...state,
       myRecuitementList,

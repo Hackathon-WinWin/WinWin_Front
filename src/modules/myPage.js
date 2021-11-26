@@ -27,11 +27,14 @@ const GET_MY_ARTIST_PROFILE_BACKIMG_FAILURE =
   'myPage/GET_MY_ARTIST_PROFILE_BACKIMG_FAILURE';
 
 // HOTEL action
-const UPDATE_HOTEL_PROFILEIMG = 'myPage/UPDATE_PROFILEIMG';
+const UPDATE_HOTEL_PROFILEIMG = 'myPage/UPDATE_HOTEL_PROFILEIMG';
 const UPDATE_HOTEL_PROFILEIMG_SUCCESS =
   'myPage/UPDATE_HOTEL_PROFILEIMG_SUCCESS';
 const UPDATE_HOTEL_PROFILEIMG_FAILURE =
   'myPage/UPDATE_HOTEL_PROFILEIMG_FAILURE';
+const ADD_HOTEL_IMAGE = 'myPage/ADD_HOTEL_IMAGE';
+const ADD_HOTEL_IMAGE_SUCCESS = 'myPage/ADD_HOTEL_IMAGE_SUCCESS';
+const ADD_HOTEL_IMAGE_FAILURE = 'myPage/ADD_HOTEL_IMAGE_FAILURE';
 const GET_MY_HOTEL_PROFILE = 'myPage/GET_MY_HOTEL_PROFILE';
 const GET_MY_HOTEL_PROFILE_SUCCESS = 'myPage/GET_MY_HOTEL_PROFILE_SUCCESS';
 const GET_MY_HOTEL_PROFILE_FAILURE = 'myPage/GET_MY_HOTEL_PROFILE_FAILURE';
@@ -57,6 +60,14 @@ export const getMyArtistBgImg = createAction(GET_MY_ARTIST_PROFILE_BACKIMG);
 // HOTEL action creator
 export const getMyHotelProfile = createAction(GET_MY_HOTEL_PROFILE);
 export const getMyHotelProfileImg = createAction(GET_MY_HOTEL_PROFILEIMG);
+export const updateHotelProfileImage = createAction(
+  UPDATE_HOTEL_PROFILEIMG,
+  (formData) => formData
+);
+export const addHotelImage = createAction(
+  ADD_HOTEL_IMAGE,
+  (formData) => formData
+);
 
 // ARTIST saga
 const updateArtistProfileImageSaga = createRequestSaga(
@@ -88,6 +99,14 @@ const getMyHotelProfileImgSaga = createRequestSaga(
   GET_MY_HOTEL_PROFILEIMG,
   myPageAPI.getMyHotelProfileImage
 );
+const updateHotelProfileImageSaga = createRequestSaga(
+  UPDATE_HOTEL_PROFILEIMG,
+  myPageAPI.updateHotelProfileImage
+);
+const addHotelImageSaga = createRequestSaga(
+  ADD_HOTEL_IMAGE,
+  myPageAPI.addHotelImage
+);
 export function* myPageSaga() {
   yield takeLatest(GET_MY_ARTIST_PROFILE, getMyAritistProfileSaga);
   yield takeLatest(GET_MY_ARTIST_PROFILEIMG, getMyArtistProfileImgSaga);
@@ -96,6 +115,8 @@ export function* myPageSaga() {
   yield takeLatest(UPDATE_ARTIST_BACKIMG, updateArtistBackgroundImageSaga);
   yield takeLatest(GET_MY_HOTEL_PROFILE, getMyHotelProfileSaga);
   yield takeLatest(GET_MY_HOTEL_PROFILEIMG, getMyHotelProfileImgSaga);
+  yield takeLatest(UPDATE_HOTEL_PROFILEIMG, updateHotelProfileImageSaga);
+  yield takeLatest(ADD_HOTEL_IMAGE, addHotelImageSaga);
 }
 const initialState = {
   myArtist: null,
@@ -109,6 +130,10 @@ const initialState = {
   myHotelError: null,
   hotelProfileImg: null,
   hotelProfileImgError: null,
+  updateHotelProfileImg: null,
+  updateHotelProfileImgError: null,
+  addHotelImg: null,
+  addHotelImgError: null,
 };
 // DUMMY DATA
 // initialState.myArtist = {
@@ -146,7 +171,7 @@ const initialState = {
 //   phoneNumber: '02-1234-56781',
 //   email: 'ojj991123@seoulhotel.com',
 //   introduceText: '안녕하세요 서울 호텔입니다.',
-//   images: [],
+//   images: [], // 이미지가 비어있다면 무조건 빈 배열?
 //   __v: 0,
 // };
 // initialState.hotelProfileImg = {
@@ -211,6 +236,29 @@ export default handleActions(
       ...state,
       hotelProfileImg: null,
       hotelProfileImgError: error,
+    }),
+    [UPDATE_HOTEL_PROFILEIMG_SUCCESS]: (
+      state,
+      { payload: updateHotelProfileImg }
+    ) => ({
+      ...state,
+      updateHotelProfileImg,
+      updateHotelProfileImgError: null,
+    }),
+    [UPDATE_HOTEL_PROFILEIMG_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      updateHotelProfileImg: null,
+      updateHotelProfileImgError: error,
+    }),
+    [ADD_HOTEL_IMAGE_SUCCESS]: (state, { payload: addHotelImg }) => ({
+      ...state,
+      addHotelImg,
+      addHotelImgError: null,
+    }),
+    [ADD_HOTEL_IMAGE_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      addHotelImg: null,
+      addHotelImgError: error,
     }),
   },
   initialState

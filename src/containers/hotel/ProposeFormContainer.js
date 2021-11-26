@@ -35,7 +35,6 @@ const ProposeFormContainer = () => {
   };
   const onPropose = async (e) => {
     e.preventDefault();
-    console.log(form);
     const { phoneNumber, email } = hotelInfo;
     try {
       const response = await hotelSendApplication({
@@ -53,7 +52,9 @@ const ProposeFormContainer = () => {
           recruitment_id: null,
         }));
       }
-    } catch (e) {}
+    } catch (e) {
+      alert('죄송합니다. 지원서를 다시 작성해주세요.');
+    }
   };
   useEffect(() => {
     const fetchHotelInfo = async () => {

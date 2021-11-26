@@ -8,7 +8,7 @@ import axios from 'axios';
 // 501: 네이버 SENS API 에러
 // 500: 에러 내용
 export const requireNumber = async (phoneNumber) =>
-  await axios.post('/auth/sms', {
+  await axios.post('/api/auth/sms', {
     phoneNumber,
   });
 // 인증번호 확인
@@ -16,7 +16,7 @@ export const requireNumber = async (phoneNumber) =>
 // 400: 인증번호 불일치
 // 500: 에러 내용
 export const checkNumber = async ({ phoneNumber, certification }) =>
-  await axios.post('/auth/smsCheck', {
+  await axios.post('/api/auth/smsCheck', {
     phoneNumber,
     certification,
   });
@@ -30,4 +30,8 @@ export const checkNumber = async ({ phoneNumber, certification }) =>
 // 400: 인증 실패
 // 500: 에러 내용
 export const checkBusiness = async ({ businessNumber, openDate, hostName }) =>
-  await axios.post('/auth/business', { businessNumber, openDate, hostName });
+  await axios.post('/api/auth/business', {
+    businessNumber,
+    openDate,
+    hostName,
+  });

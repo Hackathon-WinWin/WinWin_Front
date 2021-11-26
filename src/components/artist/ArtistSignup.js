@@ -9,26 +9,26 @@ const ArtistSignup = ({ form, onChange, onSubmit }) => {
       <form onSubmit={onSubmit}>
         <P1>ID</P1>
         <Input1
-          name="account"
+          name='account'
           value={form.account}
           onChange={onChange}
-          placeholder=""
+          placeholder=''
         />
         <P2>비밀번호</P2>
         <Input2
-          name="password"
+          name='password'
           value={form.password}
           onChange={onChange}
-          placeholder=""
-          type="password"
+          placeholder=''
+          type='password'
         />
         <P3>비밀번호 확인</P3>
         <Input3
-          name="passwordConfirm"
+          name='passwordConfirm'
           value={form.passwordConfirm}
           onChange={onChange}
-          placeholder=""
-          type="password"
+          placeholder=''
+          type='password'
         />
         <Button1>다음</Button1>
       </form>

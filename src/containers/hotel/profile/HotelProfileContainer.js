@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { createHotelProfile } from '../../../api/profile';
 import HotelProfile from '../../../components/hotel/profile/HotelProfile';
-import { createHotelProfile } from '../../../modules/profile';
+// import { createHotelProfile } from '../../../modules/profile';
 
 const HotelProfileContainer = () => {
   const { hotelprofileSuccess, hotelprofileError } = useSelector(
@@ -28,7 +29,7 @@ const HotelProfileContainer = () => {
     } = e;
     setForm((state) => ({ ...state, [name]: value }));
   };
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const { hotelName, address, phoneNumber, email } = form;
     if (
@@ -40,26 +41,32 @@ const HotelProfileContainer = () => {
       alert('소개란을 제외한 양식을 체워주세요.');
       return;
     }
-    dispatch(createHotelProfile(form));
+    try {
+      const response = await createHotelProfile(form);
+      if (response.status === 200) {
+        navigate('/main');
+      }
+    } catch (e) {
+      const { status } = e.response;
+      switch (status) {
+        case 400:
+          alert('이미 사용중인 전화번호');
+          break;
+        case 401:
+          alert('이미 사용중인 이메일');
+          break;
+        default:
+          alert('다시 시도');
+          setForm((state) => ({
+            ...state,
+            nickname: '',
+            name: '',
+            birthday: new Date().toString(),
+            email: '',
+          }));
+      }
+    }
   };
-  useEffect(() => {
-    if (hotelprofileSuccess) {
-      navigate('/main');
-      return;
-    }
-    if (hotelprofileError) {
-      alert('다시 시도해주세요.');
-      setForm((state) => ({
-        ...state,
-        hotelName: '',
-        address: '서울시 노원구 공릉동 41마길 7',
-        phoneNumber: '',
-        email: '',
-        introduceText: '',
-      }));
-      return;
-    }
-  }, [hotelprofileSuccess, hotelprofileError, navigate]);
   return <HotelProfile form={form} onChange={onChange} onSubmit={onSubmit} />;
 };
 

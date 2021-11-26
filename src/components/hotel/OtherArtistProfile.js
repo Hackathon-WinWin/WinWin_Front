@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const OtherArtistProfile = ({ otherProfile, otherPortfolio }) => {
-  if (!otherProfile && !otherPortfolio) return null;
+  if (!otherProfile || !otherPortfolio) return null;
   const {
     backgroundImageURL,
     profileImageURL,
@@ -15,9 +15,16 @@ const OtherArtistProfile = ({ otherProfile, otherPortfolio }) => {
   return (
     <Wrapper>
       <Header>
-        <Link to='/main'>뒤로가기</Link>
+        <Link
+          to='/main'
+          css={css`
+            position: absolute;
+            left: 16px;
+          `}
+        >
+          <img src={process.env.PUBLIC_URL + '/icons/back.svg'} alt='back' />
+        </Link>
         <h3>아티스트 탐색</h3>
-        <div></div>
       </Header>
       <ArtistBgImg backgroundImage={backgroundImageURL}></ArtistBgImg>
       <ArtistInfo>
@@ -33,7 +40,10 @@ const OtherArtistProfile = ({ otherProfile, otherPortfolio }) => {
             <p>개인 포트폴리오를 추가해보세요!</p>
           ) : (
             portfolios.map((portfolio) => (
-              <li key={portfolio._id} image={portfolio.images[0].image}>
+              <PreviewItem
+                key={portfolio._id}
+                image={portfolio.images[0].image}
+              >
                 <Link
                   css={css`
                     display: block;
@@ -43,7 +53,7 @@ const OtherArtistProfile = ({ otherProfile, otherPortfolio }) => {
                   to={`/specificPortfolio/${artistAuth_id}/${portfolio._id}`}
                   state={{ profileImageURL, artistName: name }}
                 />
-              </li>
+              </PreviewItem>
             ))
           ))}
       </PortfolioList>
@@ -65,22 +75,20 @@ const Header = styled.header`
   left: 0;
   padding: 16px;
   box-sizing: border-box;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  justify-content: center;
   align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
   height: 60px;
   width: 100vw;
   border-bottom: 1px solid lightgray;
-  & > h3 {
-    align-self: center;
-    justify-self: center;
-  }
 `;
 const ArtistBgImg = styled.div`
   width: 100vw;
   height: 220px;
-  background: lightgray;
   background-image: url(${({ backgroundImage }) => backgroundImage});
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 const ArtistProfileImg = styled.div`
   position: absolute;
@@ -89,8 +97,9 @@ const ArtistProfileImg = styled.div`
   width: 106px;
   height: 106px;
   border-radius: 50%;
-  background: lightgreen;
   background-image: url(${({ backgroundImage }) => backgroundImage});
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 const ArtistInfo = styled.div`
   position: relative;
@@ -113,14 +122,15 @@ const PortfolioList = styled.ul`
   & > p {
     margin: 30px auto 0;
   }
-  & > li {
-    list-style: none;
-    width: 167px;
-    height: 167px;
-    background-color: lightgreen;
-    background-image: url(${({ image }) => image});
-    border-radius: 15px;
-  }
+`;
+const PreviewItem = styled.li`
+  list-style: none;
+  width: 167px;
+  height: 167px;
+  background-image: url(${({ image }) => image});
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 15px;
 `;
 const ProposeFormLink = css`
   display: flex;

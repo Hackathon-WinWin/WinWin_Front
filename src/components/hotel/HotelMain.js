@@ -23,7 +23,7 @@ const HotelMain = ({ artistProfiles }) => {
             <p>아티스트의 프로필이 없습니다!</p>
           ) : (
             artistProfiles.map((portfolio, index) => (
-              <li
+              <MainPortfolioItem
                 key={index}
                 image={
                   portfolio.portfolio.images.length === 0
@@ -46,7 +46,7 @@ const HotelMain = ({ artistProfiles }) => {
                     </ul>
                   </div>
                 </Link>
-              </li>
+              </MainPortfolioItem>
             ))
           )}
         </ul>
@@ -95,28 +95,27 @@ const MainPortfoilo = styled.div`
     &::-webkit-scrollbar {
       display: none;
     }
-    & > li {
-      flex-shrink: 0;
-      scroll-snap-align: start; /* latest (Chrome 69+) */
-      scroll-snap-coordinate: 0% 0%; /* older (Firefox/IE) */
-      -webkit-scroll-snap-coordinate: 0% 0%; /* older (Safari) */
-      overflow: hidden;
-      box-sizing: border-box;
-
-      width: 208px;
-      height: 274px;
-      margin: 16px 0;
-      padding: 16px;
-      list-style: none;
-      background-color: red;
-      /* background-image: url(${({ image }) => image}); */
-      background-repeat: no-repeat;
-      background-size: cover;
-      scroll-snap-align: start;
-      margin-left: 16px;
-      border-radius: 10px;
-    }
   }
+`;
+const MainPortfolioItem = styled.li`
+  flex-shrink: 0;
+  scroll-snap-align: start; /* latest (Chrome 69+) */
+  scroll-snap-coordinate: 0% 0%; /* older (Firefox/IE) */
+  -webkit-scroll-snap-coordinate: 0% 0%; /* older (Safari) */
+  overflow: hidden;
+  box-sizing: border-box;
+
+  width: 208px;
+  height: 274px;
+  margin: 16px 0;
+  padding: 16px;
+  list-style: none;
+  background-image: url(${({ image }) => image});
+  background-repeat: no-repeat;
+  background-size: cover;
+  scroll-snap-align: start;
+  margin-left: 16px;
+  border-radius: 10px;
 `;
 const LinkCss = css`
   display: flex;

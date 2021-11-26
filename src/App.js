@@ -22,11 +22,12 @@ import RecruitmentPage from './pages/hotel/RecruitmentPage';
 import AddRecruitPage from './pages/hotel/AddRecruitPage';
 import SpecificPortfolioPage from './pages/hotel/SpecificPortfolioPage';
 import ProposeFormPage from './pages/hotel/ProposeFormPage';
-import RequireAuth from './routes/RequireAuth';
 import SpecificRecruitmentPage from './pages/artist/SpecificRecruitmentPage';
 import ApplyFormPage from './pages/artist/ApplyFormPage';
 import OtherArtistProfilePage from './pages/hotel/OtherArtistProfilePage';
 import OtherHotelProfilePage from './pages/artist/OtherHotelProfilePage';
+import PrivateRoute from './routes/PrivateRoute';
+import MySpecificPortfolioPage from './pages/artist/mypage/MySpecificPortfolioPage';
 
 axios.defaults.withCredentials = true;
 
@@ -82,21 +83,19 @@ const App = () => {
       } catch (e) {}
     };
     getFirebaseToken();
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (firebaseToken) {
-      console.log(firebaseToken);
       dispatch(checkLoggedIn(firebaseToken));
     }
   }, [dispatch, firebaseToken]);
-
   return (
     <>
       <GlobalStyle />
       <Routes>
-        <Route path='/' element={<EntryPage />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/' element={<EntryPage />} />
         <Route path='/checkArtistPhone' element={<PhoneCertificationPage />} />
         <Route path='/checkBusiness' element={<BusinessCertificationPage />} />
         <Route path='/signupArtist' element={<ArtistSignupPage />} />
@@ -104,65 +103,30 @@ const App = () => {
         <Route path='/createArtistProfile' element={<ArtistProfilePage />} />
         <Route path='/createHotelProfile' element={<HotelProfilePage />} />
         <Route
-          path='/myPage'
-          element={
-            <RequireAuth
-              firebaseToken={firebaseToken}
-              ArtistComponent={ArtistMyPage}
-              HotelComponent={HotelMyPage}
-            />
-          }
-        />
-        <Route path='/editProfile' element={<EditArtistProfilePage />} />
-        <Route
           path='/main'
           element={
-            <RequireAuth
-              firebaseToken={firebaseToken}
-              ArtistComponent={ArtistMainPage}
-              HotelComponent={HotelMainPage}
-            />
+            check && check.isArtist ? <ArtistMainPage /> : <HotelMainPage />
           }
         />
-        <Route
-          path='/recruit'
-          element={
-            <RequireAuth
-              firebaseToken={firebaseToken}
-              HotelComponent={RecruitmentPage}
-            />
-          }
-        />
-        <Route
-          path='/createRecruit'
-          element={
-            <RequireAuth
-              firebaseToken={firebaseToken}
-              HotelComponent={AddRecruitPage}
-            />
-          }
-        />
+        {/* <Route path='/hotelmain' element={<HotelMainPage />} /> */}
+
+        <Route path='/artistMyPage' element={<ArtistMyPage />} />
+        <Route path='/hotelMyPage' element={<HotelMyPage />} />
+
+        <Route path='/editProfile' element={<EditArtistProfilePage />} />
+        <Route path='/recruit' element={<RecruitmentPage />} />
+        <Route path='/createRecruit' element={<AddRecruitPage />} />
         <Route
           path='/otherArtistProfile/:artistAuth_id'
           element={<OtherArtistProfilePage />}
         />
         <Route
           path='/specificPortfolio/:artistAuth_id/:portfolio_id'
-          element={
-            <RequireAuth
-              firebaseToken={firebaseToken}
-              HotelComponent={SpecificPortfolioPage}
-            />
-          }
+          element={<SpecificPortfolioPage />}
         />
         <Route
-          path='/propose/:artistAuth_id'
-          element={
-            <RequireAuth
-              firebaseToken={firebaseToken}
-              HotelComponent={ProposeFormPage}
-            />
-          }
+          path='/mySpecificPortfolio/:artistAuth_id/:portfolio_id'
+          element={<MySpecificPortfolioPage />}
         />
         <Route path='/propose/:artistAuth_id' element={<ProposeFormPage />} />
         <Route
