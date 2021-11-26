@@ -19,31 +19,31 @@ const HotelSignup = ({
         <P1>ID</P1>
         <Input1
           onBlur={onCheckAccount}
-          name='account'
+          name="account"
           value={form.account}
           onChange={onChange}
-          placeholder=''
+          placeholder=""
         />
-        <p>{isError && message}</p>
-        <p>{!isError && message}</p>
+        <IdError>{isError && message}</IdError>
+        <IdSuccess>{!isError && message}</IdSuccess>
         <P2>비밀번호</P2>
         <Input2
-          name='password'
+          name="password"
           value={form.password}
           onChange={onChange}
-          placeholder=''
-          type='password'
+          placeholder=""
+          type="password"
         />
         <P3>비밀번호 확인</P3>
         <Input3
-          name='passwordConfirm'
+          name="passwordConfirm"
           value={form.passwordConfirm}
           onChange={onChange}
-          placeholder=''
-          type='password'
+          placeholder=""
+          type="password"
         />
-        <p>{formError && formMessage}</p>
-        <p>{!formError && formMessage}</p>
+        <PasswordSuccess>{formError && formMessage}</PasswordSuccess>
+        <PasswordError>{!formError && formMessage}</PasswordError>
         <SubmitBtn disabled={isError || !formError}>다음</SubmitBtn>
       </form>
     </Container>
@@ -177,6 +177,54 @@ const Input3 = styled.input`
   border-bottom: 1px solid black;
   font-size: 16px;
   font-weight: 500;
+`;
+
+const IdSuccess = styled.p`
+  position: absolute;
+  display: flex;
+  top: 319px;
+  left: 20px;
+  width: 100%;
+  height: 16px;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 400;
+`;
+
+const IdError = styled.p`
+  position: absolute;
+  display: flex;
+  top: 319px;
+  left: 20px;
+  width: 100%;
+  height: 16px;
+  color: #ff1212;
+  font-size: 12px;
+  font-weight: 400;
+`;
+
+const PasswordSuccess = styled.p`
+  position: absolute;
+  display: flex;
+  top: 557px;
+  left: 20px;
+  width: 100%;
+  height: 16px;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 400;
+`;
+
+const PasswordError = styled.p`
+  position: absolute;
+  display: flex;
+  top: 557px;
+  left: 20px;
+  width: 100%;
+  height: 16px;
+  color: #ff1212;
+  font-size: 12px;
+  font-weight: 400;
 `;
 
 const SubmitBtn = styled.button`
