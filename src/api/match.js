@@ -59,3 +59,22 @@ export const hotelSendApplication = async ({
     title,
     message,
   });
+
+// 아티스트 보낸 신청, 받은 제안
+// 200: JSON
+// 500: 에러 내용
+export const getArtistStatus = async () =>
+  await axios.get('/match/artistMatch');
+
+// 호텔 보낸 신청, 받은 제안
+// 200: JSON
+// 500: 에러 내용
+export const getHotelStatus = async () => await axios.get('/match/hotelMatch');
+
+// 호텔이 보낸 제안 열람
+export const artistReadRecieved = async (application_id) =>
+  await axios.post('/match/artistReadRecieved', { application_id });
+
+// 아티스트가 보낸 신청 열람
+export const hotelReadRecieved = async (application_id) =>
+  await axios.get('/match/hotelReadRecieved', { application_id });

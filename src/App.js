@@ -27,6 +27,8 @@ import ApplyFormPage from './pages/artist/ApplyFormPage';
 import OtherArtistProfilePage from './pages/hotel/OtherArtistProfilePage';
 import OtherHotelProfilePage from './pages/artist/OtherHotelProfilePage';
 import MySpecificPortfolioPage from './pages/artist/mypage/MySpecificPortfolioPage';
+import ArtistStatusPage from './pages/artist/ArtistStatusPage';
+import HotelStatusPage from './pages/hotel/HotelStatusPage';
 
 axios.defaults.withCredentials = true;
 
@@ -107,7 +109,8 @@ const App = () => {
             check && check.isArtist ? <ArtistMainPage /> : <HotelMainPage />
           }
         />
-        {/* <Route path='/hotelmain' element={<HotelMainPage />} /> */}
+        <Route path='/applyStatus/*' element={<ArtistStatusPage />} />
+        <Route path='/recruitStatus/*' element={<HotelStatusPage />} />
 
         <Route path='/artistMyPage' element={<ArtistMyPage />} />
         <Route path='/hotelMyPage' element={<HotelMyPage />} />
