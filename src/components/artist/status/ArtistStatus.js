@@ -16,25 +16,25 @@ const ArtistStatus = ({ artistStatus }) => {
     <div>
       <Header>
         <TopTitle>
-          <h3>지원현황</h3>
+          <h3>지원 현황</h3>
           <img
             src={process.env.PUBLIC_URL + '/icons/bell_b.svg'}
-            alt='알림'
+            alt="알림"
             css={css`
               position: absolute;
-              right: 16px;
-              top: 16px;
+              right: 20px;
+              top: 48px;
             `}
           />
         </TopTitle>
         <ul css={Tab}>
           <TabItem active={len === 2}>
-            <StyledLink to='.' active={len === 2}>
+            <StyledLink to="." active={len === 2}>
               내가 보낸 신청
             </StyledLink>
           </TabItem>
           <TabItem active={len === 3}>
-            <StyledLink to='receive' active={len === 3}>
+            <StyledLink to="receive" active={len === 3}>
               내가 받은 제안
             </StyledLink>
           </TabItem>
@@ -43,7 +43,7 @@ const ArtistStatus = ({ artistStatus }) => {
       <Routes>
         <Route index element={<ArtistSendStatus sent={sent} />} />
         <Route
-          path=':name'
+          path=":name"
           element={<ArtistReceiveStatus recieved={recieved} />}
         />
       </Routes>
@@ -56,15 +56,15 @@ const Header = styled.header`
   position: sticky;
   top: 0;
   width: 100vw;
-  height: 106px;
+  height: 136px;
 `;
 const TopTitle = styled.div`
   border-bottom: 1px solid lightgray;
   width: 100%;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 90px;
+  text-align: center;
+  padding-top: 51px;
+  box-sizing: border-box;
 `;
 const Tab = css`
   display: flex;

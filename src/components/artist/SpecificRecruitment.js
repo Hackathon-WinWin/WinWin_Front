@@ -33,7 +33,7 @@ const SpecificRecruitment = ({ specificRecruit }) => {
         <Link to={-1} css={BackBtn}>
           <img
             src={process.env.PUBLIC_URL + '/icons/back.svg'}
-            alt='back'
+            alt="back"
           ></img>
         </Link>
         <h3>지원공고</h3>
@@ -82,7 +82,7 @@ const SpecificRecruitment = ({ specificRecruit }) => {
                 {area} m<sup>2</sup>
               </p>
             </li>
-            <li className='line'></li>
+            <li className="line"></li>
             <li>
               <h4>전시컨셉</h4>
               <p>{concept}</p>
@@ -148,10 +148,10 @@ const ApplyFormLink = css`
   color: white;
   text-decoration: none;
   background-color: #181818;
-  height: 75px;
-  width: 100%;
+  height: 76px;
+  width: 391px;
   position: sticky;
-  bottom: 0;
+  bottom: 0px;
 `;
 const HotelExhibitImg = styled.ul`
   display: flex;
@@ -213,8 +213,13 @@ const RecruitmentInfoCard = styled.div`
   top: -35px;
   left: calc(50vw - 43%);
   border-radius: 20px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
+  & > div {
+    & > h2 {
+      margin-bottom: 53px;
+    }
+  }
 `;
 const Top = css`
   display: flex;
@@ -241,5 +246,8 @@ const RecruitInfoList = css`
 const Bottom = css`
   display: flex;
   flex-direction: column;
+  & > h3 {
+    margin-bottom: 24px;
+  }
 `;
 export default SpecificRecruitment;

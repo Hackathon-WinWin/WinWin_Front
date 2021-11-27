@@ -18,10 +18,10 @@ const Recruitment = ({ myRecuitementList }) => {
             </RecruitItem>
           ))}
       </RecruitList>
-      <AddRecruit to='/createRecruit'>
+      <AddRecruit to="/createRecruit">
         <img
           src={process.env.PUBLIC_URL + '/icons/gonggo_write.svg'}
-          alt='공고'
+          alt="공고"
         />
       </AddRecruit>
     </RecruitmentWrapper>
@@ -58,6 +58,14 @@ const RecruitItem = styled.li`
   flex-direction: column;
   justify-content: space-between;
   border-bottom: 1px solid lightgray;
+  & > h3 {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  & > p {
+    font-size: 14px;
+    font-weight: 400;
+  }
 `;
 const AddRecruit = styled(Link)`
   display: flex;
