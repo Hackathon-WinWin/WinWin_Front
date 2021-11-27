@@ -14,22 +14,22 @@ const ArtistMain = ({ hotelList }) => {
           <Menu>
             <img
               src={process.env.PUBLIC_URL + '/icons/bookmark_line_w.svg'}
-              alt='bookmark'
+              alt="bookmark"
             />
             <img
               src={process.env.PUBLIC_URL + '/icons/bell_w.svg'}
-              alt='bell'
+              alt="bell"
             />
           </Menu>
           <SearchBox>
             <img
               src={process.env.PUBLIC_URL + '/icons/search.svg'}
-              alt='search'
+              alt="search"
             />
-            <SearchInput placeholder='전시공간 검색' />
+            <SearchInput placeholder="전시공간 검색" />
             <img
               src={process.env.PUBLIC_URL + '/icons/filter.svg'}
-              alt='filter'
+              alt="filter"
             />
           </SearchBox>
         </Header>
@@ -61,8 +61,9 @@ const ArtistMain = ({ hotelList }) => {
                     <p>
                       <img
                         src={process.env.PUBLIC_URL + '/icons/location_w.svg'}
-                        alt='loc'
-                      />{' '}
+                        alt="loc"
+                      />
+                      &nbsp;&nbsp;
                       {hotel.address}
                     </p>
                     <p>{hotel.recruitment.title}</p>
@@ -184,6 +185,7 @@ const PortfolioItem = styled.li`
   -webkit-scroll-snap-coordinate: 0% 0%; /* older (Safari) */
   overflow: hidden;
   box-sizing: border-box;
+  margin-right: 20px;
 
   width: 208px;
   height: 274px;
@@ -204,7 +206,7 @@ const PortfolioItem = styled.li`
     align-items: center;
     letter-spacing: 0.5px;
     color: #ffffff;
-    margin-bottom: 5px;
+    margin-top: 10px;
   }
 `;
 const HotelName = styled.h3`
