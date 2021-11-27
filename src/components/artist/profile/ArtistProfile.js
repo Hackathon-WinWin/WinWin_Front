@@ -12,31 +12,31 @@ const ArtistProfile = ({ form, dupNickname, dupEmail, onChange, onSubmit }) => {
         </Subtitle>
       </TitleContainer>
       <Form onSubmit={onSubmit}>
-        <Label className='message'>
+        <Label className="message">
           <p>닉네임</p>
-          <Input name='nickname' value={form.nickname} onChange={onChange} />
+          <Input name="nickname" value={form.nickname} onChange={onChange} />
           <ErrorMessage>{isDupNickname && nicknameMessage}</ErrorMessage>
           <SuccessMessage>{!isDupNickname && nicknameMessage}</SuccessMessage>
         </Label>
         <Label>
           <p>이름</p>
-          <Input name='name' value={form.name} onChange={onChange} />
+          <Input name="name" value={form.name} onChange={onChange} />
         </Label>
         <Label>
           <p>생년월일</p>
-          <Input name='birthday' value={form.birthday} onChange={onChange} />
+          <Input name="birthday" value={form.birthday} onChange={onChange} />
         </Label>
         <Label>
           <p>거주지역</p>
-          <Input name='address' value={form.address} onChange={onChange} />
+          <Input name="address" value={form.address} onChange={onChange} />
         </Label>
-        <Label className='message'>
+        <Label className="message">
           <p>메일</p>
           <Input
-            name='email'
+            name="email"
             value={form.email}
             onChange={onChange}
-            type='email'
+            type="email"
           />
           <SuccessMessage>{isDupEmail && emailMessage}</SuccessMessage>
           <ErrorMessage>{!isDupEmail && emailMessage}</ErrorMessage>
@@ -44,10 +44,10 @@ const ArtistProfile = ({ form, dupNickname, dupEmail, onChange, onSubmit }) => {
         <Label>
           <TextAreaTitle>
             <span>소개</span>
-            <span className='gray'>최대 40자</span>
+            <span className="gray">최대 40자</span>
           </TextAreaTitle>
           <IntroduceTextArea
-            name='introduceText'
+            name="introduceText"
             value={form.introduceText}
             onChange={onChange}
           />
@@ -94,7 +94,7 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
   padding: 0 16px;
-  margin-top: 96px;
+  margin-top: 66px;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -125,6 +125,7 @@ const TextAreaTitle = styled.p`
   margin-bottom: 10px;
   & > .gray {
     color: rgba(146, 146, 146, 1);
+    font-weight: 500;
   }
 `;
 const ErrorMessage = styled.div`
@@ -148,6 +149,7 @@ const IntroduceTextArea = styled.textarea`
   width: 100%;
   height: 125px;
   border-radius: 10px;
+  border: none;
   background-color: #f3f3f3;
   font-size: 14px;
   font-weight: 500;
@@ -158,12 +160,12 @@ const IntroduceTextArea = styled.textarea`
 
 const SubmitBtn = styled.button`
   position: fixed;
-  bottom: 0;
+  top: 769px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100vw;
-  height: 75px;
+  width: 391px;
+  height: 76px;
   border: none;
   background-color: #181818;
   transition: 0.5s;

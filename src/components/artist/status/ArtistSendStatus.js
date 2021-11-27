@@ -9,7 +9,7 @@ const ArtistSendStatus = ({ sent }) => {
     <Wrapper>
       {sent.map((item) => (
         <li key={item._id} css={SentItem}>
-          <div className='top'>
+          <div className="top">
             <h3>{item.hotelName}</h3>
             <Status>
               {item.checked ? (
@@ -30,6 +30,17 @@ const Wrapper = styled.ul`
   width: 100vw;
   min-height: 100vh;
   height: auto;
+  & > li {
+    & > div {
+      & > h3 {
+        font-size: 18px;
+      }
+    }
+    & > p {
+      font-size: 16px;
+      font-weight: 400;
+    }
+  }
 `;
 const SentItem = css`
   display: flex;

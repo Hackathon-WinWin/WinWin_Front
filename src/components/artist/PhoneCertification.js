@@ -16,7 +16,7 @@ const PhoneCertification = ({
       <form onSubmit={onSubmitPhoneNumber}>
         <P1>휴대전화 번호</P1>
         <Input1
-          name='phoneNumber'
+          name="phoneNumber"
           value={form.phoneNumber}
           onChange={onChange}
         />
@@ -25,7 +25,7 @@ const PhoneCertification = ({
       <form onSubmit={onCertify}>
         <P2>인증번호 입력</P2>
         <Input2
-          name='certification'
+          name="certification"
           value={form.certification}
           onChange={onChange}
         />
@@ -82,7 +82,7 @@ const P1 = styled.p`
   height: 16px;
   color: #000000;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 700;
 `;
 
 const P2 = styled.p`
@@ -96,7 +96,7 @@ const P2 = styled.p`
   height: 16px;
   color: #000000;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 700;
 `;
 
 const Input1 = styled.input`
@@ -156,8 +156,8 @@ const Button2 = styled.button`
   align-items: center;
   justify-content: center;
   top: 769px;
-  width: 390px;
-  height: 75px;
+  width: 391px;
+  height: 76px;
   border: none;
   background-color: #181818;
   color: #ffffff;
