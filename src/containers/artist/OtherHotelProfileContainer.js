@@ -16,7 +16,7 @@ const hotelprofile = {
     phoneNumber: '02-1234-567832',
     email: 'orijoon98@seoulhotel.com32',
     introduceText: '안녕하세요 서울 호텔입니다.',
-    bookMark: 0,
+    bookMark: 10,
     images: [],
     __v: 0,
   },

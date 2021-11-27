@@ -62,14 +62,25 @@ const ArtistMy = ({
             <input type='file' name='profileImage' onChange={onChangeFile} />
           </label>
         </ArtistProfileImg>
-        <h3>{myArtist.name}</h3>
-        <div>{myArtist.phoneNumber}</div>
-        <div>{myArtist.email}</div>
+        <div>
+          <h3>{myArtist.name}</h3>
+          <p className='phone'>
+            <img
+              src={process.env.PUBLIC_URL + '/icons/phone.svg'}
+              alt='phone'
+            />
+            {myArtist.phoneNumber}
+          </p>
+          <p className='email'>
+            <img src={process.env.PUBLIC_URL + '/icons/mail.svg'} alt='phone' />
+            {myArtist.email}
+          </p>
+        </div>
       </ArtistInfo>
       <PortfolioList>
-        {!myPortfolio && <p>개인 포트폴리오를 추가해보세요!</p>}
+        {!myPortfolio && <p>개인 포트폴리오를 불러올 수 없습니다.</p>}
         {myPortfolio &&
-          (myPortfolio.portfolios === [] ? (
+          (myPortfolio.portfolios.length === 0 ? (
             <p>개인 포트폴리오를 추가해보세요!</p>
           ) : (
             myPortfolio.portfolios.map((portfolio) => (
@@ -168,9 +179,46 @@ const ArtistInfo = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  height: 185px;
   flex-direction: column;
   justify-content: flex-end;
+  height: 185px;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    & > h3 {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 16px;
+      margin-bottom: 23px;
+      align-self: center;
+    }
+    & > p {
+      display: flex;
+      &.phone {
+        font-family: 'Noto Sans', sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.5px;
+        margin-bottom: 11px;
+      }
+      &.email {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.5px;
+        margin-bottom: 30px;
+      }
+      & > img {
+        width: 19px;
+        height: 19px;
+        margin-right: 15px;
+      }
+    }
+  }
 `;
 const PortfolioList = styled.ul`
   display: grid;
@@ -183,7 +231,7 @@ const PortfolioList = styled.ul`
   padding: 16px;
   box-sizing: border-box;
   & > p {
-    margin: 30px auto 0;
+    margin: 50px auto 0;
   }
 `;
 const PreviewImg = styled.li`

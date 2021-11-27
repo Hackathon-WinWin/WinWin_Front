@@ -38,7 +38,14 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
   body {
-    word-break : keep-all
+    word-break : keep-all;
+    font-family: 'Noto Sans KR', sans-serif; // 한글 폰트
+  }
+  input:focus {
+    outline: none;
+  }
+  textarea:focus {
+    outline: none;
   }
 `;
 const config = {

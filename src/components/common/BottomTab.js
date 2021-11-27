@@ -1,56 +1,68 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const BottomTab = ({ isArtist }) => {
-  const onActive = ({ isActive }) => ({ color: isActive ? 'red' : 'black' });
+  const activeStyle = {};
+  const onActive = ({ isActive }) => {
+    console.log(isActive);
+  };
   return (
     <BottomTabWrapper>
       <Tab>
-        {/* {isArtist ? (
-          <NavLink to='/artistmain' style={onActive}>
-            메인
-          </NavLink>
-        ) : (
-          <NavLink to='/hotelmain' style={onActive}>
-            메인
-          </NavLink>
-        )} */}
-        <NavLink to='/main' style={onActive}>
-          메인
-        </NavLink>
+        <StyledLink to='/main' style={onActive}>
+          <img
+            src={process.env.PUBLIC_URL + '/icons/tap_home.svg'}
+            alt='home'
+          />
+          <ActiveYellow />
+        </StyledLink>
       </Tab>
       <Tab>
         {isArtist ? (
-          <NavLink to='/community' style={onActive}>
-            커뮤니티
-          </NavLink>
+          <StyledLink to='/community' style={onActive}>
+            <img
+              src={process.env.PUBLIC_URL + '/icons/tap_community.svg'}
+              alt='commu'
+            />
+          </StyledLink>
         ) : (
-          <NavLink to='/recruit' style={onActive}>
-            모집공고
-          </NavLink>
+          <StyledLink to='/recruit' style={onActive}>
+            <img
+              src={process.env.PUBLIC_URL + '/icons/tap_write.svg'}
+              alt='wrtie'
+            />
+          </StyledLink>
         )}
       </Tab>
       <Tab>
         {isArtist ? (
-          <NavLink to='/applyStatus' style={onActive}>
-            지원현황
-          </NavLink>
+          <StyledLink to='/applyStatus' style={onActive}>
+            <img
+              src={process.env.PUBLIC_URL + '/icons/tap_heart.svg'}
+              alt='status'
+            />
+          </StyledLink>
         ) : (
-          <NavLink to='/recruitStatus' style={onActive}>
-            제안현황
-          </NavLink>
+          <StyledLink to='/recruitStatus' style={onActive}>
+            <img
+              src={process.env.PUBLIC_URL + '/icons/tap_heart.svg'}
+              alt='status'
+            />
+          </StyledLink>
         )}
       </Tab>
       <Tab>
         {isArtist ? (
-          <NavLink to='/artistMyPage' style={onActive}>
-            마이페이지
-          </NavLink>
+          <StyledLink to='/artistMyPage' style={onActive}>
+            <img src={process.env.PUBLIC_URL + '/icons/tap_my.svg'} alt='my' />
+          </StyledLink>
         ) : (
-          <NavLink to='/hotelMyPage' style={onActive}>
-            마이페이지
-          </NavLink>
+          <StyledLink to='/hotelMyPage' style={onActive}>
+            <img src={process.env.PUBLIC_URL + '/icons/tap_my.svg'} alt='my' />
+          </StyledLink>
         )}
       </Tab>
     </BottomTabWrapper>
@@ -68,9 +80,23 @@ const BottomTabWrapper = styled.ul`
 const Tab = styled.li`
   list-style: none;
   width: 100%;
-  & + & {
-    border-left: 1px solid lightgray;
-  }
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
-
+const StyledLink = styled(NavLink)`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+`;
+const ActiveYellow = styled.div`
+  /* position: absolute; */
+  background: #faff00;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+`;
 export default BottomTab;

@@ -32,13 +32,30 @@ const ApplyForm = ({ form, artistInfo, onApply, onChange }) => {
             left: 16px;
           `}
         >
-          X
+          <Icon
+            src={process.env.PUBLIC_URL + '/icons/x_w.svg'}
+            alt='icon'
+            style={{ width: '10.5px', height: '10.5px' }}
+          />
         </Link>
-        <h3>지원서 작성</h3>
+        <h3
+          css={css`
+            font-style: normal;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 10px;
+          `}
+        >
+          지원서 작성
+        </h3>
         <button
           css={css`
             position: absolute;
             right: 16px;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 10px;
           `}
         >
           완료
@@ -50,27 +67,26 @@ const ApplyForm = ({ form, artistInfo, onApply, onChange }) => {
           <WhiteBox>
             <div css={InfoItem}>
               <Icon
-                src={process.env.PUBLIC_URL + '/icons/person.png'}
+                src={process.env.PUBLIC_URL + '/icons/person.svg'}
                 alt='icon'
               />
               <p>
-                <span>{name}</span>
+                <span>{name}</span>{' '}
                 <span>
-                  {calcAge()}세/
-                  {address}
+                  {calcAge()}세 /{address}
                 </span>
               </p>
             </div>
             <div css={InfoItem}>
               <Icon
-                src={process.env.PUBLIC_URL + '/icons/phone.png'}
+                src={process.env.PUBLIC_URL + '/icons/phone.svg'}
                 alt='icon'
               />
               <p>{phoneNumber}</p>
             </div>
             <div css={InfoItem}>
               <Icon
-                src={process.env.PUBLIC_URL + '/icons/phone.png'}
+                src={process.env.PUBLIC_URL + '/icons/mail.svg'}
                 alt='icon'
               />
               <p>{email}</p>
@@ -93,13 +109,13 @@ const ApplyForm = ({ form, artistInfo, onApply, onChange }) => {
         <div css={FlexColumn}>
           <FormTitle>지원서 작성</FormTitle>
           <WhiteBox>
-            <input
+            <Input
               name='title'
               value={form.title}
               onChange={onChange}
               placeholder='제목을 입력하세요.'
             />
-            <input
+            <TextArea
               name='message'
               value={form.message}
               onChange={onChange}
@@ -159,8 +175,14 @@ const FlexColumn = css`
 `;
 const InfoItem = css`
   display: flex;
+  align-items: center;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
   & > span {
     width: 80px;
+    font-weight: 500;
   }
   & + & {
     margin-top: 16px;
@@ -170,8 +192,34 @@ const WhiteBox = styled.div`
   display: flex;
   flex-direction: column;
   padding: 16px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+
+  letter-spacing: 0.5px;
 `;
 const Icon = styled.img`
   object-fit: contain;
+  width: 19px;
+  height: 19px;
+  margin-right: 10px;
+`;
+const Input = styled.input`
+  height: 50px;
+  border: none;
+  border-bottom: 1px solid #d9d9d9;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+`;
+const TextArea = styled.textarea`
+  margin-top: 15px;
+  border: none;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
 `;
 export default ApplyForm;

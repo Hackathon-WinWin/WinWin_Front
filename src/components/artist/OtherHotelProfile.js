@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { AiOutlineMenu } from 'react-icons/ai';
 import styled from 'styled-components';
 
 const OtherHotelProfile = ({ otherHotelProfile }) => {
@@ -23,10 +22,18 @@ const OtherHotelProfile = ({ otherHotelProfile }) => {
   };
   return (
     <Wrapper>
+      {/* <Gradient /> */}
       <HotelProfileImg image={profileImageURL}>
-        <MenuBtn onClick={onOpenMenu}>
-          <AiOutlineMenu size='22'></AiOutlineMenu>
-        </MenuBtn>
+        <Header>
+          <BookMark>
+            <img
+              src={process.env.PUBLIC_URL + '/icons/bookmark_w.svg'}
+              alt='book'
+            />
+            {bookMark}
+          </BookMark>
+          <img src={process.env.PUBLIC_URL + '/icons/bell_w.svg'} alt='book' />
+        </Header>
       </HotelProfileImg>
       <HotelInfoBox>
         <HotelName>{hotelName}</HotelName>
@@ -39,7 +46,7 @@ const OtherHotelProfile = ({ otherHotelProfile }) => {
       </HotelInfoBox>
       <HotelImageList>
         {images.length === 0 ? (
-          <Message>이미지를 추가해주세요!</Message>
+          <Message>해당 호텔 이미지가 없습니다.</Message>
         ) : (
           images.map((image) => <li image={image.image}>{image}</li>)
         )}
@@ -59,11 +66,25 @@ const HotelProfileImg = styled.div`
 
   background-image: url(${({ image }) => image});
 `;
-const MenuBtn = styled.button`
-  margin: 16px;
-  cursor: pointer;
-  background: none;
-  border: none;
+const Gradient = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 138px;
+  background: linear-gradient(
+    180deg,
+    rgba(24, 24, 24, 0) 18.23%,
+    #181818 90.1%
+  );
+  transform: rotate(-180deg);
+`;
+const Header = styled.header`
+  padding: 16px;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 99;
 `;
 const HotelInfoBox = styled.div`
   background-color: white;
@@ -103,6 +124,12 @@ const HotelImageList = styled.ul`
     background-repeat: no-repeat;
     background-size: cover;
   }
+`;
+const BookMark = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 `;
 const Message = styled.p`
   margin: 30px auto 0;

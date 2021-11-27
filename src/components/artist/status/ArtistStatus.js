@@ -18,7 +18,7 @@ const ArtistStatus = ({ artistStatus }) => {
         <TopTitle>
           <h3>지원현황</h3>
           <img
-            src={process.env.PUBLIC_URL + 'bell_b.svg'}
+            src={process.env.PUBLIC_URL + '/icons/bell_b.svg'}
             alt='알림'
             css={css`
               position: absolute;

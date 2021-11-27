@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { flexbox } from '@mui/system';
 import dayjs from 'dayjs';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -33,16 +32,15 @@ const SpecificRecruitment = ({ specificRecruit }) => {
       <Header>
         <Link to={-1} css={BackBtn}>
           <img
-            src={process.env.PUBLIC_URL + '/icons/back_button.png'}
-            alt='icon'
+            src={process.env.PUBLIC_URL + '/icons/back.svg'}
+            alt='back'
           ></img>
         </Link>
         <h3>지원공고</h3>
-        <div></div>
       </Header>
       <HotelExhibitImg>
         {images.map((image) => (
-          <li image={image.image}></li>
+          <HotelItem image={image.image}></HotelItem>
         ))}
       </HotelExhibitImg>
       <div css={BottomBox}>
@@ -132,8 +130,15 @@ const Header = styled.header`
   border-bottom: 1px solid lightgray;
   background-color: white;
   & > h3 {
-    align-self: center;
-    justify-self: center;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 10px;
+    /* or 56% */
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.314367px;
   }
 `;
 const ApplyFormLink = css`
@@ -165,27 +170,35 @@ const HotelExhibitImg = styled.ul`
   &::-webkit-scrollbar {
     display: none;
   }
-  & > li {
-    box-sizing: border-box;
-    width: 100%;
-    height: 261px;
-    border-left: 1px solid black;
-    flex-shrink: 0;
-    scroll-snap-align: start; /* latest (Chrome 69+) */
-    scroll-snap-coordinate: 0% 0%; /* older (Firefox/IE) */
-    -webkit-scroll-snap-coordinate: 0% 0%; /* older (Safari) */
-    overflow: hidden;
-    list-style: none;
-    background-color: green;
-    background-image: url(${({ image }) => image});
-    background-repeat: no-repeat;
-    background-size: cover;
-    scroll-snap-align: start;
-  }
+`;
+const HotelItem = styled.li`
+  box-sizing: border-box;
+  width: 100%;
+  height: 261px;
+  border-left: 1px solid black;
+  flex-shrink: 0;
+  scroll-snap-align: start; /* latest (Chrome 69+) */
+  scroll-snap-coordinate: 0% 0%; /* older (Firefox/IE) */
+  -webkit-scroll-snap-coordinate: 0% 0%; /* older (Safari) */
+  overflow: hidden;
+  list-style: none;
+  background-image: url(${({ image }) => image});
+  background-repeat: no-repeat;
+  background-size: cover;
+  scroll-snap-align: start;
 `;
 const BottomBox = css`
   flex: auto;
   position: relative;
+  & > h2 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.5px;
+  }
 `;
 const RecruitmentInfoCard = styled.div`
   display: flex;
