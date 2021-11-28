@@ -79,7 +79,6 @@ const ArtistMyContainer = () => {
       return;
     }
     const formData = new FormData();
-    console.log(form.images);
     form.images.forEach((image) => {
       formData.append('images', image);
     });

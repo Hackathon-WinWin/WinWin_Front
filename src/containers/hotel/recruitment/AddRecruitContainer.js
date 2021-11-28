@@ -52,7 +52,6 @@ const AddRecruitContainer = () => {
   };
   const onAddRecruit = (e) => {
     e.preventDefault();
-    console.log(form);
     const formData = new FormData();
     form.images.forEach((image) => {
       formData.append('images', image);

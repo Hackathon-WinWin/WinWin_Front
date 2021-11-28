@@ -2,7 +2,6 @@
 import { css } from '@emotion/react';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { IoArrowBack } from 'react-icons/io5';
 
 const DetailPortfolio = ({
   setOpenDetail,

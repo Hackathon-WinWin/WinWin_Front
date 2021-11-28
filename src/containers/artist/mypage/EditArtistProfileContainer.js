@@ -34,7 +34,6 @@ const EditArtistProfileContainer = () => {
     e.preventDefault();
     const res = await updateArtistProfile(form);
     const { status } = res;
-    console.log(res);
     if (status === 200) {
       alert('업데이트 성공');
       navigate('/mypage');
