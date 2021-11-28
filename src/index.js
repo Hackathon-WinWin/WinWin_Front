@@ -10,12 +10,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 import createSagaMiddleware from '@redux-saga/core';
-import axios from 'axios';
 import { LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import 'dayjs/locale/ko';
+import dayjs from 'dayjs';
 
-// axios.defaults.baseURL = `http://3.12.248.32:8000`;
-// axios.defaults.withCredentials = true;
+dayjs.locale('ko');
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(

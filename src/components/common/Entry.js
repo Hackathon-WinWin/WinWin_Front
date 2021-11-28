@@ -7,36 +7,36 @@ const Entry = ({ form, onChange, onSubmit }) => {
     <Container>
       <MainLogo
         src={process.env.PUBLIC_URL + '/assets/main_logo.png'}
-        alt="WinWin"
+        alt='WinWin'
       />
       <form onSubmit={onSubmit}>
         <InputId
-          name="account"
+          name='account'
           value={form.account}
-          placeholder="ID"
+          placeholder='ID'
           onChange={onChange}
+          autoFocus
         />
         <InputPassword
-          name="password"
+          name='password'
           value={form.password}
-          placeholder="Password"
+          placeholder='Password'
           onChange={onChange}
-          type="password"
+          type='password'
         />
         <LoginButton>로그인</LoginButton>
       </form>
-      <FindAuth to="/signup">아이디 비밀번호 찾기</FindAuth>
+      <FindAuth to='/signup'>아이디 비밀번호 찾기</FindAuth>
       <Bar></Bar>
-      <CreateAuth to="/signup">회원가입</CreateAuth>
+      <CreateAuth to='/signup'>회원가입</CreateAuth>
     </Container>
   );
 };
 const Container = styled.div`
-  height: 844px;
-  width: 390px;
+  width: 100vw;
+  height: 100vh;
   background-color: #181818;
   text-align: center;
-  font-family: 'Noto Sans KR', sans-serif;
   font-weight: 100;
 `;
 

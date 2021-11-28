@@ -58,7 +58,7 @@ const ArtistProfileContainer = () => {
           setDupNickname((state) => ({
             ...state,
             isDupNickname: true,
-            nicknameMessage: '다른 닉네임을 사용해 주세요.',
+            nicknameMessage: '이미 사용중인 닉네임입니다.',
           }));
           break;
         case 401:
@@ -85,12 +85,12 @@ const ArtistProfileContainer = () => {
           setDupNickname((state) => ({
             ...state,
             isDupNickname: true,
-            nicknameMessage: '다른 닉네임을 사용해 주세요.',
+            nicknameMessage: '',
           }));
           setDupEmail((state) => ({
             ...state,
-            isDupEmail: false,
-            emailMessage: '이미 존재하는 이메일입니다.',
+            isDupEmail: true,
+            emailMessage: '',
           }));
       }
     }

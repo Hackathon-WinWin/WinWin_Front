@@ -43,6 +43,7 @@ const GET_MY_HOTEL_PROFILEIMG_SUCCESS =
   'myPage/GET_MY_HOTEL_PROFILEIMG_SUCCESS';
 const GET_MY_HOTEL_PROFILEIMG_FAILURE =
   'myPage/GET_MY_HOTEL_PROFILEIMG_FAILURE';
+const INIT_PROFILEIMG = 'myPage/INIT_PROFILEIMG';
 
 // ARTIST action creator
 export const updateArtistProfileImage = createAction(
@@ -56,7 +57,6 @@ export const updateArtistBackgroundImage = createAction(
 export const getMyAritistProfile = createAction(GET_MY_ARTIST_PROFILE);
 export const getMyArtistProfileImg = createAction(GET_MY_ARTIST_PROFILEIMG);
 export const getMyArtistBgImg = createAction(GET_MY_ARTIST_PROFILE_BACKIMG);
-
 // HOTEL action creator
 export const getMyHotelProfile = createAction(GET_MY_HOTEL_PROFILE);
 export const getMyHotelProfileImg = createAction(GET_MY_HOTEL_PROFILEIMG);
@@ -68,6 +68,7 @@ export const addHotelImage = createAction(
   ADD_HOTEL_IMAGE,
   (formData) => formData
 );
+export const initProfileImg = createAction(INIT_PROFILEIMG);
 
 // ARTIST saga
 const updateArtistProfileImageSaga = createRequestSaga(
@@ -287,6 +288,11 @@ export default handleActions(
       ...state,
       addHotelImg: null,
       addHotelImgError: error,
+    }),
+    [INIT_PROFILEIMG]: (state) => ({
+      ...state,
+      addHotelImg: null,
+      addHotelImgError: null,
     }),
   },
   initialState

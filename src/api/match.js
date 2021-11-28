@@ -22,6 +22,8 @@ export const artistSendApplication = async ({
   email,
   hotelName,
   recruitmentTitle,
+  title,
+  message,
 }) =>
   await axios.post('/api/match/artistSendApplication', {
     hotelAuth_id,
@@ -33,6 +35,8 @@ export const artistSendApplication = async ({
     email,
     hotelName,
     recruitmentTitle,
+    title,
+    message,
   });
 // 제안서 작성 화면에 필요한 정보들
 // 200: 필요한 정보 JSON 반환
@@ -64,17 +68,18 @@ export const hotelSendApplication = async ({
 // 200: JSON
 // 500: 에러 내용
 export const getArtistStatus = async () =>
-  await axios.get('/match/artistMatch');
+  await axios.get('/api/match/artistMatch');
 
 // 호텔 보낸 신청, 받은 제안
 // 200: JSON
 // 500: 에러 내용
-export const getHotelStatus = async () => await axios.get('/match/hotelMatch');
+export const getHotelStatus = async () =>
+  await axios.get('/api/match/hotelMatch');
 
 // 호텔이 보낸 제안 열람
 export const artistReadRecieved = async (application_id) =>
-  await axios.post('/match/artistReadRecieved', { application_id });
+  await axios.post('/api/match/artistReadRecieved', { application_id });
 
 // 아티스트가 보낸 신청 열람
 export const hotelReadRecieved = async (application_id) =>
-  await axios.get('/match/hotelReadRecieved', { application_id });
+  await axios.get('/api/match/hotelReadRecieved', { application_id });

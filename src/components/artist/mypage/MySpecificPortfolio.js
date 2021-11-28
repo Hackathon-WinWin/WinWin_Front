@@ -21,7 +21,9 @@ const MySpecificPortfolio = ({
   return (
     <Wrapper>
       <Header>
-        <Link to={-1}>뒤로 가기</Link>
+        <Link to={-1}>
+          <img src={process.env.PUBLIC_URL + '/icons/back.svg'} alt='back' />
+        </Link>
         <h3>아티스트 탐색</h3>
         <div></div>
       </Header>
@@ -114,9 +116,7 @@ const PortfolioImg = styled.li`
   -webkit-scroll-snap-coordinate: 0% 0%; /* older (Safari) */
   overflow: hidden;
   list-style: none;
-  background-image: url(${({ image }) => image});
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: center / contain no-repeat url(${({ image }) => image}) #f9f9f9;
   scroll-snap-align: start;
 `;
 const LinkBox = styled.div`

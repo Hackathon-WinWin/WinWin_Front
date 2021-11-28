@@ -20,6 +20,7 @@ import {
 
 const ArtistMyContainer = () => {
   const {
+    signinSuccess,
     logoutSuccess,
     myArtist,
     artistProfileImg,
@@ -29,6 +30,7 @@ const ArtistMyContainer = () => {
     myPortfolio,
     myPortfolioError,
   } = useSelector(({ auth, myPage, portfolio }) => ({
+    signinSuccess: auth.signinSuccess,
     logoutSuccess: auth.logoutSuccess,
     myArtist: myPage.myArtist,
     artistProfileImg: myPage.artistProfileImg,
@@ -91,11 +93,14 @@ const ArtistMyContainer = () => {
   };
   // ** 프로필 생성 여부가 선행되어야 함 **
   useEffect(() => {
+    if (signinSuccess) {
+      dispatch(initAuth());
+    }
     dispatch(getMyAritistProfile());
     dispatch(getMyArtistProfileImg());
     dispatch(getMyArtistBgImg());
     dispatch(readMyPortfolio());
-  }, [dispatch]);
+  }, [dispatch, signinSuccess]);
   useEffect(() => {
     if (success) {
       setOpenDetail(false);
@@ -103,17 +108,12 @@ const ArtistMyContainer = () => {
       dispatch(readMyPortfolio());
     }
   }, [success, dispatch]);
-  useEffect(() => {
-    if (myPortfolioError) {
-      console.log('myPortfolioError');
-    }
-  }, [myPortfolio, myPortfolioError]);
+
   useEffect(() => {
     if (logoutSuccess) {
       navigate('/');
-      return () => {
-        dispatch(initAuth());
-      };
+      dispatch(initAuth());
+      return;
     }
   }, [dispatch, navigate, logoutSuccess]);
   return (
