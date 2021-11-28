@@ -12,6 +12,7 @@ const ArtistStatus = ({ artistStatus }) => {
   if (!artistStatus) return null;
   const { sent, recieved } = artistStatus;
   const len = pathname.split('/').length;
+  console.log(artistStatus);
   return (
     <div>
       <Header>
@@ -19,7 +20,7 @@ const ArtistStatus = ({ artistStatus }) => {
           <h3>지원 현황</h3>
           <img
             src={process.env.PUBLIC_URL + '/icons/bell_b.svg'}
-            alt="알림"
+            alt='알림'
             css={css`
               position: absolute;
               right: 20px;
@@ -29,12 +30,12 @@ const ArtistStatus = ({ artistStatus }) => {
         </TopTitle>
         <ul css={Tab}>
           <TabItem active={len === 2}>
-            <StyledLink to="." active={len === 2}>
+            <StyledLink to='.' active={len === 2}>
               내가 보낸 신청
             </StyledLink>
           </TabItem>
           <TabItem active={len === 3}>
-            <StyledLink to="receive" active={len === 3}>
+            <StyledLink to='receive' active={len === 3}>
               내가 받은 제안
             </StyledLink>
           </TabItem>
@@ -43,7 +44,7 @@ const ArtistStatus = ({ artistStatus }) => {
       <Routes>
         <Route index element={<ArtistSendStatus sent={sent} />} />
         <Route
-          path=":name"
+          path=':name'
           element={<ArtistReceiveStatus recieved={recieved} />}
         />
       </Routes>
@@ -88,7 +89,12 @@ const StyledLink = styled(NavLink)`
   height: 100%;
   justify-content: center;
   align-items: center;
-  color: ${({ active }) => (active ? '#181818' : '#BCBCBC')};
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 10px;
+  letter-spacing: 0.314367px;
+  color: ${({ active }) => (active ? '#181818' : '#bcbcbc')};
   text-decoration: none;
 `;
 export default ArtistStatus;

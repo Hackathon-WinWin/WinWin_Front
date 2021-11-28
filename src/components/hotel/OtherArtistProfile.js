@@ -5,12 +5,11 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const OtherArtistProfile = ({ otherProfile, otherPortfolio }) => {
-  console.log(otherProfile, otherPortfolio);
   if (!otherProfile || !otherPortfolio) return null;
   const {
     backgroundImageURL,
     profileImageURL,
-    profile: { name, phoneNumber, email },
+    profile: { name, introduceText },
   } = otherProfile;
   const { artistAuth_id, portfolios } = otherPortfolio;
   return (
@@ -30,9 +29,8 @@ const OtherArtistProfile = ({ otherProfile, otherPortfolio }) => {
       <ArtistBgImg backgroundImage={backgroundImageURL}></ArtistBgImg>
       <ArtistInfo>
         <ArtistProfileImg profileImage={profileImageURL}></ArtistProfileImg>
-        <h3>{name}</h3>
-        <div>{phoneNumber}</div>
-        <div>{email}</div>
+        <ArtistName>{name}</ArtistName>
+        <IntroText>{introduceText}</IntroText>
       </ArtistInfo>
       <PortfolioList>
         {!portfolios && <p>loading...</p>}
@@ -80,7 +78,6 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  grid-template-columns: 1fr 1fr 1fr;
   height: 60px;
   width: 100vw;
   border-bottom: 1px solid lightgray;
@@ -92,6 +89,14 @@ const ArtistBgImg = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
 `;
+const ArtistInfo = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 185px;
+`;
 const ArtistProfileImg = styled.div`
   position: absolute;
   left: calc(50vw - 53px);
@@ -102,14 +107,32 @@ const ArtistProfileImg = styled.div`
   background-image: url(${({ profileImage }) => profileImage});
   background-repeat: no-repeat;
   background-size: cover;
+  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25));
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
 `;
-const ArtistInfo = styled.div`
-  position: relative;
+const ArtistName = styled.h3`
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 16px;
   display: flex;
   align-items: center;
-  height: 185px;
-  flex-direction: column;
-  justify-content: flex-end;
+  letter-spacing: 0.5px;
+  color: #181818;
+  margin-bottom: 35px;
+`;
+const IntroText = styled.p`
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.5px;
+  color: #000000;
+  opacity: 0.5;
+  margin-bottom: 35px;
 `;
 const PortfolioList = styled.ul`
   display: grid;
@@ -133,7 +156,11 @@ const PreviewItem = styled.li`
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 15px;
+  filter: drop-shadow(0px 1px 7px rgba(0, 0, 0, 0.25));
+  border-radius: 15px;
+  box-shadow: 0px 1px 7px 0px rgba(0, 0, 0, 0.25);
 `;
+
 const ProposeFormLink = css`
   display: flex;
   justify-content: center;

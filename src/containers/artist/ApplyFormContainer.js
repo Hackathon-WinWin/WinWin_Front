@@ -3,17 +3,17 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { artistMakeApplication, artistSendApplication } from '../../api/match';
 import ApplyForm from '../../components/artist/ApplyForm';
 
-const dummy = {
-  name: '공혁준',
-  birthday: '1998-02-05T00:00:00.000Z',
-  address: '서울시 중구 신당동',
-  phoneNumber: '01079998559',
-  email: 'orijoon98@gmail.com2',
-  hotelName: '서울 호텔',
-  recruitmentTitle: '서울호텔 자연컨셉 작품 모집',
-};
+// const dummy = {
+//   name: '공혁준',
+//   birthday: '1998-02-05T00:00:00.000Z',
+//   address: '서울시 중구 신당동',
+//   phoneNumber: '01079998559',
+//   email: 'orijoon98@gmail.com2',
+//   hotelName: '서울 호텔',
+//   recruitmentTitle: '서울호텔 자연컨셉 작품 모집',
+// };
 const ApplyFormContainer = () => {
-  const { recruitment_id } = useParams();
+  const { hotelAuth_id, recruitment_id } = useParams();
   const [artistInfo, setArtistInfo] = useState();
   const navigate = useNavigate();
 
@@ -32,7 +32,9 @@ const ApplyFormContainer = () => {
 
   const onApply = async (e) => {
     e.preventDefault();
+
     try {
+      console.log({ hotelAuth_id, recruitment_id, ...artistInfo, ...form });
       const response = await artistSendApplication({
         ...artistInfo,
         ...form,
@@ -45,18 +47,19 @@ const ApplyFormContainer = () => {
           message: '',
         }));
       }
-    } catch (e) {}
+    } catch (e) {
+      console.log(e.response);
+    }
   };
 
   useEffect(() => {
-    // const fetchArtistInfo = async () => {
-    //   try {
-    //     const response = await artistMakeApplication(recruitment_id);
-    //     setArtistInfo(response.data);
-    //   } catch (e) {}
-    // };
-    // if (recruitment_id) fetchArtistInfo();
-    if (recruitment_id) setArtistInfo(dummy);
+    const fetchArtistInfo = async () => {
+      try {
+        const response = await artistMakeApplication(recruitment_id);
+        setArtistInfo(response.data);
+      } catch (e) {}
+    };
+    if (recruitment_id) fetchArtistInfo();
   }, [recruitment_id]);
 
   return (

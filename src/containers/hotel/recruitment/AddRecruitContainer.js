@@ -16,10 +16,10 @@ const AddRecruitContainer = () => {
   const navigate = useNavigate();
   const initState = {
     images: [],
-    exhibitionStartDate: new Date(),
-    exhibitionEndDate: new Date(),
     applicationStartDate: new Date(),
     applicationEndDate: new Date(),
+    exhibitionStartDate: new Date(),
+    exhibitionEndDate: new Date(),
     area: '',
     recruitNumber: '',
     concept: '',
@@ -31,27 +31,24 @@ const AddRecruitContainer = () => {
     const {
       target: { name, value, files },
     } = e;
-    // console.log(name, value);
     setForm((state) => ({
       ...state,
       [name]: name === 'images' ? state.images.concat(files[0]) : value,
     }));
   };
-  const onChangExStartDate = (date) => {
-    const dateFormat = dayjs(date).format('YYYY-MM-DD');
-    setForm((state) => ({ ...state, exhibitionStartDate: dateFormat }));
+  const onChangeAppDate = (date) => {
+    setForm((state) => ({
+      ...state,
+      applicationStartDate: date[0],
+      applicationEndDate: date[1],
+    }));
   };
-  const onChangExEndDate = (date) => {
-    const dateFormat = dayjs(date).format('YYYY-MM-DD');
-    setForm((state) => ({ ...state, exhibitionEndDate: dateFormat }));
-  };
-  const onChangAppStartDate = (date) => {
-    const dateFormat = dayjs(date).format('YYYY-MM-DD');
-    setForm((state) => ({ ...state, applicationStartDate: dateFormat }));
-  };
-  const onChangAppEndDate = (date) => {
-    const dateFormat = dayjs(date).format('YYYY-MM-DD');
-    setForm((state) => ({ ...state, applicationEndDate: dateFormat }));
+  const onChangExhibitDate = (date) => {
+    setForm((state) => ({
+      ...state,
+      exhibitionStartDate: date[0],
+      exhibitionEndDate: date[1],
+    }));
   };
   const onAddRecruit = (e) => {
     e.preventDefault();
@@ -98,10 +95,8 @@ const AddRecruitContainer = () => {
       form={form}
       onAddRecruit={onAddRecruit}
       onChange={onChange}
-      onChangExStartDate={onChangExStartDate}
-      onChangExEndDate={onChangExEndDate}
-      onChangAppStartDate={onChangAppStartDate}
-      onChangAppEndDate={onChangAppEndDate}
+      onChangExhibitDate={onChangExhibitDate}
+      onChangeAppDate={onChangeAppDate}
     />
   );
 };

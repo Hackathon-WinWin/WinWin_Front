@@ -33,14 +33,14 @@ const SpecificRecruitment = ({ specificRecruit }) => {
         <Link to={-1} css={BackBtn}>
           <img
             src={process.env.PUBLIC_URL + '/icons/back.svg'}
-            alt="back"
+            alt='back'
           ></img>
         </Link>
         <h3>지원공고</h3>
       </Header>
       <HotelExhibitImg>
-        {images.map((image) => (
-          <HotelItem image={image.image}></HotelItem>
+        {images.map((image, index) => (
+          <HotelItem key={index} image={image.image}></HotelItem>
         ))}
       </HotelExhibitImg>
       <div css={BottomBox}>
@@ -82,7 +82,7 @@ const SpecificRecruitment = ({ specificRecruit }) => {
                 {area} m<sup>2</sup>
               </p>
             </li>
-            <li className="line"></li>
+            <li className='line'></li>
             <li>
               <h4>전시컨셉</h4>
               <p>{concept}</p>
@@ -98,8 +98,8 @@ const SpecificRecruitment = ({ specificRecruit }) => {
           </div>
         </RecruitmentInfoCard>
       </div>
-      {/* param : 공고 id */}
-      <Link css={ApplyFormLink} to={`/apply/${recruitment_id}`}>
+      {/* param : 공고 id, 호텔 id */}
+      <Link css={ApplyFormLink} to={`/apply/${hotelAuth_id}/${recruitment_id}`}>
         지원하기
       </Link>
     </Wrapper>
@@ -134,7 +134,6 @@ const Header = styled.header`
     font-weight: bold;
     font-size: 18px;
     line-height: 10px;
-    /* or 56% */
 
     display: flex;
     align-items: center;
@@ -150,7 +149,7 @@ const ApplyFormLink = css`
   background-color: #181818;
   height: 76px;
   width: 391px;
-  position: sticky;
+  position: fixed;
   bottom: 0px;
 `;
 const HotelExhibitImg = styled.ul`
@@ -204,31 +203,29 @@ const RecruitmentInfoCard = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: absolute;
+  position: relative;
+  top: -35px;
+  left: calc(50vw - 43%);
   background-color: white;
   width: 86%;
   min-height: 100%;
   height: fit-content;
   padding: 25px 20px;
-  top: -35px;
-  left: calc(50vw - 43%);
+  margin-bottom: 76px;
   border-radius: 20px;
   box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  & > div {
-    & > h2 {
-      margin-bottom: 53px;
-    }
-  }
 `;
 const Top = css`
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-start;
+  height: 100px;
 `;
 const RecruitInfoList = css`
   display: flex;
   flex-direction: column;
+  margin-bottom: 50px;
   & > li {
     display: flex;
     list-style: none;

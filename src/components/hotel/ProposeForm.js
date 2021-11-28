@@ -10,47 +10,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const BpIcon = styled('span')(({ theme }) => ({
-  borderRadius: '50%',
-  width: 10,
-  height: 10,
-  border: '1px solid lightgray',
-  '.Mui-focusVisible &': {
-    outline: '2px auto rgba(19,124,189,.6)',
-    outlineOffset: 2,
-  },
-  'input:disabled ~ &': {
-    boxShadow: 'none',
-  },
-}));
-const BpCheckedIcon = styled(BpIcon)({
-  backgroundColor: '#181818',
-  '&:before': {
-    display: 'block',
-    width: 5,
-    height: 5,
-    content: '""',
-  },
-  'input:hover ~ &': {
-    backgroundColor: '#181818',
-  },
-});
-function BpRadio(props) {
-  return (
-    <Radio
-      sx={{
-        '&:hover': {
-          bgcolor: 'transparent',
-        },
-      }}
-      disableRipple
-      color='default'
-      checkedIcon={<BpCheckedIcon />}
-      icon={<BpIcon />}
-      {...props}
-    />
-  );
-}
 const ProposeForm = ({
   hotelInfo,
   myRecuitementList,
@@ -70,12 +29,38 @@ const ProposeForm = ({
             css={css`
               color: white;
               text-decoration: none;
+              position: absolute;
+              left: 16px;
             `}
           >
-            X
+            <img
+              src={process.env.PUBLIC_URL + '/icons/x_w.svg'}
+              alt='icon'
+              style={{ width: '10.5px', height: '10.5px' }}
+            />
           </Link>
-          <h3>제안서 작성</h3>
-          <button>완료</button>
+          <h3
+            css={css`
+              font-style: normal;
+              font-weight: bold;
+              font-size: 18px;
+              line-height: 10px;
+            `}
+          >
+            제안서 작성
+          </h3>
+          <button
+            css={css`
+              position: absolute;
+              right: 16px;
+              font-style: normal;
+              font-weight: 500;
+              font-size: 18px;
+              line-height: 10px;
+            `}
+          >
+            완료
+          </button>
         </Header>
         <div css={FlexColumn}>
           <div css={FlexColumn}>
@@ -123,17 +108,17 @@ const ProposeForm = ({
           <div css={FlexColumn}>
             <FormTitle>메세지 작성</FormTitle>
             <WhiteBox>
-              <input
+              <Input
                 name='title'
                 value={form.title}
                 onChange={onChange}
                 placeholder='제목을 입력하세요.'
               />
-              <input
+              <TextArea
                 name='message'
                 value={form.message}
                 onChange={onChange}
-                placeholder='아티스트에게 전하고 싶은 메시지를 적어주세요. '
+                placeholder='아티스트에게 전하고 싶은 메시지를 적어주세요.'
               />
             </WhiteBox>
           </div>
@@ -143,6 +128,50 @@ const ProposeForm = ({
   );
 };
 
+// ### Material UI styling ###
+const BpIcon = styled('span')(({ theme }) => ({
+  borderRadius: '50%',
+  width: 10,
+  height: 10,
+  border: '1px solid lightgray',
+  '.Mui-focusVisible &': {
+    outline: '2px auto rgba(19,124,189,.6)',
+    outlineOffset: 2,
+  },
+  'input:disabled ~ &': {
+    boxShadow: 'none',
+  },
+}));
+const BpCheckedIcon = styled(BpIcon)({
+  backgroundColor: '#181818',
+  '&:before': {
+    display: 'block',
+    width: 5,
+    height: 5,
+    content: '""',
+  },
+  'input:hover ~ &': {
+    backgroundColor: '#181818',
+  },
+});
+function BpRadio(props) {
+  return (
+    <Radio
+      sx={{
+        '&:hover': {
+          bgcolor: 'transparent',
+        },
+      }}
+      disableRipple
+      color='default'
+      checkedIcon={<BpCheckedIcon />}
+      icon={<BpIcon />}
+      {...props}
+    />
+  );
+}
+
+// ### Form ###
 const Form = css`
   width: 100vw;
   min-height: 100vh;
@@ -155,8 +184,8 @@ const Header = styled.header`
   left: 0;
   padding: 16px;
   box-sizing: border-box;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  justify-content: center;
   align-items: center;
   height: 60px;
   width: 100vw;
@@ -175,6 +204,7 @@ const Header = styled.header`
     justify-self: flex-end;
   }
 `;
+
 const FormTitle = styled.div`
   display: flex;
   justify-content: space-between;
@@ -202,6 +232,23 @@ const WhiteBox = styled.div`
   display: flex;
   flex-direction: column;
   padding: 16px;
+`;
+const Input = styled.input`
+  height: 50px;
+  border: none;
+  border-bottom: 1px solid #d9d9d9;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+`;
+const TextArea = styled.textarea`
+  margin-top: 15px;
+  border: none;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
 `;
 const FormControlLabelStyle = css`
   &.MuiFormControlLabel-root {

@@ -146,7 +146,10 @@ const App = () => {
           path='/specificRecruit/:hotelAuth_id/:recruitment_id'
           element={<SpecificRecruitmentPage />}
         />
-        <Route path='/apply/:recruitment_id' element={<ApplyFormPage />} />
+        <Route
+          path='/apply/:hotelAuth_id/:recruitment_id'
+          element={<ApplyFormPage />}
+        />
         <Route path='*' element={<div>Not Found.</div>} />
       </Routes>
     </>

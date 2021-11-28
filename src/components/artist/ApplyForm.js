@@ -32,34 +32,14 @@ const ApplyForm = ({ form, artistInfo, onApply, onChange }) => {
             left: 16px;
           `}
         >
-          <Icon
+          <img
             src={process.env.PUBLIC_URL + '/icons/x_w.svg'}
             alt='icon'
             style={{ width: '10.5px', height: '10.5px' }}
           />
         </Link>
-        <h3
-          css={css`
-            font-style: normal;
-            font-weight: bold;
-            font-size: 18px;
-            line-height: 10px;
-          `}
-        >
-          지원서 작성
-        </h3>
-        <button
-          css={css`
-            position: absolute;
-            right: 16px;
-            font-style: normal;
-            font-weight: 500;
-            font-size: 18px;
-            line-height: 10px;
-          `}
-        >
-          완료
-        </button>
+        <h3>지원서 작성</h3>
+        <button>완료</button>
       </Header>
       <div css={FlexColumn}>
         <div css={FlexColumn}>
@@ -119,7 +99,7 @@ const ApplyForm = ({ form, artistInfo, onApply, onChange }) => {
               name='message'
               value={form.message}
               onChange={onChange}
-              placeholder='아티스트에게 전하고 싶은 메시지를 적어주세요. '
+              placeholder='지원동기, 질문, 전하고 싶은 메시지를 적어주세요.'
             />
           </WhiteBox>
         </div>
@@ -148,8 +128,10 @@ const Header = styled.header`
   background-color: #181818;
   & > h3 {
     color: white;
-    align-self: center;
-    justify-self: center;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 10px;
   }
   & > button {
     color: white;
@@ -157,6 +139,12 @@ const Header = styled.header`
     border: none;
     width: fit-content;
     justify-self: flex-end;
+    position: absolute;
+    right: 16px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 10px;
   }
 `;
 const FormTitle = styled.div`

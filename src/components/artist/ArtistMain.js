@@ -8,28 +8,27 @@ const ArtistMain = ({ hotelList }) => {
   if (!hotelList) return null;
   return (
     <MainWrapper>
-      <Gradient />
-      <MainImage url={process.env.PUBLIC_URL + '/assets/mainpage_image.png'}>
+      <MainImage url={process.env.PUBLIC_URL + '/assets/artist_main_img.svg'}>
         <Header>
           <Menu>
             <img
               src={process.env.PUBLIC_URL + '/icons/bookmark_line_w.svg'}
-              alt="bookmark"
+              alt='bookmark'
             />
             <img
               src={process.env.PUBLIC_URL + '/icons/bell_w.svg'}
-              alt="bell"
+              alt='bell'
             />
           </Menu>
           <SearchBox>
             <img
               src={process.env.PUBLIC_URL + '/icons/search.svg'}
-              alt="search"
+              alt='search'
             />
-            <SearchInput placeholder="전시공간 검색" />
+            <SearchInput placeholder='전시공간 검색' />
             <img
               src={process.env.PUBLIC_URL + '/icons/filter.svg'}
-              alt="filter"
+              alt='filter'
             />
           </SearchBox>
         </Header>
@@ -61,7 +60,7 @@ const ArtistMain = ({ hotelList }) => {
                     <p>
                       <img
                         src={process.env.PUBLIC_URL + '/icons/location_w.svg'}
-                        alt="loc"
+                        alt='loc'
                       />
                       &nbsp;&nbsp;
                       {hotel.address}
@@ -84,18 +83,7 @@ const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Gradient = styled.div`
-  position: absolute;
-  top: 0;
-  width: 100vw;
-  height: 189px;
-  background: linear-gradient(
-    180deg,
-    rgba(24, 24, 24, 0) 18.23%,
-    #181818 90.1%
-  );
-  transform: rotate(-180deg);
-`;
+
 const Header = styled.header`
   display: flex;
   flex-direction: column;
@@ -138,7 +126,6 @@ const SearchInput = styled.input`
 `;
 const MainImage = styled.div`
   height: 322px;
-  background-color: lightgray;
   background-image: url(${({ url }) => url});
 `;
 const Intro = styled.div`
@@ -160,13 +147,11 @@ const Intro = styled.div`
 const MainPortfoilo = styled.div`
   padding: 0 16px;
   flex: auto;
-
   & > ul {
     display: flex;
     align-items: stretch;
     width: 100%;
     height: 100%;
-    /* height: calc(100% - 80px); */
     overflow: auto;
     scroll-snap-type: x mandatory; /* Chrome Canary */
     scrollbar-width: none; /* Firefox */
@@ -191,7 +176,6 @@ const PortfolioItem = styled.li`
   height: 274px;
   padding: 21px 16px;
   list-style: none;
-  background-color: lightgray;
   background-image: url(${({ image }) => image});
   background-repeat: no-repeat;
   background-size: cover;

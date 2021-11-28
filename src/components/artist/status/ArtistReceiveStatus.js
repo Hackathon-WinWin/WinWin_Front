@@ -3,9 +3,6 @@ import { css } from '@emotion/react';
 import React from 'react';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
-import 'dayjs/locale/ko';
-
-dayjs.locale('ko');
 
 const ArtistReceiveStatus = ({ recieved }) => {
   return (
