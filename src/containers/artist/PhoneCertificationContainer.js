@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import PhoneCertification from '../../components/artist/PhoneCertification';
-import { initAuth } from '../../modules/auth';
 import {
   checkNumber,
   initPhoneCertify,

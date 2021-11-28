@@ -5,7 +5,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const HotelReveiveStatus = ({ recieved }) => {
-  console.log(recieved);
   return (
     <Wrapper>
       {recieved.map((item) => (

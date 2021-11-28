@@ -8,10 +8,10 @@ import { checkLoggedIn, initAuth } from '../../modules/auth';
 const HotelSignupContainer = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const {
-  //   state: { businessNumber, hostName, openDate },
-  // } = useLocation();
-  const [businessNumber, hostName, openDate] = ['123', '오정진', '2021-11-23'];
+  const {
+    state: { businessNumber, hostName, openDate },
+  } = useLocation();
+  // const [businessNumber, hostName, openDate] = ['123', '오정진', '2021-11-23'];
   const initialState = {
     account: '',
     password: '',

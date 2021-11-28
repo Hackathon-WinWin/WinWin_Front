@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import AddRecruit from '../../../components/hotel/recruitment/AddRecruit';
 import { addRecruitment } from '../../../modules/recruitment';
-import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 

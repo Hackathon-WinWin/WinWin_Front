@@ -14,10 +14,9 @@ const ArtistSignupContainer = () => {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const {
-  //   state: { phoneNumber },
-  // } = useLocation();
-  const phoneNumber = '123';
+  const {
+    state: { phoneNumber },
+  } = useLocation();
   const initialState = {
     account: '',
     password: '',

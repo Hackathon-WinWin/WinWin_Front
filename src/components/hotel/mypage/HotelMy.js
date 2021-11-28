@@ -69,9 +69,7 @@ const HotelMy = ({ myHotel, hotelProfileImg, onChange, onLogout }) => {
       </HotelInfoBox>
       {/* 이미지 */}
       <ImgBox>
-        {images.length === 0 && (
-          <Message>개인 포트폴리오를 추가해보세요!</Message>
-        )}
+        {images.length === 0 && <Message>호텔 이미지를 추가해보세요!</Message>}
         {images.length !== 0 && (
           <HotelImageList>
             {images.map((image) => (

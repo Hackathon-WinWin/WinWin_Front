@@ -6,12 +6,6 @@ import { hotelMakeApplication, hotelSendApplication } from '../../api/match';
 import ProposeForm from '../../components/hotel/ProposeForm';
 import { readMyRecruitment } from '../../modules/recruitment';
 
-// 호텔이 제안서를 보낼 때 같이 보낼 정보
-// const dummy = {
-//   hotelAuth_id: '619c963ba5f1fece6e970d6b',
-//   phoneNumber: '02-1234-567832',
-//   email: 'orijoon98@seoulhotel.com32',
-// };
 const ProposeFormContainer = () => {
   const { myRecuitementList } = useSelector(({ recruitment }) => ({
     myRecuitementList: recruitment.myRecuitementList,
