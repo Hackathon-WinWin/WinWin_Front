@@ -29,6 +29,7 @@ import OtherHotelProfilePage from './pages/artist/OtherHotelProfilePage';
 import MySpecificPortfolioPage from './pages/artist/mypage/MySpecificPortfolioPage';
 import ArtistStatusPage from './pages/artist/ArtistStatusPage';
 import HotelStatusPage from './pages/hotel/HotelStatusPage';
+import CommunityPage from './pages/artist/CommunityPage';
 
 axios.defaults.withCredentials = true;
 
@@ -150,6 +151,7 @@ const App = () => {
           path='/apply/:hotelAuth_id/:recruitment_id'
           element={<ApplyFormPage />}
         />
+        <Route path='/community' element={<CommunityPage />} />
         <Route path='*' element={<div>Not Found.</div>} />
       </Routes>
     </>

@@ -8,11 +8,9 @@ import styled from 'styled-components';
 
 const ArtistStatus = ({ artistStatus }) => {
   const { pathname } = useLocation();
-
   if (!artistStatus) return null;
   const { sent, recieved } = artistStatus;
   const len = pathname.split('/').length;
-  console.log(artistStatus);
   return (
     <div>
       <Header>

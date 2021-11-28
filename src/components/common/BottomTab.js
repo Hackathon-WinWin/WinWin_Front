@@ -1,66 +1,68 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const BottomTab = ({ isArtist }) => {
-  const onActive = ({ isActive }) => {
-    console.log(isActive);
-  };
   return (
     <BottomTabWrapper>
       <Tab>
-        <StyledLink to='/main' style={onActive}>
+        <StyledLink to='/main'>
           <img
             src={process.env.PUBLIC_URL + '/icons/tap_home.svg'}
             alt='home'
           />
-          <ActiveYellow />
+          <div></div>
         </StyledLink>
       </Tab>
       <Tab>
         {isArtist ? (
-          <StyledLink to='/community' style={onActive}>
+          <StyledLink to='/community'>
             <img
               src={process.env.PUBLIC_URL + '/icons/tap_community.svg'}
-              alt='commu'
+              alt='community'
             />
+            <div></div>
           </StyledLink>
         ) : (
-          <StyledLink to='/recruit' style={onActive}>
+          <StyledLink to='/recruit'>
             <img
               src={process.env.PUBLIC_URL + '/icons/tap_write.svg'}
               alt='wrtie'
             />
+            <div></div>
           </StyledLink>
         )}
       </Tab>
       <Tab>
         {isArtist ? (
-          <StyledLink to='/applyStatus' style={onActive}>
+          <StyledLink to='/applyStatus'>
             <img
               src={process.env.PUBLIC_URL + '/icons/tap_heart.svg'}
               alt='status'
             />
+            <div></div>
           </StyledLink>
         ) : (
-          <StyledLink to='/recruitStatus' style={onActive}>
+          <StyledLink to='/recruitStatus'>
             <img
               src={process.env.PUBLIC_URL + '/icons/tap_heart.svg'}
               alt='status'
             />
+            <div></div>
           </StyledLink>
         )}
       </Tab>
       <Tab>
         {isArtist ? (
-          <StyledLink to='/artistMyPage' style={onActive}>
+          <StyledLink to='/artistMyPage'>
             <img src={process.env.PUBLIC_URL + '/icons/tap_my.svg'} alt='my' />
+            <div></div>
+            <div></div>
           </StyledLink>
         ) : (
-          <StyledLink to='/hotelMyPage' style={onActive}>
+          <StyledLink to='/hotelMyPage'>
             <img src={process.env.PUBLIC_URL + '/icons/tap_my.svg'} alt='my' />
+            <div></div>
           </StyledLink>
         )}
       </Tab>
@@ -86,18 +88,20 @@ const Tab = styled.li`
 `;
 const StyledLink = styled(NavLink)`
   display: flex;
-  width: 100%;
-  height: 100%;
   align-items: center;
   justify-content: center;
-`;
-const ActiveYellow = styled.div`
-  position: absolute;
-  background: #faff00;
-  width: 38px;
-  height: 38px;
-  left: 30px;
-  top: 788px;
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  & > img {
+    z-index: 99;
+  }
+  &.active > div {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #faff00;
+    position: fixed;
+    bottom: 18px;
+  }
 `;
 export default BottomTab;

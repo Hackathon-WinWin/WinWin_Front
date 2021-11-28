@@ -22,6 +22,8 @@ export const artistSendApplication = async ({
   email,
   hotelName,
   recruitmentTitle,
+  title,
+  message,
 }) =>
   await axios.post('/api/match/artistSendApplication', {
     hotelAuth_id,
@@ -33,6 +35,8 @@ export const artistSendApplication = async ({
     email,
     hotelName,
     recruitmentTitle,
+    title,
+    message,
   });
 // 제안서 작성 화면에 필요한 정보들
 // 200: 필요한 정보 JSON 반환

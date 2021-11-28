@@ -5,12 +5,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 const HotelReveiveStatus = ({ recieved }) => {
+  console.log(recieved);
   return (
     <Wrapper>
       {recieved.map((item) => (
         <li key={item._id} css={RecievedItem}>
           <div className='top'>
-            <h3>{item.nickname}</h3>
+            <h3>{item.name}</h3>
             <span>{dayjs(item.writtenTime).format('MM.DD ddd A hh:mm')}</span>
           </div>
           <p>{item.recruitmentTitle}</p>

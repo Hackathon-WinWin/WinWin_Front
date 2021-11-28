@@ -43,7 +43,7 @@ const DetailPortfolio = ({
       <PreviewBox ref={previewRef} />
       <div css={InputBox}>
         <Label>
-          제목
+          <div>제목</div>
           <input name='title' value={form.title} onChange={onChange} />
         </Label>
         <Label>
@@ -54,9 +54,9 @@ const DetailPortfolio = ({
             onChange={onChange}
           />
         </Label>
-        <Label>
+        <Label className='linkLabel'>
           링크 삽입
-          <input name='link' value={form.link} onChange={onChange} />
+          <TextArea name='link' value={form.link} onChange={onChange} />
         </Label>
       </div>
     </DetailBox>
@@ -115,17 +115,35 @@ const PreviewBox = styled.div`
 `;
 const Label = styled.label`
   display: flex;
-  padding: 0 16px;
+  padding: 16px;
+  align-items: center;
   box-sizing: border-box;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
-  display: flex;
-  align-items: center;
   text-align: center;
   letter-spacing: 0.5px;
   color: #222222;
   opacity: 0.8;
+  gap: 15px;
+  &.linkLabel {
+    flex-direction: column;
+    align-items: flex-start;
+    color: #222222;
+    opacity: 1;
+  }
+  & + & {
+    border-top: 0.5px solid #000000;
+  }
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  & > input {
+    border: none;
+  }
 `;
+
 export default DetailPortfolio;

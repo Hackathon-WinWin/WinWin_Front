@@ -65,6 +65,7 @@ const OtherArtistProfile = ({ otherProfile, otherPortfolio }) => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100vw;
   min-height: 100vh;
 `;
@@ -93,13 +94,14 @@ const ArtistInfo = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
+  gap: 20px;
   height: 185px;
+  width: 70%;
 `;
 const ArtistProfileImg = styled.div`
   position: absolute;
-  left: calc(50vw - 53px);
   bottom: calc(185px - 53px);
   width: 106px;
   height: 106px;
@@ -118,21 +120,20 @@ const ArtistName = styled.h3`
   display: flex;
   align-items: center;
   letter-spacing: 0.5px;
+  margin-top: 80px;
   color: #181818;
-  margin-bottom: 35px;
 `;
 const IntroText = styled.p`
+  display: flex;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 22px;
-  display: flex;
-  align-items: center;
   text-align: center;
   letter-spacing: 0.5px;
   color: #000000;
   opacity: 0.5;
-  margin-bottom: 35px;
+  flex: auto;
 `;
 const PortfolioList = styled.ul`
   display: grid;
@@ -143,6 +144,7 @@ const PortfolioList = styled.ul`
   width: 100vw;
   flex: auto;
   padding: 16px;
+  margin-bottom: 80px;
   box-sizing: border-box;
   & > p {
     margin: 30px auto 0;

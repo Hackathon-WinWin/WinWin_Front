@@ -34,11 +34,8 @@ const ApplyFormContainer = () => {
     e.preventDefault();
 
     try {
-      console.log({ hotelAuth_id, recruitment_id, ...artistInfo, ...form });
-      const response = await artistSendApplication({
-        ...artistInfo,
-        ...form,
-      });
+      const data = { hotelAuth_id, recruitment_id, ...artistInfo, ...form };
+      const response = await artistSendApplication(data);
       if (response.status === 200) {
         navigate(-1);
         setForm((state) => ({
