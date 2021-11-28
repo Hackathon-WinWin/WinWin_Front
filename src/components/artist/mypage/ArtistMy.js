@@ -2,7 +2,6 @@
 import { css } from '@emotion/react';
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { AiOutlineMenu } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { HiPlus } from 'react-icons/hi';
 import DetailPortfolio from './DetailPortfolio';
@@ -47,10 +46,16 @@ const ArtistMy = ({
   };
   return (
     <ArtistMyWrapper>
-      <ArtistBgImg backgroundImage={artistBackImg.backgroundImage}>
-        <MenuBtn onClick={onOpenMenu}>
-          <AiOutlineMenu size='22'></AiOutlineMenu>
-        </MenuBtn>
+      <ArtistBgImg image={artistBackImg.backgroundImage}>
+        <Gradient />
+        <Header>
+          <MenuBtn onClick={onOpenMenu}>
+            <img
+              src={process.env.PUBLIC_URL + 'icons/hamburger_w.svg'}
+              alt='menu'
+            />
+          </MenuBtn>
+        </Header>
       </ArtistBgImg>
       <ArtistInfo>
         <ArtistProfileImg profileImage={artistProfileImg.profileImage}>
@@ -62,16 +67,28 @@ const ArtistMy = ({
             <input type='file' name='profileImage' onChange={onChangeFile} />
           </label>
         </ArtistProfileImg>
-        <h3>{myArtist.name}</h3>
-        <div>{myArtist.phoneNumber}</div>
-        <div>{myArtist.email}</div>
+        <div>
+          <h3>{myArtist.name}</h3>
+          <p className='phone'>
+            <img
+              src={process.env.PUBLIC_URL + '/icons/phone.svg'}
+              alt='phone'
+            />
+            {myArtist.phoneNumber}
+          </p>
+          <p className='email'>
+            <img src={process.env.PUBLIC_URL + '/icons/mail.svg'} alt='phone' />
+            {myArtist.email}
+          </p>
+        </div>
       </ArtistInfo>
-      <PortfolioList>
-        {!myPortfolio && <p>개인 포트폴리오를 추가해보세요!</p>}
-        {myPortfolio &&
-          (myPortfolio.portfolios === [] ? (
-            <p>개인 포트폴리오를 추가해보세요!</p>
-          ) : (
+      {/* 이미지 */}
+      <ImgBox>
+        {myPortfolio.portfolios.length === 0 && (
+          <p>개인 포트폴리오를 추가해보세요!</p>
+        )}
+        <PortfolioList>
+          {myPortfolio.portfolios.length !== 0 &&
             myPortfolio.portfolios.map((portfolio) => (
               <PreviewImg key={portfolio._id} image={portfolio.images[0].image}>
                 <Link
@@ -87,23 +104,62 @@ const ArtistMy = ({
                   }}
                 />
               </PreviewImg>
-            ))
-          ))}
-      </PortfolioList>
+            ))}
+        </PortfolioList>
+      </ImgBox>
       {/* 메뉴 */}
       <MenuTab isOpen={isOpen}>
         <ul>
+          <li className='bottomLine' style={{ height: '92px' }}></li>
           <li>
-            <MenuBtn onClick={onOpenMenu}>
-              <AiOutlineMenu size='22'></AiOutlineMenu>
-            </MenuBtn>
+            <Link className='styleLink' to='/editProfile'>
+              프로필 편집
+            </Link>
+          </li>
+          <li className='bottomLine'>
+            <label className='styleLink'>
+              배너 이미지 수정
+              <ImageInput
+                type='file'
+                name='backgroundImage'
+                onChange={onChangeFile}
+              />
+            </label>
+          </li>
+          <li className='bottomLine'>
+            <Link className='styleLink' to='/main'>
+              해시태그 설정
+            </Link>
+          </li>
+          <li className='bottomLine'>
+            <Link className='styleLink' to='/main'>
+              내가 쓴 게시글
+            </Link>
           </li>
           <li>
-            <Link to='/editProfile'>프로필 편집</Link>
+            <Link className='styleLink' to='/main'>
+              언어설정
+            </Link>
           </li>
-          <li></li>
           <li>
-            <LogoutBtn onClick={onLogout}>로그아웃</LogoutBtn>
+            <Link className='styleLink' to='/main'>
+              사용약관
+            </Link>
+          </li>
+          <li>
+            <Link className='styleLink' to='/main'>
+              버전 정보
+            </Link>
+          </li>
+          <li>
+            <Button className='styleLink' onClick={onLogout}>
+              로그아웃
+            </Button>
+          </li>
+          <li>
+            <Link className='styleLink' to='/main'>
+              탈퇴하기
+            </Link>
           </li>
         </ul>
         <BlackEmpty onClick={onOpenMenu} />
@@ -136,15 +192,33 @@ const ArtistMy = ({
 };
 
 const ArtistMyWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   width: 100vw;
 `;
+const Header = styled.header`
+  position: absolute;
+  top: 0;
+  display: flex;
+  width: 100%;
+`;
 const ArtistBgImg = styled.div`
+  position: relative;
   width: 100vw;
   height: 220px;
-  background-image: url(${({ backgroundImage }) => backgroundImage});
+  background: center / cover no-repeat url(${({ image }) => image});
+`;
+const Gradient = styled.div`
+  width: 100%;
+  height: 138px;
+  background: linear-gradient(
+    180deg,
+    rgba(24, 24, 24, 0) 18.23%,
+    #181818 90.1%
+  );
+  transform: rotate(-180deg);
 `;
 const ArtistProfileImg = styled.div`
   position: absolute;
@@ -168,9 +242,68 @@ const ArtistInfo = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  height: 185px;
   flex-direction: column;
   justify-content: flex-end;
+  height: 185px;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    & > h3 {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 16px;
+      margin-bottom: 23px;
+      align-self: center;
+    }
+    & > p {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      &.phone {
+        font-family: 'Noto Sans', sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.5px;
+        margin-bottom: 11px;
+      }
+      &.email {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.5px;
+        margin-bottom: 30px;
+      }
+      & > img {
+        width: 19px;
+        height: 19px;
+      }
+    }
+  }
+`;
+const ImgBox = styled.div`
+  display: flex;
+  background-color: #f9f9f9;
+  width: 100vw;
+  flex: auto;
+  box-sizing: border-box;
+  margin-bottom: 80px;
+  & > p {
+    margin: auto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.5px;
+    color: #000000;
+    opacity: 0.5;
+  }
 `;
 const PortfolioList = styled.ul`
   display: grid;
@@ -182,16 +315,13 @@ const PortfolioList = styled.ul`
   flex: auto;
   padding: 16px;
   box-sizing: border-box;
-  & > p {
-    margin: 30px auto 0;
-  }
 `;
 const PreviewImg = styled.li`
   list-style: none;
   width: 167px;
   height: 167px;
-  background-image: url(${({ image }) => image});
   border-radius: 15px;
+  background: center / cover no-repeat url(${({ image }) => image});
 `;
 const AddPortfolioLabel = styled.label`
   cursor: pointer;
@@ -200,12 +330,13 @@ const AddPortfolioLabel = styled.label`
   border-radius: 50%;
   width: 68px;
   height: 68px;
-  position: absolute;
+  position: fixed;
   bottom: 12vh;
   left: calc(50vw - 34px);
   display: flex;
   justify-content: center;
   align-items: center;
+  filter: drop-shadow(0px 3px 4px rgba(0, 0, 0, 0.19));
 `;
 const ImageInput = styled.input`
   display: none;
@@ -228,6 +359,24 @@ const MenuTab = styled.div`
     flex-direction: column;
     width: 70%;
     height: 100vh;
+    & > li {
+      list-style: none;
+      &.bottomLine {
+        border-bottom: 1px solid #d9d9d9;
+      }
+      & > .styleLink {
+        padding: 16px;
+        box-sizing: border-box;
+        text-decoration: none;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 23px;
+        display: flex;
+        align-items: center;
+        color: #181818;
+      }
+    }
   }
 `;
 const BlackEmpty = styled.div`
@@ -235,7 +384,7 @@ const BlackEmpty = styled.div`
   width: 30%;
   height: 100vh;
 `;
-const LogoutBtn = styled.button`
+const Button = styled.button`
   border: none;
   background: none;
 `;

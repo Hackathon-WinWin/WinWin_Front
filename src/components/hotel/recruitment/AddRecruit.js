@@ -2,10 +2,8 @@
 import { css } from '@emotion/react';
 import React from 'react';
 import styled from 'styled-components';
-import MobileDatePicker from '@mui/lab/MobileDatePicker';
-import TextField from '@mui/material/TextField';
+import MobileDateRangePicker from '@mui/lab/MobileDateRangePicker';
 import { Box } from '@material-ui/core';
-import { Input, InputAdornment } from '@mui/material';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -13,10 +11,8 @@ const AddRecruit = ({
   form,
   onAddRecruit,
   onChange,
-  onChangExStartDate,
-  onChangExEndDate,
-  onChangAppStartDate,
-  onChangAppEndDate,
+  onChangExhibitDate,
+  onChangeAppDate,
 }) => {
   const imageRef = useRef([]);
   const handleOnChangeFiles = (e) => {
@@ -36,8 +32,20 @@ const AddRecruit = ({
   return (
     <AddRecruitWrapper onSubmit={onAddRecruit}>
       <Header>
-        <Link to='../recruit' style={{ color: 'white' }}>
-          x
+        <Link
+          to='../recruit'
+          css={css`
+            color: white;
+            text-decoration: none;
+            position: absolute;
+            left: 16px;
+          `}
+        >
+          <img
+            src={process.env.PUBLIC_URL + '/icons/x_w.svg'}
+            alt='icon'
+            style={{ width: '10.5px', height: '10.5px' }}
+          />
         </Link>
         <h3>모집공고 관리</h3>
         <button>완료</button>
@@ -48,92 +56,90 @@ const AddRecruit = ({
           <InputBox>
             <Box css={BoxStyle}>
               <h4>신청기간</h4>
-              <MobileDatePicker
-                label='시작날짜'
+              <MobileDateRangePicker
                 inputFormat='yyyy-MM-dd'
-                value={form.applicationStartDate}
-                onChange={onChangAppStartDate}
-                renderInput={(params) => <TextField {...params} />}
-              />
-              <span>-</span>
-              <MobileDatePicker
-                label='종료날짜'
-                inputFormat='yyyy-MM-dd'
-                value={form.applicationEndDate}
-                onChange={onChangAppEndDate}
-                renderInput={(params) => <TextField {...params} />}
+                value={[form.applicationStartDate, form.applicationEndDate]}
+                onChange={(newValue) => {
+                  onChangeAppDate(newValue);
+                }}
+                renderInput={(startProps, endProps) => (
+                  <React.Fragment>
+                    <DateInput
+                      ref={startProps.ref}
+                      {...startProps.inputProps}
+                    />
+                    <Box sx={{ mx: 2 }}> - </Box>
+                    <DateInput ref={endProps.ref} {...endProps.inputProps} />
+                  </React.Fragment>
+                )}
               />
             </Box>
             <Box css={BoxStyle}>
               <h4>전시기간</h4>
-              <MobileDatePicker
-                label='시작날짜'
+              <MobileDateRangePicker
                 inputFormat='yyyy-MM-dd'
-                value={form.exhibitionStartDate}
-                onChange={onChangExStartDate}
-                renderInput={(params) => <TextField {...params} />}
-              />
-              <span>-</span>
-              <MobileDatePicker
-                label='종료날짜'
-                inputFormat='yyyy-MM-dd'
-                value={form.exhibitionEndDate}
-                onChange={onChangExEndDate}
-                renderInput={(params) => <TextField {...params} />}
+                value={[form.exhibitionStartDate, form.exhibitionEndDate]}
+                onChange={(newValue) => {
+                  onChangExhibitDate(newValue);
+                }}
+                renderInput={(startProps, endProps) => {
+                  console.log(startProps, endProps);
+                  return (
+                    <React.Fragment>
+                      <DateInput
+                        ref={startProps.ref}
+                        {...startProps.inputProps}
+                      />
+                      <Box sx={{ mx: 2 }}> - </Box>
+                      <DateInput ref={endProps.ref} {...endProps.inputProps} />
+                    </React.Fragment>
+                  );
+                }}
               />
             </Box>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Box css={BoxStyle}>
               <h4>전시공간</h4>
-              <Input
-                name='area'
-                value={form.area}
-                onChange={onChange}
-                endAdornment={
-                  <InputAdornment position='end'>
-                    m<sup>2</sup>
-                  </InputAdornment>
-                }
-                inputProps={{
-                  'aria-label': 'weight',
-                }}
-              />
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <InputShape>
+                <input name='area' value={form.area} onChange={onChange} />
+                <span className='adornment'>
+                  m<sup>2</sup>
+                </span>
+              </InputShape>
+            </Box>
+            <Box css={BoxStyle}>
               <h4>모집인원</h4>
-              <Input
-                name='recruitNumber'
-                value={form.recruitNumber}
-                onChange={onChange}
-                endAdornment={
-                  <InputAdornment position='end'>명</InputAdornment>
-                }
-                inputProps={{
-                  'aria-label': 'weight',
-                }}
-              />
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <InputShape>
+                <input
+                  name='recruitNumber'
+                  value={form.recruitNumber}
+                  onChange={onChange}
+                />
+                <span className='adornment'>명</span>
+              </InputShape>
+            </Box>
+            <Box css={BoxStyle}>
               <h4>전시컨셉</h4>
-              <Input
-                name='concept'
-                value={form.concept}
-                onChange={onChange}
-                inputProps={{
-                  'aria-label': 'weight',
-                }}
-              />
-            </div>
+              <InputShape>
+                <input
+                  name='concept'
+                  value={form.concept}
+                  onChange={onChange}
+                />
+              </InputShape>
+            </Box>
           </InputBox>
         </FormBox>
         <FormBox>
           <FormTitle>
             <span>공간사진 업로드</span>
-            <span>*3장 필수</span>
+            <span className='right'>*3장 필수</span>
           </FormTitle>
           <ImgInputBox>
-            <ImgLabel ref={(ele) => (imageRef.current[0] = ele)}>
+            <ImgLabel id='image1' ref={(ele) => (imageRef.current[0] = ele)}>
+              <span>+</span>
               <input
                 style={{ display: 'none' }}
+                for='image1'
                 id={0}
                 type='file'
                 name='images'
@@ -141,23 +147,25 @@ const AddRecruit = ({
                 accept='image/*'
                 required
               />
-              +
             </ImgLabel>
-            <ImgLabel ref={(ele) => (imageRef.current[1] = ele)}>
+            <ImgLabel id='image2' ref={(ele) => (imageRef.current[1] = ele)}>
+              <span>+</span>
               <input
                 style={{ display: 'none' }}
                 id={1}
+                for='image2'
                 type='file'
                 name='images'
                 onChange={handleOnChangeFiles}
                 accept='image/*'
                 required
               />
-              +
             </ImgLabel>
-            <ImgLabel ref={(ele) => (imageRef.current[2] = ele)}>
+            <ImgLabel id='image3' ref={(ele) => (imageRef.current[2] = ele)}>
+              <span>+</span>
               <input
                 style={{ display: 'none' }}
+                for='image3'
                 id={2}
                 type='file'
                 name='images'
@@ -165,24 +173,23 @@ const AddRecruit = ({
                 accept='image/*'
                 required
               />
-              +
             </ImgLabel>
           </ImgInputBox>
         </FormBox>
         <FormBox>
           <FormTitle>메시지 작성</FormTitle>
           <InputBox>
-            <input
+            <TitleInput
               name='title'
               value={form.title}
               onChange={onChange}
-              placeholder='제목'
+              placeholder='제목을 입력하세요.'
             />
-            <input
+            <TextArea
               name='introduceText'
               value={form.introduceText}
               onChange={onChange}
-              placeholder='소개'
+              placeholder='전하고 싶은 메시지를 적어주세요.'
             />
           </InputBox>
         </FormBox>
@@ -197,16 +204,37 @@ const AddRecruitWrapper = styled.form`
   flex-direction: column;
 `;
 const Header = styled.header`
+  position: sticky;
+  top: 0;
+  left: 0;
+  padding: 16px;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #181818;
   height: 60px;
   width: 100vw;
+  border-bottom: 1px solid lightgray;
+  background-color: #181818;
   & > h3 {
     color: white;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 10px;
+  }
+  & > button {
+    color: white;
+    background: none;
+    border: none;
     width: fit-content;
-    height: fit-content;
+    justify-self: flex-end;
+    position: absolute;
+    right: 16px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 10px;
   }
 `;
 const RecruitForm = styled.div`
@@ -226,28 +254,115 @@ const FormTitle = styled.div`
   background-color: #f4f4f4;
   height: 48px;
   width: 100%;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 23px;
+  display: flex;
+  align-items: center;
+  color: #181818;
+  & > span.right {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    opacity: 0.8;
+  }
 `;
 const ImgInputBox = styled.div`
   display: flex;
-  padding: 10px;
+  padding: 16px;
+  justify-content: space-between;
 `;
 const ImgLabel = styled.label`
   cursor: pointer;
-  background: #181818;
   border: none;
-  border-radius: 10px;
   width: 106px;
   height: 106px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background: #181818;
+  opacity: 0.1;
+  border-radius: 15px;
+  & > span {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 44px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.5px;
+    color: #181818;
+    opacity: 0.3;
+    z-index: 99;
+  }
 `;
-const InputBox = styled.div``;
+
 const BoxStyle = css`
   display: flex;
   align-items: center;
+  gap: 25px;
   & .muioutlinedinput-root {
     height: 30px;
     width: fit-content;
+  }
+`;
+const InputBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  box-sizing: border-box;
+  gap: 15px;
+  flex: auto;
+`;
+const TitleInput = styled.input`
+  height: 50px;
+  border: none;
+  border-bottom: 1px solid #d9d9d9;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+`;
+const TextArea = styled.textarea`
+  border: none;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+`;
+const InputShape = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 75px;
+  padding: 5px;
+  border-bottom: 1px solid #c4c4c4;
+  & > input {
+    width: 50px;
+    border: none;
+  }
+  & > span.adornment {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    color: #181818;
+    opacity: 0.5;
+  }
+`;
+const DateInput = styled.input`
+  border: none;
+  border-bottom: 1px solid #c4c4c4;
+  padding: 5px;
+  width: 75px;
+  text-align: center;
+  ::placeholder {
+    text-align: center;
   }
 `;
 export default AddRecruit;

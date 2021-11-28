@@ -8,7 +8,6 @@ import styled from 'styled-components';
 
 const ArtistStatus = ({ artistStatus }) => {
   const { pathname } = useLocation();
-
   if (!artistStatus) return null;
   const { sent, recieved } = artistStatus;
   const len = pathname.split('/').length;
@@ -16,14 +15,14 @@ const ArtistStatus = ({ artistStatus }) => {
     <div>
       <Header>
         <TopTitle>
-          <h3>지원현황</h3>
+          <h3>지원 현황</h3>
           <img
-            src={process.env.PUBLIC_URL + 'bell_b.svg'}
+            src={process.env.PUBLIC_URL + '/icons/bell_b.svg'}
             alt='알림'
             css={css`
               position: absolute;
-              right: 16px;
-              top: 16px;
+              right: 20px;
+              top: 48px;
             `}
           />
         </TopTitle>
@@ -56,15 +55,15 @@ const Header = styled.header`
   position: sticky;
   top: 0;
   width: 100vw;
-  height: 106px;
+  height: 136px;
 `;
 const TopTitle = styled.div`
   border-bottom: 1px solid lightgray;
   width: 100%;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 90px;
+  text-align: center;
+  padding-top: 51px;
+  box-sizing: border-box;
 `;
 const Tab = css`
   display: flex;
@@ -88,7 +87,12 @@ const StyledLink = styled(NavLink)`
   height: 100%;
   justify-content: center;
   align-items: center;
-  color: ${({ active }) => (active ? '#181818' : '#BCBCBC')};
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 10px;
+  letter-spacing: 0.314367px;
+  color: ${({ active }) => (active ? '#181818' : '#bcbcbc')};
   text-decoration: none;
 `;
 export default ArtistStatus;

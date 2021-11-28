@@ -3,7 +3,12 @@ import OtherHotelProfileContainer from '../../containers/artist/OtherHotelProfil
 import BottomTabContainer from '../../containers/common/BottomTabContainer';
 
 const OtherHotelProfilePage = () => {
-  return <OtherHotelProfileContainer />;
+  return (
+    <>
+      <OtherHotelProfileContainer />
+      <BottomTabContainer />
+    </>
+  );
 };
 
 export default OtherHotelProfilePage;

@@ -3,9 +3,6 @@ import { css } from '@emotion/react';
 import React from 'react';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
-import 'dayjs/locale/ko';
-
-dayjs.locale('ko');
 
 const ArtistReceiveStatus = ({ recieved }) => {
   return (
@@ -34,13 +31,11 @@ const RecievedItem = css`
   box-sizing: border-box;
   padding: 24px 16px;
   height: 115px;
+  border-bottom: 1px solid lightgray;
   & > .top {
     display: flex;
     justify-content: space-between;
     width: 100%;
-  }
-  & + & {
-    border-top: 1px solid lightgray;
   }
 `;
 const Message = styled.p`

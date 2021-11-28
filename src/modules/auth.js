@@ -110,22 +110,27 @@ export default handleActions(
     [SIGNIN_SUCCESS]: (state, { payload: success }) => ({
       ...state,
       signinSuccess: success,
+      signinError: null,
     }),
     [SIGNIN_FAILURE]: (state, { payload: error }) => ({
       ...state,
+      signinSuccess: null,
       signinError: error,
     }),
     [LOGOUT_SUCCESS]: (state, { payload: success }) => ({
       ...state,
+      check: null,
       logoutSuccess: success,
     }),
     [CHECK_LOGGEDIN_SUCCESS]: (state, { payload: check }) => ({
       ...state,
+      signinSuccess: null,
       check,
       checkError: null,
     }),
     [CHECK_LOGGEDIN_FAILURE]: (state, { payload: error }) => ({
       ...state,
+      signinSuccess: null,
       check: null,
       checkError: error,
     }),

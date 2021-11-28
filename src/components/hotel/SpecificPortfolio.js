@@ -18,7 +18,15 @@ const SpecificPortfolio = ({
   return (
     <Wrapper>
       <Header>
-        <Link to={-1}>뒤로 가기</Link>
+        <Link
+          to={-1}
+          css={css`
+            position: absolute;
+            left: 16px;
+          `}
+        >
+          <img src={process.env.PUBLIC_URL + '/icons/back.svg'} alt='back' />
+        </Link>
         <h3>아티스트 탐색</h3>
         <div></div>
       </Header>
@@ -59,16 +67,12 @@ const Header = styled.header`
   left: 0;
   padding: 16px;
   box-sizing: border-box;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  justify-content: center;
   align-items: center;
   height: 60px;
   width: 100vw;
   border-bottom: 1px solid lightgray;
-  & > h3 {
-    align-self: center;
-    justify-self: center;
-  }
 `;
 const ProfileLink = css`
   display: flex;
@@ -85,7 +89,6 @@ const ProfileImgBox = styled.div`
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background-color: lightgray;
   margin-right: 12px;
   background-image: url(${({ image }) => image});
   background-repeat: no-repeat;
@@ -120,9 +123,7 @@ const PortfolioImgItem = styled.li`
   -webkit-scroll-snap-coordinate: 0% 0%; /* older (Safari) */
   overflow: hidden;
   list-style: none;
-  background-image: url(${({ image }) => image});
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: center / contain no-repeat url(${({ image }) => image}) #f9f9f9;
   scroll-snap-align: start;
 `;
 const LinkBox = styled.div`

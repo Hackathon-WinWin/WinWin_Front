@@ -5,10 +5,14 @@ import Entry from '../../components/common/Entry';
 import { checkLoggedIn, initAuth, signin } from '../../modules/auth';
 
 const EntryContainer = () => {
-  const { signinSuccess, signinError } = useSelector(({ auth }) => ({
-    signinSuccess: auth.signinSuccess,
-    signinError: auth.signinError,
-  }));
+  const { signinSuccess, signinError, check, checkError } = useSelector(
+    ({ auth }) => ({
+      check: auth.check,
+      checkError: auth.checkError,
+      signinSuccess: auth.signinSuccess,
+      signinError: auth.signinError,
+    })
+  );
   const [firebaseToken, setFirebaseToken] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,15 +46,33 @@ const EntryContainer = () => {
   }, []);
   useEffect(() => {
     if (signinSuccess) {
+      console.log('로그인 성공?');
       dispatch(checkLoggedIn(firebaseToken));
-      navigate('/main');
+      return;
     }
     if (signinError) {
       alert('다시 시도해주세요.');
       setForm({ account: '', password: '' });
       dispatch(initAuth());
+      return;
     }
-  }, [signinSuccess, signinError, navigate, dispatch, firebaseToken]);
+    if (check) {
+      navigate('/main');
+      return;
+    }
+    if (checkError) {
+      navigate('/');
+      return;
+    }
+  }, [
+    signinSuccess,
+    signinError,
+    navigate,
+    dispatch,
+    firebaseToken,
+    check,
+    checkError,
+  ]);
   return <Entry form={form} onChange={onChange} onSubmit={onSubmit} />;
 };
 

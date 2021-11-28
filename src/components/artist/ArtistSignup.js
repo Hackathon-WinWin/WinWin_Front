@@ -97,7 +97,7 @@ const P1 = styled.p`
   height: 16px;
   color: #000000;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 700;
 `;
 
 const P2 = styled.p`
@@ -111,7 +111,7 @@ const P2 = styled.p`
   height: 16px;
   color: #000000;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 700;
 `;
 
 const P3 = styled.p`
@@ -125,7 +125,7 @@ const P3 = styled.p`
   height: 16px;
   color: #000000;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 700;
 `;
 
 const IdSuccess = styled.p`
@@ -234,9 +234,9 @@ const SubmitBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  bottom: 0px;
-  width: 100vw;
-  height: 75px;
+  top: 769px;
+  width: 391px;
+  height: 76px;
   border: none;
   background-color: ${({ disabled }) => (disabled ? '#c1c1c1' : '#181818')};
   transition: 0.5s;

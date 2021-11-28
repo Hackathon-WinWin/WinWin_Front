@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { flexbox } from '@mui/system';
 import dayjs from 'dayjs';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -33,16 +32,15 @@ const SpecificRecruitment = ({ specificRecruit }) => {
       <Header>
         <Link to={-1} css={BackBtn}>
           <img
-            src={process.env.PUBLIC_URL + '/icons/back_button.png'}
-            alt='icon'
+            src={process.env.PUBLIC_URL + '/icons/back.svg'}
+            alt='back'
           ></img>
         </Link>
         <h3>지원공고</h3>
-        <div></div>
       </Header>
       <HotelExhibitImg>
-        {images.map((image) => (
-          <li image={image.image}></li>
+        {images.map((image, index) => (
+          <HotelItem key={index} image={image.image}></HotelItem>
         ))}
       </HotelExhibitImg>
       <div css={BottomBox}>
@@ -100,8 +98,8 @@ const SpecificRecruitment = ({ specificRecruit }) => {
           </div>
         </RecruitmentInfoCard>
       </div>
-      {/* param : 공고 id */}
-      <Link css={ApplyFormLink} to={`/apply/${recruitment_id}`}>
+      {/* param : 공고 id, 호텔 id */}
+      <Link css={ApplyFormLink} to={`/apply/${hotelAuth_id}/${recruitment_id}`}>
         지원하기
       </Link>
     </Wrapper>
@@ -132,8 +130,14 @@ const Header = styled.header`
   border-bottom: 1px solid lightgray;
   background-color: white;
   & > h3 {
-    align-self: center;
-    justify-self: center;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 10px;
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.314367px;
   }
 `;
 const ApplyFormLink = css`
@@ -143,10 +147,10 @@ const ApplyFormLink = css`
   color: white;
   text-decoration: none;
   background-color: #181818;
-  height: 75px;
-  width: 100%;
-  position: sticky;
-  bottom: 0;
+  height: 76px;
+  width: 391px;
+  position: fixed;
+  bottom: 0px;
 `;
 const HotelExhibitImg = styled.ul`
   display: flex;
@@ -165,52 +169,63 @@ const HotelExhibitImg = styled.ul`
   &::-webkit-scrollbar {
     display: none;
   }
-  & > li {
-    box-sizing: border-box;
-    width: 100%;
-    height: 261px;
-    border-left: 1px solid black;
-    flex-shrink: 0;
-    scroll-snap-align: start; /* latest (Chrome 69+) */
-    scroll-snap-coordinate: 0% 0%; /* older (Firefox/IE) */
-    -webkit-scroll-snap-coordinate: 0% 0%; /* older (Safari) */
-    overflow: hidden;
-    list-style: none;
-    background-color: green;
-    background-image: url(${({ image }) => image});
-    background-repeat: no-repeat;
-    background-size: cover;
-    scroll-snap-align: start;
-  }
+`;
+const HotelItem = styled.li`
+  box-sizing: border-box;
+  width: 100%;
+  height: 261px;
+  border-left: 1px solid black;
+  flex-shrink: 0;
+  scroll-snap-align: start; /* latest (Chrome 69+) */
+  scroll-snap-coordinate: 0% 0%; /* older (Firefox/IE) */
+  -webkit-scroll-snap-coordinate: 0% 0%; /* older (Safari) */
+  overflow: hidden;
+  list-style: none;
+  background-image: url(${({ image }) => image});
+  background-repeat: no-repeat;
+  background-size: cover;
+  scroll-snap-align: start;
 `;
 const BottomBox = css`
   flex: auto;
   position: relative;
+  & > h2 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.5px;
+  }
 `;
 const RecruitmentInfoCard = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: absolute;
+  position: relative;
+  top: -35px;
+  left: calc(50vw - 43%);
   background-color: white;
   width: 86%;
   min-height: 100%;
   height: fit-content;
   padding: 25px 20px;
-  top: -35px;
-  left: calc(50vw - 43%);
+  margin-bottom: 76px;
   border-radius: 20px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
 `;
 const Top = css`
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-start;
+  height: 100px;
 `;
 const RecruitInfoList = css`
   display: flex;
   flex-direction: column;
+  margin-bottom: 50px;
   & > li {
     display: flex;
     list-style: none;
@@ -228,5 +243,8 @@ const RecruitInfoList = css`
 const Bottom = css`
   display: flex;
   flex-direction: column;
+  & > h3 {
+    margin-bottom: 24px;
+  }
 `;
 export default SpecificRecruitment;

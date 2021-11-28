@@ -29,6 +29,7 @@ import OtherHotelProfilePage from './pages/artist/OtherHotelProfilePage';
 import MySpecificPortfolioPage from './pages/artist/mypage/MySpecificPortfolioPage';
 import ArtistStatusPage from './pages/artist/ArtistStatusPage';
 import HotelStatusPage from './pages/hotel/HotelStatusPage';
+import CommunityPage from './pages/artist/CommunityPage';
 
 axios.defaults.withCredentials = true;
 
@@ -38,7 +39,14 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
   body {
-    word-break : keep-all
+    word-break : keep-all;
+    font-family: 'Noto Sans KR', sans-serif; // 한글 폰트
+  }
+  input:focus {
+    outline: none;
+  }
+  textarea:focus {
+    outline: none;
   }
 `;
 const config = {
@@ -139,7 +147,11 @@ const App = () => {
           path='/specificRecruit/:hotelAuth_id/:recruitment_id'
           element={<SpecificRecruitmentPage />}
         />
-        <Route path='/apply/:recruitment_id' element={<ApplyFormPage />} />
+        <Route
+          path='/apply/:hotelAuth_id/:recruitment_id'
+          element={<ApplyFormPage />}
+        />
+        <Route path='/community' element={<CommunityPage />} />
         <Route path='*' element={<div>Not Found.</div>} />
       </Routes>
     </>

@@ -5,12 +5,11 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const OtherArtistProfile = ({ otherProfile, otherPortfolio }) => {
-  console.log(otherProfile, otherPortfolio);
   if (!otherProfile || !otherPortfolio) return null;
   const {
     backgroundImageURL,
     profileImageURL,
-    profile: { name, phoneNumber, email },
+    profile: { name, introduceText },
   } = otherProfile;
   const { artistAuth_id, portfolios } = otherPortfolio;
   return (
@@ -30,9 +29,8 @@ const OtherArtistProfile = ({ otherProfile, otherPortfolio }) => {
       <ArtistBgImg backgroundImage={backgroundImageURL}></ArtistBgImg>
       <ArtistInfo>
         <ArtistProfileImg profileImage={profileImageURL}></ArtistProfileImg>
-        <h3>{name}</h3>
-        <div>{phoneNumber}</div>
-        <div>{email}</div>
+        <ArtistName>{name}</ArtistName>
+        <IntroText>{introduceText}</IntroText>
       </ArtistInfo>
       <PortfolioList>
         {!portfolios && <p>loading...</p>}
@@ -67,6 +65,7 @@ const OtherArtistProfile = ({ otherProfile, otherPortfolio }) => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100vw;
   min-height: 100vh;
 `;
@@ -80,7 +79,6 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  grid-template-columns: 1fr 1fr 1fr;
   height: 60px;
   width: 100vw;
   border-bottom: 1px solid lightgray;
@@ -92,9 +90,18 @@ const ArtistBgImg = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
 `;
+const ArtistInfo = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 185px;
+  width: 70%;
+`;
 const ArtistProfileImg = styled.div`
   position: absolute;
-  left: calc(50vw - 53px);
   bottom: calc(185px - 53px);
   width: 106px;
   height: 106px;
@@ -102,14 +109,31 @@ const ArtistProfileImg = styled.div`
   background-image: url(${({ profileImage }) => profileImage});
   background-repeat: no-repeat;
   background-size: cover;
+  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25));
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
 `;
-const ArtistInfo = styled.div`
-  position: relative;
+const ArtistName = styled.h3`
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 16px;
   display: flex;
   align-items: center;
-  height: 185px;
-  flex-direction: column;
-  justify-content: flex-end;
+  letter-spacing: 0.5px;
+  margin-top: 80px;
+  color: #181818;
+`;
+const IntroText = styled.p`
+  display: flex;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  color: #000000;
+  opacity: 0.5;
+  flex: auto;
 `;
 const PortfolioList = styled.ul`
   display: grid;
@@ -120,6 +144,7 @@ const PortfolioList = styled.ul`
   width: 100vw;
   flex: auto;
   padding: 16px;
+  margin-bottom: 80px;
   box-sizing: border-box;
   & > p {
     margin: 30px auto 0;
@@ -133,7 +158,11 @@ const PreviewItem = styled.li`
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 15px;
+  filter: drop-shadow(0px 1px 7px rgba(0, 0, 0, 0.25));
+  border-radius: 15px;
+  box-shadow: 0px 1px 7px 0px rgba(0, 0, 0, 0.25);
 `;
+
 const ProposeFormLink = css`
   display: flex;
   justify-content: center;
