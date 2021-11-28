@@ -53,7 +53,6 @@ const PhoneCertificationContainer = () => {
 
   useEffect(() => {
     if (checkPhoneSuccess) {
-      console.log('success');
       navigate('/signupArtist', { state: { phoneNumber: form.phoneNumber } });
       return;
     }

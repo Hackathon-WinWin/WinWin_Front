@@ -46,7 +46,6 @@ const EntryContainer = () => {
   }, []);
   useEffect(() => {
     if (signinSuccess) {
-      console.log('로그인 성공?');
       dispatch(checkLoggedIn(firebaseToken));
       return;
     }

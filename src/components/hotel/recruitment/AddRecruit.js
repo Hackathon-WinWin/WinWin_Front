@@ -83,7 +83,6 @@ const AddRecruit = ({
                   onChangExhibitDate(newValue);
                 }}
                 renderInput={(startProps, endProps) => {
-                  console.log(startProps, endProps);
                   return (
                     <React.Fragment>
                       <DateInput

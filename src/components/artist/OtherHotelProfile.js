@@ -16,7 +16,6 @@ const OtherHotelProfile = ({ otherHotelProfile }) => {
       images,
     },
   } = otherHotelProfile;
-  console.log(otherHotelProfile);
   return (
     <Wrapper>
       <HotelProfileImg image={profileImageURL}>
